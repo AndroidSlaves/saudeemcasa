@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mds.gpp.saudeemcasa" >
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- api to map cache -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- access google services -->
+    <uses-permission android:name="com.google.providers.gsf.permission.READ_GSERVICES" />
+    <!-- access mobile location with wi-fi -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- access mobile location with GPS -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".view.LoadingScreen">
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.ChooseScreen">
+            <action android:name="android.intent.action.MAIN"></action>
+            <category android:name="android.intent.category.default"></category>
+
+
+        </activity>
+
+        <activity android:name=".view.DrugStoreList">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+        <activity android:name=".view.HospitalList">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+        <activity android:name=".view.InfoScreenMelhorEmCasa">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+        <activity android:name=".view.InfoScreenSaudeEmCasa">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+        <activity android:name=".view.InfoScreenDrugStore">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+        <!-- API Key -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDiz3GLq_9mijorWyNPANDhziIfuioxrJY" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <activity android:name=".view.GoogleMapDrugStore">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+        <activity android:name=".view.GoogleMapHospital">
+            <action android:name="android.intent.action.MAIN"></action>
+            <action android:name="android.intent.category.default"></action>
+        </activity>
+
+    </application>
+
+</manifest>
+

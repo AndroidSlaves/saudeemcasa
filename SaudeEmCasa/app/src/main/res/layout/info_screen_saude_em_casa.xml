@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@mipmap/saude_em_casa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="61dp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView_melhorEmCasa"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/logo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text para o Saúde em Casadesenvolvidos pelos alunos de graduação da UnB"
+            android:id="@+id/text_info_saude_em_casa"
+            android:editable="false"
+            android:textSize="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/logo"
+            android:textColor="#212121"/>
+    </ScrollView>
+
+
+</RelativeLayout>

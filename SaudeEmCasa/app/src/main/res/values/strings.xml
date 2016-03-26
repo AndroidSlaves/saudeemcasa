@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SaudeEmCasa</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
+
+    <string name="program_drug">Farmacia Popular</string>
+    <string name="program_hospital">Melhor em Casa</string>
+    <string name="title_activity_hospital_maps">Map</string>
+</resources>

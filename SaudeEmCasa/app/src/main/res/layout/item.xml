@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/list_item"
+android:layout_gravity="center"
+android:layout_width="wrap_content"
+android:layout_height="90dp">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Large Text"
+    android:id="@+id/textView2_item"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginStart="13dp"
+    android:layout_marginTop="13dp"
+    android:singleLine="true"
+    android:textColor="#212121"
+    android:elevation="50dp"
+    android:translationZ="10dp"/>
+
+<RatingBar
+    style="?android:attr/ratingBarStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/ratingBarItem"
+    android:layout_below="@+id/textView2_item"
+    android:layout_alignStart="@+id/textView2_item"
+    android:layout_marginTop="15dp"
+    android:color="#FFAB00" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="Small Text"
+    android:id="@+id/textView4_item"
+    android:layout_marginEnd="25dp"
+    android:layout_alignTop="@+id/ratingBarItem"
+    android:layout_alignParentEnd="true"
+    android:textColor="#757575"/>
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:background="#bcccc7c2"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginBottom="10dp"
+    android:color="#BDBDBD"/>
+
+</RelativeLayout>

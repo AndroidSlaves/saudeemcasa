@@ -1,0 +1,125 @@
+[
+   {
+    "_id":{
+      "_str":"560a0bd473ca72bc1dfa5fb4"
+    },
+
+    "type":"FeatureCollection",
+
+    "features":[
+      {
+        "type":"Feature",
+
+        "properties":[
+          {"gid":"2001063"},
+          {"tipo_sus":"SUS"},
+          {"uf":"AC"},
+          {"cidade":"Rio Branco"},
+          {"no_logradouro":"TRAVESSA IPASE"},
+          {"nu_endereco":"77"},
+          {"no_bairro":"CENTRO"},
+          {"nu_telefone":"(68)3224 3693"},
+          {"no_fantasia":"CENTRO DE CONTROLE DE ONCOLOGIA DO ACRE"}
+        ],
+        "geometry":{
+          "type":"Point",
+          "coordinates":[-67.81423,-9.96876]
+        }
+      },
+      {
+        "type":"Feature",
+        "properties":[
+          {"gid":"2001063"},
+          {"tipo_sus":"SUS"},
+          {"uf":"AC"},
+          {"cidade":"Rio Branco"},
+          {"no_logradouro":"TRAVESSA IPASE"},
+          {"nu_endereco":"77"},
+          {"no_bairro":"CENTRO"},
+          {"nu_telefone":"(68)3224 3693"},
+          {"no_fantasia":"CENTRO DE CONTROLE DE ONCOLOGIA DO ACRE"}
+        ],
+        "geometry":{
+          "type":"Point",
+          "coordinates":[-67.81423,-9.96876]
+        }
+      },
+
+      {
+        "type":"Feature",
+        "properties":[
+          {"gid":"6627595"},
+          {"tipo_sus":"SUS"},
+          {"uf":"AM"},
+          {"cidade":"Manaus"},
+          {"no_logradouro":"RUA MARIO YPIRANGA"},
+          {"nu_endereco":"1581"},
+          {"no_bairro":"ADRIANOPOPLIS"},
+          {"nu_telefone":""},
+          {"no_fantasia":"INSTITUTO DA MULHER DONA LINDU"}
+        ],
+        "geometry":{
+          "type":"Point",
+          "coordinates":[-60.00531,-3.06231]
+        }
+      },
+
+      {
+        "type":"Feature",
+        "properties":[
+          {"gid":"6627595"},
+          {"tipo_sus":"SUS"},
+          {"uf":"AM"},
+          {"cidade":"Manaus"},
+          {"no_logradouro":"RUA MARIO YPIRANGA"},
+          {"nu_endereco":"1581"},
+          {"no_bairro":"ADRIANOPOPLIS"},
+          {"nu_telefone":""},
+          {"no_fantasia":"INSTITUTO DA MULHER DONA LINDU"}
+        ],
+        "geometry":{
+          "type":"Point",
+          "coordinates":[-60.00531,-3.06231]
+        }
+      },
+
+      {
+        "type":"Feature",
+        "properties":[
+          {"gid":"3477487"},
+          {"tipo_sus":"NAOSUS"},
+          {"uf":"PA"},
+          {"cidade":"BelÃ©m"},
+          {"no_logradouro":"AV GENERALISSIMO DEODORO"},
+          {"nu_endereco":"S/N"},
+          {"no_bairro":"NAZARE"},
+          {"nu_telefone":"(91)40060006"},
+          {"no_fantasia":"CLINICA LOBO"}
+        ],
+        "geometry":{
+          "type":"Point",
+          "coordinates":[-48.48268,-1.45386]
+        }
+      },
+
+      {
+        "type":"Feature",
+        "properties":[
+          {"gid":"6456251"},
+          {"tipo_sus":"NAOSUS"},
+          {"uf":"PA"},
+          {"cidade":"BelÃ©m"},
+          {"no_logradouro":"RUA DOS MUNDURUCUS"},
+          {"nu_endereco":"3100"},
+          {"no_bairro":"GUAMA"},
+          {"nu_telefone":"30843091"},
+          {"no_fantasia":"PORTO DIAS DIAGNOSTICO"}
+        ],
+        "geometry":{
+          "type":"Point",
+          "coordinates":[-48.479,-1.45814]
+        }
+      }
+    ]
+  }
+]

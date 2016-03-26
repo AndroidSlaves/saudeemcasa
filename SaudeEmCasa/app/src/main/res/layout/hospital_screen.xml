@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+android:paddingBottom="@dimen/activity_vertical_margin"
+tools:context=".view.HospitalScreen"
+android:background="#F5F5F5"
+android:contextClickable="false"
+    android:id="@+id/hospital_map">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="hospitalName"
+    android:id="@+id/textViewHospName"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true" />
+
+<TextView
+
+    android:layout_width="200dip"
+    android:layout_height="80dip"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:text="Address"
+    android:id="@+id/textViewAddressHosp"
+    android:layout_gravity="center_horizontal"
+    android:layout_below="@+id/textViewHospName"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="22dp" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="Telephone"
+    android:id="@+id/textViewHospTel"
+    android:layout_alignBottom="@+id/textViewAddressHosp"/>
+
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBarUserHospital"
+        android:numStars="5"
+        android:stepSize="1"
+        android:layout_alignParentBottom="true"
+
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="144dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nota"
+        android:id="@+id/textViewRatingHospital"
+        android:layout_above="@+id/ratingBarFinalHospital"
+        android:layout_alignParentStart="true" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/ratingBarFinalHospital"
+        android:layout_above="@+id/ratingBarUserHospital"
+        android:layout_toEndOf="@+id/textViewRatingHospital"
+        android:numStars="5"
+        android:stepSize="1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:id="@+id/buttonSaveRateHostpital"
+        android:layout_alignBottom="@+id/ratingBarUserHospital"
+        android:layout_toEndOf="@+id/textViewHospName" />
+
+
+    <ImageButton
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:id="@+id/phonecallButtonHospital"
+        android:src="@mipmap/phonecall_icon"
+        android:layout_alignBottom="@+id/textViewAddressHosp"
+        android:layout_alignParentStart="true" />
+
+
+
+</RelativeLayout>
+
+
+
