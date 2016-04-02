@@ -1,0 +1,25 @@
+public class Hospital extends Stablishment:
+
+    // Empty Constructor
+    public Hospital()
+
+    // Build an object with name and telephone attributes.
+    public Hospital(String name, String telephone)
+
+    // Atrribute number of a Hospital.
+    private String number = "";
+
+    // Attribute district of a Hospital.
+    private String district = "";
+
+    // Get the value of attribute number.
+    public String getNumber()
+
+    // Set the value of attribute number.
+    public void setNumber(String number)
+
+    // Get the string of attribute district.
+    public String getDistrict()
+
+    // Set the string of attribute district.
+    public void setDistrict(String district)
