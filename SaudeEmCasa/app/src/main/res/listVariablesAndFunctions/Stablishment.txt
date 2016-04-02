@@ -1,0 +1,29 @@
+Classe: Stablishment
+
+VARIABLES:
+
+*latitude: receive a latitude from a Hospital or a Drugstore
+
+*longitude: receive a latitude from a Hospital or a Drugstore
+
+*telephone: receive a phone number from a Hospital or a Drugstore
+
+*name: receive the name from a Hospital or a Drugstore
+
+*city: receive the city's name of a Hospital or a Drugstore
+
+*address: receive the address from a Hospital or a Drugstore
+
+*state: receive the State's name that a Hospital or a Drugstore comes
+
+*distance: receive the result of the distance between the user and the stablishment
+
+*id: receive the id number from the user
+
+*rate:
+
+*type:
+
+
+
+
