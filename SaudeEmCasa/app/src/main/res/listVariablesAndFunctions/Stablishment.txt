@@ -24,6 +24,55 @@ VARIABLES:
 
 *type:
 
+FUNCTIONS
+
+*Stablishment(): default constructor
+
+*Stablishment(String name, String telephone): defined constructor
+
+*getId(): used to return the id number value stored
+        
+*setId(String id): used to access the variable id address and store the data
+
+*getLatitude(): used to return the latitude number value stored
+
+*setLatitude(String latitude): used to access the variable latitude address and store the data
+
+*getLongitude(): used to return the longitude number value stored
+
+*setLongitude(String longitude): used to access the variable longitude address and store the data
+
+*setCity(String city): used to access the variable city address and store the data
+
+*setAddress(String address): used to access the variable "address" address and store the data
+
+*setState(String state): used to access the variable state address and store the data
+
+*setRate(float rate): used to access the variable rate address and store the data
+
+*getCity(): used to return the city value stored
+
+*getAddress(): used to return the address value stored
+
+*getState(): used to return the state value stored
+
+*getRate(): used to return the rate value stored
+
+*getTelephone(): used to return the telephone number value stored
+
+*setTelephone(String telephone): used to access the variable telephone address and store the data
+
+*getName(): used to return the name value stored
+
+*setName(String name): used to access the variable "name" address and store the data
+
+*getType(): used to return the type value stored
+
+*setType(String type): used to access the variable type address and store the data
+
+*getDistance(): used to return the distance value stored
+
+*setDistance(float distance): used to access the variable distance address and store the data
 
 
 
