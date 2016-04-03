@@ -1,0 +1,17 @@
+Class: HospitalAdapter
+    /* Class that create an item list for the user by inflating the items and putting them on the
+    screen. */
+
+Attributes:
+    Context context
+        /*represents the context where the application in taking place, the screen where the user
+        is. */
+
+    ArrayList<Hospital> lista
+        //represent the list of hospitals that will inflate the visual list for the user.
+
+    int COUNT = 15
+        //represent the number of items that the list will have.
+
+Function:
+    
