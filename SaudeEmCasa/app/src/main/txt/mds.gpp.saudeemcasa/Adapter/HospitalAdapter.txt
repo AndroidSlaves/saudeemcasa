@@ -1,0 +1,40 @@
+Class: HospitalAdapter
+    /* Class that create an item list for the user by inflating the items and putting them on the
+    screen. */
+
+Attributes:
+    Context context
+        /* represents the context where the application in taking place, the screen where the user
+        is. */
+
+    ArrayList<Hospital> lista
+        // represent the list of hospitals that will inflate the visual list for the user.
+
+    int COUNT = 15
+        // represent the number of items that the list will have.
+
+Function:
+    HospitalAdapter(Context context, ArrayList<Hospital> lista)
+        /* Create a hospitalAdapter entity with the context where it will be used and the list of
+        hospitals that will populate the shown to the user */
+
+    int getCount()
+        // method that returns the number of items in the list to be shown to the user.
+
+    Hospital getItem(int position)
+        // method that returns the object hospital in the position specified in the parameter.
+
+    long getItemId(int position)
+        // Method that returns the identification number of the element specified in the parameter.
+
+    View getView(int position, View convertView, ViewGroup parent)
+        // Method that returns an view  item from the view list.
+
+    Float convertToKM(Float distance)
+        // Convert the parameter into a kilometer value.
+
+    View populateAdapter(View convertView, int position)
+        /* Method that populate and returns the populated view with the item list to be shown
+         to the user. */
+    void setDistance(View convertView, int position)
+        // set distance text to the field of the item in the hospital list.

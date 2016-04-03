@@ -24,7 +24,6 @@ public class GoogleMapDrugStore extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_google_maps_hospital);
         setUpMap();
     }
@@ -57,10 +56,10 @@ public class GoogleMapDrugStore extends FragmentActivity{
         String nome = controller.getDrugstore().getName();
         String latitude = controller.getDrugstore().getLatitude();
         String longitude = controller.getDrugstore().getLongitude();
-        LatLng hospitalLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+        LatLng drugstoreLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
-        mMap.addMarker(new MarkerOptions().position(hospitalLocation).title(nome));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 10));
+        mMap.addMarker(new MarkerOptions().position(drugstoreLocation).title(nome));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(drugstoreLocation, 10));
     }
 }
 

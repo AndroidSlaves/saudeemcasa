@@ -1,0 +1,19 @@
+Class: Drustore
+    //represents a generic drugstore with its attributes.
+
+Attributes:
+    String postalCode
+        //Represents the postal code which complements the adress of a drugstore.
+
+Functions:
+    DrugStore()
+        //Method that creates an empty drugstore (constructor)
+
+    DrugStore(String nameDrugStore, String telephoneDrugStore)
+        //Method that creates a drugstore with basic information, name and telephone.
+
+    getPostalCode()
+        //Method that return the postal code of a single drugstore.
+
+    setPostalCode()
+        //Method that set the postal code of a single drugstore.

@@ -1,0 +1,15 @@
+Classe: HospitalScreen
+
+VARIABLES
+
+*view: receive the layout from hospital
+
+*controller: receive the hospital instaciated in the context
+
+*drugStore: access the hospital informations
+
+*********************************************************************
+
+FUNCTIONS
+
+*onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState): this function can receive a group fragments view. This screen set the fragment activity with the googleMaps and one activity with the informations about the Hospital, setting his name, address, CEP, telephone, a phone call button in the end set ratting for drugstore and verify if it was save in server.

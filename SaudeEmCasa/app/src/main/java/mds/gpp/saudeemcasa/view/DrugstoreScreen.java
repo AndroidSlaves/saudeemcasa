@@ -50,9 +50,6 @@ import static java.security.AccessController.getContext;
 
 public class DrugstoreScreen extends Fragment {
 
-    ArrayList<DrugStore> list;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
 
@@ -63,15 +60,17 @@ public class DrugstoreScreen extends Fragment {
         final DrugStore drugStore = controller.getDrugstore();
 
         // setting name
-
         TextView nameTextView = (TextView) view.findViewById(R.id.textViewDrugName);
         nameTextView.setText(drugStore.getName());
+
         // Address
         TextView addressTextView = (TextView) view.findViewById(R.id.textViewAddress);
         addressTextView.setText(Html.fromHtml(drugStore.getAddress() + " - " + drugStore.getCity() + " - " + drugStore.getState()));
+
         //CEP
         TextView cepTextView = (TextView) view.findViewById(R.id.textViewCep);
         cepTextView.setText("Cep: " + drugStore.getPostalCode());
+
         // setting telephone
         if (drugStore.getType().equals("FARMACIAPOPULAR")) {
             TextView telephoneTextView = (TextView) view.findViewById(R.id.textViewDrugTel);
@@ -82,18 +81,15 @@ public class DrugstoreScreen extends Fragment {
 
         }
 
-
         //set ratting for drugstore
-
         RatingBar ratingBarFinal = (RatingBar) view.findViewById(R.id.ratingBarFinalDrugstore);
         ratingBarFinal.setRating(drugStore.getRate());
-
         TextView textViewRate = (TextView) view.findViewById(R.id.textViewRatingDrugstore);
-
         textViewRate.setText("" + drugStore.getRate());
 
         Button drugStoreButton = (Button) view.findViewById(R.id.buttonSaveRateDrugstore);
         final RatingBar drugstoreStars = (RatingBar) view.findViewById(R.id.ratingBarUserDrugstore);
+
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +108,6 @@ public class DrugstoreScreen extends Fragment {
 
                         }
 
-
                         Looper.loop();
                     }
                 }.start();
@@ -120,11 +115,11 @@ public class DrugstoreScreen extends Fragment {
 
         });
 
+        //Phone call button
             ImageButton phoneCallButton = (ImageButton) view.findViewById(R.id.phonecallButtonDrugstore);
             phoneCallButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) throws SecurityException{
-
 
                     Intent phoneCall = new Intent(Intent.ACTION_CALL);
                     phoneCall.setData(Uri.parse("tel:"+drugStore.getTelephone()));
@@ -132,7 +127,6 @@ public class DrugstoreScreen extends Fragment {
 
                 }
             });
-
 
         return (view);
 

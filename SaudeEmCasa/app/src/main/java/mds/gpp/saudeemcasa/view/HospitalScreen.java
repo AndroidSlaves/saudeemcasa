@@ -34,12 +34,7 @@ import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 import mds.gpp.saudeemcasa.model.Hospital;
 
-/**
- * Created by freemanpivo on 11/14/15.
- */
 public class HospitalScreen extends Fragment {
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
@@ -49,25 +44,24 @@ public class HospitalScreen extends Fragment {
         final HospitalController controller = HospitalController.getInstance(this.getContext());
 
         final Hospital hospital = controller.getHospital();
+
         // setting name
         final TextView nameTextView = (TextView) view.findViewById(R.id.textViewHospName);
         nameTextView.setText(hospital.getName());
+
         // Address
         TextView addressTextView = (TextView) view.findViewById(R.id.textViewAddressHosp);
         addressTextView.setText(Html.fromHtml(hospital.getAddress() + " - " + hospital.getCity() + " - " + hospital.getState()));
+
         // setting telephone
         TextView telephoneTextView = (TextView) view.findViewById(R.id.textViewHospTel);
         telephoneTextView.setText("Tel: " + hospital.getTelephone());
 
         //set ratting for drugstore
-
         final RatingBar ratingBarFinal = (RatingBar) view.findViewById(R.id.ratingBarFinalHospital);
-
         ratingBarFinal.setRating(hospital.getRate());
-
         TextView textViewRate = (TextView) view.findViewById(R.id.textViewRatingHospital);
         textViewRate.setText("" + hospital.getRate());
-
 
         Button hospitalButton = (Button) view.findViewById(R.id.buttonSaveRateHostpital);
         final RatingBar hospitalStars = (RatingBar) view.findViewById(R.id.ratingBarUserHospital);
@@ -102,30 +96,14 @@ public class HospitalScreen extends Fragment {
             public void onClick(View v) throws SecurityException {
 
                 Intent phoneCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + hospital.getTelephone()));
-
-
                 startActivity(phoneCall);
 
             }
 
         });
 
-
-
-
-
-
-        /*Button hospitalMapButton = (Button) findViewById(R.id.button_hospital_map);
-
-        hospitalMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), GoogleMapHospital.class);
-                startActivity(intent);
-            }
-        });*/
-
     return view;
+
 }
 
 }
