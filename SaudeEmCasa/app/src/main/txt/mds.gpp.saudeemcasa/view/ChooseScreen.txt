@@ -1,0 +1,107 @@
+/**
+ * Class ChooseScreen is an activity. Here, user can choose to show a list of
+ * Hospitals or a list of Drugstores. They're also buttons that show
+ * information about the app, and government programs.
+ */
+Class: ChooseScreen
+
+        // Create hospital Button and set his layout by id defined.
+        Button hospitalButton = (Button) findViewById(R.id.melhor_em_casa_button)
+
+        // Create drugstore Button and set his layout by id defined.
+        Button drugStoreButton = (Button) findViewById(R.id.farm_popular_button)
+
+        // Create saudeemcasa ImageButton and set his layout by id defined.
+        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(R.id.infoButton)
+        // Create infoMelhorEmCasa ImageButton and set his layout by id defined.
+
+        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(R.id.melhorEmCasaInfoButton)
+
+        // Create infoDrugStore ImageButton and set his layout by id defined.
+        ImageButton infoDrugStoreButton = (ImageButton) findViewById(R.id.farmPopularInfoButton)
+
+        /*
+         * Create a listener for hospitalButton. If button is clicked then
+         * start the hospitalListThread.
+         */
+        hospitalButton.setOnClickListener(new View.OnClickListener()
+
+
+        /*
+         * Create a listener for drugStoreButton. If button is clicked then
+         * start the drugstoreListThread.
+         */
+        drugStoreButton.setOnClickListener(new View.OnClickListener()
+
+
+        /*
+         * Create a listener for infoSaudeEmCasaButton. If button is clicked
+         * then jump to InfoScreenSaudeEmCasa Activity.
+         */
+        infoSaudeEmCasaButton.setOnClickListener(new View.OnClickListener()
+
+            /*
+             * Create a Intent. This intent is used to change activity. From
+             * activity user is, to InfoScreenSaudeEmCasa.
+             */
+            Intent nextScreen = new Intent(getBaseContext(), InfoScreenSaudeEmCasa.class)
+
+        /*
+         * Create a listener for infoMelhorEmCasaButton. If button is clicked
+         * then jump to infoMelhorEmCasaButton Activity.
+         */
+        infoMelhorEmCasaButton.setOnClickListener(new View.OnClickListener()
+
+            /*
+             * Create a Intent. This intent is used to change activity. From
+             * activity user is, to InfoScreenMelhorEmCasa.
+             */
+            Intent nextScreen = new Intent(getBaseContext(), InfoScreenMelhorEmCasa.class)
+
+        )
+
+        /*
+         * Create a listener for infoDrugStoreButton. If button is clicked
+         * then jump to InfoScreenDrugStore Activity.
+         */
+        infoDrugStoreButton.setOnClickListener(new View.OnClickListener()
+
+            /*
+            * Create a Intent. This intent is used to change activity. From
+            * activity user is, to InfoScreenDrugStore.
+            */
+            Intent nextScreen = new Intent(getBaseContext(), InfoScreenDrugStore.class)
+
+
+    // This thread is used to get the ratings of each hospital from server.
+    public void hospitalListThread()
+
+        /*
+         * Create a progress bar. The progress represents the rating of hospital
+         * downloaded from server.
+         */
+        final ProgressDialog progress = new ProgressDialog(this)
+        progress.setMessage("Requerindo avaliações...")
+
+        /*
+        * Create a Intent. This intent is used to change activity. From
+        * activity user is, to HospitalList.
+        */
+        Intent nextScreen = new Intent(getBaseContext(), HospitalList.class)
+
+
+    // This thread is used to get the ratings of each drugstore from server.
+    public void drugstoreListThread()
+
+        /*
+        * Create a progress bar. The progress represents the rating of drugstore
+        * downloaded from server.
+        */
+        final ProgressDialog progress = new ProgressDialog(this)
+        progress.setMessage("Requerindo avaliações...")
+
+        /*
+        * Create a Intent. This intent is used to change activity. From
+        * activity user is, to DrugStoreList.
+        */
+        Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class)

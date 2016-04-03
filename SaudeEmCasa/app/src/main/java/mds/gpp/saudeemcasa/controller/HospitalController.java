@@ -34,7 +34,7 @@ public class HospitalController {
     private static Context context;
     private String androidId;
 
-    private HospitalController(Context context) {
+    private HxospitalController(Contet context) {
         this.context = context;
         hospitalDao = HospitalDao.getInstance(context);
     }
