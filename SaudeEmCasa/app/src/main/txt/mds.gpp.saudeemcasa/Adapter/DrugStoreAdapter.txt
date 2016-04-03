@@ -1,0 +1,32 @@
+Class: DrugStoreAdapter extends ArrayAdapter<DrugStore>
+
+    VARIABLES
+    * private Context context;  //Set application context
+    * private ArrayList<DrugStore> lista; //Set drugstore list
+    * public static final int COUNT = 15; //Set the list size
+
+    FUNCTIONS
+    * public DrugStoreAdapter(Context context, ArrayList<DrugStore> lista) 
+	//Setting DrugStoreAdapter constructor
+
+    * public int getCount()
+	//Return the number of objects to show on list
+
+    * public DrugStore getItem(int position)
+        //Returns the position of the item in the list
+
+    * public long getItemId(int position) 
+        //Returns the position
+
+    * public View getView(int position, View convertView, ViewGroup parent) 
+	//Returns a convertView the populate method Adapter
+ 
+    * private Float convertToKM(Float distance){
+        //Convert the distance value from meters to kilometers
+
+    * public View populateAdapter(View convertView, int position)
+        //Inflate the list view so that a list can be created with the specified elements.
+       
+    * public void setDistance(View convertView, int position) 
+	//Set distance value in the item layout
+        
