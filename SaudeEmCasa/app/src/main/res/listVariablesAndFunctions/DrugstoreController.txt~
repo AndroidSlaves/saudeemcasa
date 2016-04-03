@@ -1,0 +1,46 @@
+Classe: DrugstoreController
+ 
+VARIABLES
+
+*instance: this variable typed DrugStoreController, access a Drugstore instaciated
+
+*drugStore: this variable typed DrugStore, access the Drugstore atributes
+
+*drugStoreList: this is a List<DrugStore>, receive all drugstores
+
+*context: receive the drugstore in the context
+
+*drugStoreDao: used to access a drugstore in database
+
+*androidId: receive the android ID  from the user
+
+********************************************************
+
+FUNCTIONS
+    
+*DrugStoreController(Context context): access the drugstore instaciated in the context
+
+*getInstance(Context context): Return the unique instance of DrugstoreController active in the project.
+ 
+*setDrugStore( DrugStore drugStore ): Set the selected drugstore
+  
+*getDrugstore(): Get the selected drugstore
+
+*getAllDrugstores(): Get all the drugstores and return the list of drugstores
+    
+*initControllerDrugstore(): Starts the application being inside the "if" for the first usage and the "else" for the times after that. Receives the response from server, take objects out of json and add to database
+ 
+*setDistance(Context context,ArrayList<DrugStore> list): set distance based on the coordenates for each drugstore and then sort the list. The context access the activity where this is being executed, the list get a list of drugstores and the boolean is a indicator for tests
+    
+*requestRating(): Request the rating for the 15 first drugstores so that it can be shown. 15 was choosen because shows more elegance
+
+*setAndroidId(String androidId): used to access the variable androidId address and store the data
+
+*getAndroidId(): used to return the androidID value stored
+
+*public static class DistanceComparator implements Comparator<Stablishment>: Creates object that will determine how the comparation is done for setDistante function sort.
+      
+*compare(Stablishment stablishment1, Stablishment stablishment2): Use responseHandler created to request the requested through a URL. Return which stablishment has the gratter distance.
+         
+*updateRate(int rate,String androidId,String drugstoreId ): Save or update rate from user on server database. Parametres "rate" float value received from user input, "androidId" string value that represents the unique android id and "drugstoreId" int value that represents the stablishment unique id. Return response from http connection. 
+

@@ -18,11 +18,11 @@ VARIABLES:
 
 *distance: receive the result of the distance between the user and the stablishment
 
-*id: receive the id number from the user
+*id: receive the id number from a hospital or drugstore
 
-*rate:
+*rate: receive the avaliations from a stablishment
 
-*type:
+*type: receive a type of Drugstore
 
 FUNCTIONS
 
