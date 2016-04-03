@@ -84,13 +84,12 @@ public class DrugstoreScreen extends Fragment {
         //set ratting for drugstore
         RatingBar ratingBarFinal = (RatingBar) view.findViewById(R.id.ratingBarFinalDrugstore);
         ratingBarFinal.setRating(drugStore.getRate());
-
         TextView textViewRate = (TextView) view.findViewById(R.id.textViewRatingDrugstore);
-
         textViewRate.setText("" + drugStore.getRate());
 
         Button drugStoreButton = (Button) view.findViewById(R.id.buttonSaveRateDrugstore);
         final RatingBar drugstoreStars = (RatingBar) view.findViewById(R.id.ratingBarUserDrugstore);
+
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
