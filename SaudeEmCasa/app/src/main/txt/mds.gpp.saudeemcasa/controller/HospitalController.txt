@@ -1,0 +1,129 @@
+public class HospitalController
+
+    // 
+    private static HospitalController instance = null
+
+    // Create hospital used to populate HospitalList
+    private static Hospital hospital
+
+    // Creates an arraylist to populate with the list of hospitals
+    private static List<Hospital> hospitalList = new ArrayList<Hospital>()
+
+    // Attribute hospitalDao used to get hospitals objects in database
+    private static HospitalDao hospitalDao
+
+    // Attribute context is related to the screen that user should be.
+    private static Context context
+
+    // Attribute androidId is a unique identificator for each mobile phone.
+    private String androidId
+
+    // Evoques class HospitalController based in context of Android.
+    private HospitalController(Context context)
+
+    /**
+     * Return the unique instance of DrugstoreController active in the
+     * project.
+     *
+     * @return The unique instance of DrugstoreController.
+     */
+    public static HospitalController getInstance(Context context)
+
+    /**
+     * Set the selected hospital
+     *
+     * @param hospital
+     *          the selected hospital
+     * */
+    public void setHospital( Hospital hospital )
+
+
+    /**
+     * Get the selected hospital
+     *
+     * @return the class hospital
+     * */
+    public Hospital getHospital()
+
+
+    /**
+     * Get hospital list
+     *
+     * @return the hospitalList
+     * */
+    public static List<Hospital> getAllHospitals()
+
+
+    /**
+      * Starts the application being inside the if for the first usage
+      * and the else for the times after that.
+      * Receives the response from server, take objects out of json and add to database
+      * */
+    public void initControllerHospital() throws IOException, JSONException, ConnectionErrorException
+
+
+
+    /**
+     * set distance based on the coordenates for each hospitals
+     * and then sort the list
+     * @param context
+     *           The activity where this is being executed.
+     *
+     * @param list
+     *           the list of hospitals.
+     *
+     * @return a boolean indicator for testing.
+     *
+     * */
+    public boolean setDistance(Context context, ArrayList<Hospital> list)
+
+
+    /*
+    * Request the rating for the 15 first hospitals so that it can be shown
+    * at the HospitalList.
+    * */
+    public void requestRating() throws ConnectionErrorException
+
+    //The @param androidId is unique for each mobile phone.
+    public void setAndroidId(String androidId)
+
+    //Get the androidId from mobile phone.
+    public String getAndroidId()
+
+
+    /*
+    * Creates object that will determine how the comparation is done for
+    * setDistante function sort.
+    * */
+    public static class DistanceComparator implements Comparator<Stablishment> :
+
+        /**
+         * Use responseHandler created to request the requested through a URL.
+         *
+         * @param stablishment1
+         *          A stablishment to be compared.
+         *
+         * @param stablishment2
+         *          A stablishment to be compared.
+         *
+         * @return which stablishment has the gratter distance.
+         */
+        public int compare(Stablishment stablishment1, Stablishment stablishment2)
+
+
+    /**
+     * Save or update rate from user on server database.
+     *
+     * @param rate
+     *           float value received from user input.
+     *
+     * @param androidId
+     *           string value that represents the unique android id.
+     * @param hospitalId
+     *           int value that represents the stablishment unique id.
+     *
+     * @return response from http connection.
+     *
+     * @throws ConnectionErrorException
+     */
+    public String updateRate(int rate,String androidId,String hospitalId ) throws ConnectionErrorException

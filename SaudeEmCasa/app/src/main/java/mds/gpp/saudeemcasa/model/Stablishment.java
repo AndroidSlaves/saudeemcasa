@@ -5,7 +5,6 @@ package mds.gpp.saudeemcasa.model;
  */
 
 
-
     public class Stablishment {
 
     protected String latitude = "";
