@@ -1,0 +1,43 @@
+/**
+ * Class HospitalDao is used to insert Hospital information on hospital
+ * database. This class inherits Dao class, which provides methods to insert
+ * and delete data from database.
+ */
+Class: HospitalDao
+
+    // Attribute instance is used to check if Database is empty.
+    private static HospitalDao instance
+
+    /*
+     * This string was created to relate the array positions with the table
+     * columns names of database.
+     */
+    private static String tableColumns[]="latitude","longitude","city","address","state","rate","district","telephone","name","type","number","hospitalGid"
+
+    /* tableName is an auxiliary variable used to show what table is selected
+     * in database insertion or deletion.
+     */
+    private static String tableName = "Hospital"
+
+    // Constructor, that create database based on context (screen) user is.
+    private HospitalDao( Context context )
+
+    /* Method used to get instance of database. If the database where not
+     * created, then the method create a instance.
+     */
+    public static HospitalDao getInstance( Context context )
+
+    // Method used to verify database is empty.
+    public boolean isDbEmpty()
+
+    // Method used to insert an hospital object on database.
+    public boolean insertHospital(Hospital hospital)
+
+    // Method to get the list of all hospitals on database organized on array.
+    public List<Hospital> getAllHospitals()
+
+    // Method used to insert all hospitals objects on ArrayList.
+    public boolean insertAllHospitals( List<Hospital> hospitalList )
+
+    // Method used to delete hospitals from database.
+    public long deleteAllHospitals()
