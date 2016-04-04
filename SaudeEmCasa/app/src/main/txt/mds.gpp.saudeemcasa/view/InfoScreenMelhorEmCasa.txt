@@ -1,0 +1,12 @@
+Class: InfoScreenMelhorEmCasa extends FragmentActivity
+    //Class used for program presentation "Melhor em Casa" to the user.
+
+    FUNCTIONS
+    * void onCreate(Bundle savedInstanceState)
+	/* Method responsible for presentation of the "Melhor em Casa" to the user.
+	* Displays name and logo application and brief description of program 
+	* objectives in static screen to the user.
+	*/
+
+
+ 
