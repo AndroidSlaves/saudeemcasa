@@ -1,0 +1,34 @@
+/**
+ * Class Dao. Dao is a class that insert object information on database. Some
+ * information needs to be given here, example, to insert info on database
+ * you need to specify which dataBase will be used, which table will be changed
+ * and which value will be inserted in this table.
+ */
+Class: Dao
+
+    /*
+     * This attribute is used to define strings related to the columns of
+     * database instead of numbers.
+     */
+    protected static DatabaseHelper database
+
+    // This is the database will be used to store objects information
+    protected static SQLiteDatabase sqliteDatabase
+
+    // Context is the screen that Dao class will be used.
+    protected static Context context
+
+    /*
+     * Method used to insert data on database. After insertion database
+     * needs to be closed. The parameters refers to database used to store
+     * data, table of database that refers data, and the value of data.
+     */
+    protected long insertAndClose(SQLiteDatabase sqLiteDatabase, String table, ContentValues values )
+
+
+    /*
+     * Method used to delete data on database. After deletion database needs to
+     * be closed. The parameters refers to database used to database used in
+     * deletion, and the table that will be deleted.
+     */
+    protected long deleteAndClose(SQLiteDatabase sqLiteDatabase, String table)

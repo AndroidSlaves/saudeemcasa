@@ -1,0 +1,26 @@
+/**
+ * Class HospitalList is an activity. This class create a list of hospitals
+ * and using GPS calculate distance between User and Hospital. After that
+ * put these information into a list and show this list to User.
+ */
+Class: HospitalList
+
+        /*
+         * Initialize listView. listView is a layout that show objects organized
+         * in a list.
+         */
+        listView = (ListView) findViewById(R.id.listView)
+
+        /* Initialize GPS. GPS is used to get User position and calculate the
+         * distance to a hospital.
+         */
+        gps = new GPSTracker(this)
+
+        // Define an action when user click on item of the list.
+        onItemClick(AdapterView adapterView, View view, int position, long id)
+
+        /*
+         * When user click on item, the screen will be changed to show
+         * the location of this hospital on google maps.
+         */
+        Intent intent = new Intent(getBaseContext(), GoogleMapHospital.class)
