@@ -1,0 +1,9 @@
+Class: ConnectionErrorException
+    // Exception class that should occur when there is some problem with internet connection.
+Method:
+    ConnectionErrorException()
+        // Creating the exception object empty
+    ConnectionErrorException(String message)
+        // Creates the exception object with a message to be shown.
+
+
