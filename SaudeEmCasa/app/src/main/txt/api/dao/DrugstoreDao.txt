@@ -22,7 +22,7 @@ Methods:
     isDbEmpty()
         // Verifies if database is empty by selecting one object and verifying if it is null.
          variables: String query // String that contains the a database command: SELECT.
-                   Cursor cursor /*object returned from the database after executing the query
+                   Cursor cursor /* object returned from the database after executing the query
                                     command. */
 
     insertDrugstore(DrugStore drugStore)
@@ -36,7 +36,7 @@ Methods:
     List<DrugStore> getAllDrugStores()
         // Creates a list of drugstore objects from data coming from the database and return it
         variables: String query // String that contains the a database command: SELECT.
-                   Cursor cursor /*object returned from the database after executing the query
+                   Cursor cursor /* object returned from the database after executing the query
                                  command. It indicates which element of the data base it is at. */
 
     insertAllDrugStores(List<DrugStore> drugStoresList)

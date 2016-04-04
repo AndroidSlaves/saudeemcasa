@@ -1,0 +1,103 @@
+Class: DatabaseHelper
+    // Class that defines and creates the database.
+
+Attributes:
+    String DATABASE_NAME
+        // Name of the whole database.
+
+    int DATABASE_VERSION
+        // Represents the database version in this system, this varies with updates.
+
+    String DRUGSTORE_TABLE
+        // Name of the drugstore table of the database.
+
+    String HOSPITAL_TABLE
+        //Name of the Hospital table in the database.
+
+    String DRUGSTORE_LATITUDE
+        // Represents the column of the drugstore database for the drugstore latitude.
+
+    String DRUGSTORE_LONGETUDE
+        // Represents the column of the drugstore database for the drugstore longetude.
+
+    String DRUGSTORE_CITY
+        // Represents the column of the drugstore database for the city where it is located.
+
+    final String DRUGSTORE_ADDRESS
+        // Represents the column of the drugstore database for the drugstore address.
+
+    String DRUGSTORE_STATE
+        // Represents the column of the drugstore database for the state where the drugstore is.
+
+    String DRUGSTORE_RATE
+        // Represents the column of the drugstore database for the drugstore rate.
+
+    String DRUGSTORE_TELEPHONE
+        // Represents the column of the drugstore database for the drugstore telephone.
+
+    String DRUGSTORE_NAME
+        // Represents the column of the drugstore database for the drugstore commercial name.
+
+    String DRUGSTORE_TYPE
+        // Represents the column of the drugstore database for the type of the drugstore.
+
+    String DRUGSTORE_ID
+        // Represents the column of the drugstore database for its ID.
+
+    String DRUGSTORE_POSTALCODE
+        // Represents the column of the drugstore database for the drugstore postal code
+
+    String DRUGSTORE_GID
+        // Represents the column of the drugstore database for the government ID.
+
+    String HOSPITAL_LATITUDE
+        // represents the drugstore latitude in the database.
+
+    String HOSPITAL_LONGETUDE
+        // represents the drugstore longetude in the database.
+
+    String HOSPITAL_CITY
+        // represents column with the name of the city where the drugstore is located.
+
+    String HOSPITAL_ADDRESS
+        // represents the drugstore address in the database.
+
+    String HOSPITAL_STATE
+        // represents the drugstore state in the database.
+
+    String HOSPITAL_RATE
+        // represents the drugstore rate in the database.
+
+    String HOSPITAL_TELEPHONE
+        // represents the drugstore telephone in the database.
+
+    String HOSPITAL_NAME
+        // represents the drugstore name in the database.
+
+    String HOSPITAL_TYPE
+        // represents the drugstore type in the database.
+
+    String HOSPITAL_ID
+        // represents the drugstore Id in the database.
+
+    String HOSPITAL_NUMBER
+        // represents the drugstore number in the database.
+
+    String HOSPITAL_DISTRICT
+        // represents the drugstore district in the database.
+
+    String HOSPITAL_GID
+        // represents the drugstore government ID in the database.
+
+    String CREATE_DRUGSTORE
+        // The SQL command line which is the junction of the strings related to the drugstore.
+
+    String CREATE_HOSPITAL
+        // The SQL command line which is the junction of the strings related to the Hospital.
+
+Methods:
+    DatabaseHelper(Context ctx)
+        // Contructor that uses the the context to instatiated the DatabaseHelper.
+
+    onCreate(SQLiteDatabase db)
+        // Method that runs the SQL code and create the data base.
