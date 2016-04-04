@@ -6,6 +6,7 @@
  */
 Class: Dao
 
+Attributes:
     /*
      * This attribute is used to define strings related to the columns of
      * database instead of numbers.
@@ -18,6 +19,7 @@ Class: Dao
     // Context is the screen that Dao class will be used.
     protected static Context context
 
+Methods:
     /*
      * Method used to insert data on database. After insertion database
      * needs to be closed. The parameters refers to database used to store

@@ -5,12 +5,14 @@
  */
 Class: Hospital
 
+Attributes:
     // Number is an information about Hospital address.
     private String number = "";
 
     // District is an information about Hospital address.
     private String district = "";
 
+Methods: 
     // Get the value of attribute number.
     public String getNumber()
 

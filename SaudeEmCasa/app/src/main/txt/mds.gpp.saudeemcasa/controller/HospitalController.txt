@@ -5,6 +5,7 @@
  */
 Class: HospitalController
 
+Attributes:
     // Create hospital used to populate HospitalList
     private static Hospital hospital
 
@@ -23,6 +24,7 @@ Class: HospitalController
      */
     private String androidId
 
+Methods:
     // Evoques class HospitalController based in context of Android.
     private HospitalController(Context context)
 

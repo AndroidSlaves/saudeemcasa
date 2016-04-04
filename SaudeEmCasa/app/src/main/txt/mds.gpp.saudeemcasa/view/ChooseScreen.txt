@@ -5,6 +5,7 @@
  */
 Class: ChooseScreen
 
+Attributes:
         // Create hospital Button and set his layout by id defined.
         Button hospitalButton = (Button) findViewById(R.id.melhor_em_casa_button)
 

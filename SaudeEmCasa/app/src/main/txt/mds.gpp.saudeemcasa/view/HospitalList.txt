@@ -5,6 +5,7 @@
  */
 Class: HospitalList
 
+Attributes:
         /*
          * Initialize listView. listView is a layout that show objects organized
          * in a list.

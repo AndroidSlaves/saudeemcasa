@@ -5,6 +5,7 @@
  */
 Class: HospitalDao
 
+Attributes:
     // Attribute instance is used to check if Database is empty.
     private static HospitalDao instance
 
@@ -19,6 +20,7 @@ Class: HospitalDao
      */
     private static String tableName = "Hospital"
 
+Methods:
     // Constructor, that create database based on context (screen) user is.
     private HospitalDao( Context context )
 

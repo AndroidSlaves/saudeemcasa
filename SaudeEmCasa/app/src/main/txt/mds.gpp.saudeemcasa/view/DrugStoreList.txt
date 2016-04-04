@@ -1,0 +1,24 @@
+/**
+ * DrugStoreList is an activity. This class show the list of drugstores
+ * according user location.
+ */
+Class: DrugStoreList
+
+Attributes:
+    // Initialize listView. ListView is a layout that show items on list
+    listView = (ListView) findViewById(R.id.listView)
+
+    /*
+     * Initialize GPS. GPS is used to certify if the user has GPS activated, and
+     * if he can get user location.
+     */
+    gps = new GPSTracker(this)
+
+    /*
+     * Instancing drugStoreController. This instance is important to get
+     * the drugstores objects from database.
+     */
+    final DrugStoreController drugStoreController = DrugStoreController.getInstance(this)
+
+    // Initialize and fill list of drugstore that will be showed to User.
+    list = (ArrayList<DrugStore>) drugStoreController.getAllDrugstores()
