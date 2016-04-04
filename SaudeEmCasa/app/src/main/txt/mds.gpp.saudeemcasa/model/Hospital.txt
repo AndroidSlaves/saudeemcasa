@@ -1,15 +1,14 @@
-public class Hospital extends Stablishment:
+/**
+ * Hospital class inherits Stablisment. Hospital has two attributes more
+ * than stablishment. Are they, number and district. Both used to add more
+ * information on hospital address.
+ */
+Class: Hospital
 
-    // Empty Constructor
-    public Hospital()
-
-    // Build an object with name and telephone attributes.
-    public Hospital(String name, String telephone)
-
-    // Atrribute number of a Hospital.
+    // Number is an information about Hospital address.
     private String number = "";
 
-    // Attribute district of a Hospital.
+    // District is an information about Hospital address.
     private String district = "";
 
     // Get the value of attribute number.
