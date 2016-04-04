@@ -1,0 +1,68 @@
+Class: GPSTracker extends Service implements LocationListener
+    /** Class responsible for picking up the user's location by coordinates and calculate the distance 
+    * between the user and establishments.
+    */
+
+    VARIABLES
+    * final Context context; 
+	//Set application context
+    * boolean isGPSEnable = false; 
+	// Variable initialization responsible for checking whether the user's GPS is enabled
+    * boolean isNetworkEnable = false; 
+	// Variable initialization responsible for informing if there is availability of this system to get the user's location
+    * boolean canGetLocation = false; 
+	// Variable initialization responsible for checking it is to get the user's location
+
+    * double longitude; 
+	// Temporary variable to the longitude coordinate
+    * double latitude; 
+	// Temporary variable to the latitude coordinate
+    * Location location; 
+	// Object that represents the position of all the user's location information.
+
+    * static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 50;
+	// Constant definition of minimum distance to the GPS location update request.
+    * static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+	// Setting the minimum time constant for the GPS location update request.
+
+    * LocationManager locationManager; 
+	// Recover class Android system to work with location.
+
+
+
+    FUNCTIONS
+    * GPSTracker(Context context)
+        // Method that starts the constructor GPSTracker class
+
+    * Location getLocation() 
+    	/* Get the current location of the user, with latitude and longitude.
+	* Checks the GPS connection and activation,
+	* possible paths and check location by GPS or WiFi.
+	*/
+
+    * void stopUsingGPS() 
+	// Method requesting the cancellation of GPS updates, or stop updating the user's location.
+        
+    * double getLatitude() 
+	// Redeem user's position, returning only the latitude coordinate the user is located.
+
+    * double getLongitude()
+	// Redeem the user's position, returning only the longitude coordinate the user is located.
+
+    * boolean canGetLocation()
+	// Check the variable canGetLocation and returns its result
+
+    * void onLocationChanged(Location location)
+	// Body empty method
+
+    * void onStatusChanged(String provider, int status, Bundle extras)
+	// Body empty method
+
+    * void onProviderEnabled(String provider) 
+	// Body empty method
+
+    * void onProviderDisabled(String provider)
+	// Body empty method
+
+    * IBinder onBind(Intent intent) 
+	// Method, when called, returns null
