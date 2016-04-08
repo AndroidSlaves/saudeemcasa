@@ -1,0 +1,63 @@
+Class: LoadingScreen extends Activity 
+    /** Class responsible for returning a waiting screen while user settings 
+    * are performed by the application.
+    */
+
+    VARIABLES
+    * HospitalController hospitalController; 
+	// Starting reference variable to the hospital controller that will be used in the method requestStablishment.
+    * Handler messageHandler = new Handler();
+	// Starting reference variable for the handler to be used in the method requestStablishment.
+
+
+    FUNCTIONS
+    * void attachBaseContext(Context base) 
+	/* Define the basic context for this ContextWrapper.
+	* Corrects the application context class loader
+	* **to solve ERRO _non-zero exit value 2_
+	*/
+
+    * void onCreate(Bundle savedInstanceState) 
+	/* Saves the previous instance,
+	* Corrects the application context class loader
+	* Calls the loading screen display (layout) and logo
+	* Calls construction establishment.
+	*/
+
+    void requestStablishment()
+	/* Responsible for requesting communication with the Stabliment
+	* Building alert dialogs, defined the connection failure.
+	* Messages dialogue progress
+	* Start communication with the hospital or drugstore controller
+	*/
+
+        final ProgressDialog progress = new ProgressDialog(this);
+		// Checks the process of dialogue and how is the connection the database
+        final HospitalController hospitalController = HospitalController.getInstance(getApplicationContext());
+		// Starts Hospital controller instance as the application context.
+        final String androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+		// Variable initialization to check the application ID.
+
+    * void showMessageOnThread(final AlertDialog message, Handler messageHandler )
+	// Method for the user alert message display when there is a run-time error.
+
+    * void toListScreen() 
+	/* Method to end the screen, and instantiating the intention of the next screen, 
+	* ChooseScreen, and new screen initialization call.
+	*/
+
+    * class RetryButtonListener implements DialogInterface.OnClickListener {
+        //Responsible for activities when selecting the button to return to previous activity.
+        void onClick( DialogInterface dialog, int which ) 
+		/* Dismiss a dialog box that was previously shown by showDialog (int).
+	        *  Instantiates the intention to start the process on Loading Screen class, 
+		*  starting the activity and ending it.
+	        */
+              
+    * class CancelButtonListener implements DialogInterface.OnClickListener
+	//Responsible for canceling actions in activity
+        public void onClick( DialogInterface dialog, int which )
+            /* Dismiss a dialog box that was previously shown by showDialog (int).
+	    *  Terminate the Loading Screen screen.
+	    */
+           
