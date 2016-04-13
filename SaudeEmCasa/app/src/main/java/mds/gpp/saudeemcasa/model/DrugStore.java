@@ -10,9 +10,9 @@ public class DrugStore extends Stablishment {
         
         Assert(nameDrugStore != "");
         Assert(nameDrugStore != null);
-        Assert(nameDrugStore.length > 2);
+        Assert(nameDrugStore.length() > 2);
         Assert(telephoneDrugStore !="");
-        Assert(telephoneDrugStore.length >= 10);
+        Assert(telephoneDrugStore.length() >= 10);
         Assert(telephoneDrugStore < );
 
         super(nameDrugStore, telephoneDrugStore);
@@ -26,7 +26,7 @@ public class DrugStore extends Stablishment {
 
     public void setPostalCode(String postalCode) {
         
-        Assert(postalCode.length == 8);
+        Assert(postalCode.length() == 8);
         Assert(postalCode != "");
         Assert(postalCode != null);
 

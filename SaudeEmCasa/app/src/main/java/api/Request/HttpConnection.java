@@ -47,7 +47,7 @@ public class HttpConnection {
      */
     public String newRequest(String ipAddress) throws ConnectionErrorException {
         Assert(ipAddress != null);
-        Assert(ipAddress.length >= 8); // basic case 0.0.0.0
+        Assert(ipAddress.length() >= 8); // basic case 0.0.0.0
         
         String response;
         try {
@@ -96,7 +96,7 @@ public class HttpConnection {
     }
     public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
         Assert(ipAddress != null);
-        Assert(ipAddress.length >= 8); // basic case 0.0.0.0
+        Assert(ipAddress.length() >= 8); // basic case 0.0.0.0
         Assert(id != null);
         Assert(id >= 0);
 
@@ -111,7 +111,7 @@ public class HttpConnection {
     public String Request(HttpGet httpGet, HttpClient client) throws IOException {
         Assert(httpGet != null);
         Assert(client != null);
-        
+
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
         return client.execute(httpGet, responseHandler);

@@ -69,7 +69,18 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertDrugstore(DrugStore drugStore) {
-        assert(drugStore != null);
+        Assert(drugStore != null);
+        Assert(drugStore.getLatitude != null);
+        Assert(drugStore.getLongitude != null);
+        Assert(drugStore.getCity != null);
+        Assert(drugStore.getAddress != null);
+        Assert(drugStore.getState != null);
+        Assert(drugStore.getRate != null);
+        Assert(drugStore.getPostalCode != null);
+        Assert(drugStore.getTelephone != null);
+        Assert(drugStore.getName != null);
+        Assert(drugStore.getType != null);
+        Assert(drugStore.getId != null);
 
         SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
 
@@ -139,6 +150,9 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertAllDrugStores(List<DrugStore> drugStoresList) {
+        Assert(drugStoresList != null);
+        Assert(drugStoresList.length())
+
         Iterator<DrugStore> index = drugStoresList.iterator();
 
         boolean result = true;

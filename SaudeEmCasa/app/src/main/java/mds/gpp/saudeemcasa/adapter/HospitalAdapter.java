@@ -20,12 +20,11 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     public static final int COUNT = 15;
 
     public HospitalAdapter(Context context, ArrayList<Hospital> lista){
-        super(context, 0, lista);
-
         Assert(context != null);
         Assert(lista != null);
         Assert(lista.length() > 0);
         
+        super(context, 0, lista);        
         this.context = context;
         this.lista = lista;
     }
