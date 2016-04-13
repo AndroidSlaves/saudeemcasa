@@ -8,12 +8,12 @@ public class DrugStore extends Stablishment {
 
     public DrugStore(String nameDrugStore, String telephoneDrugStore) {
         
-        assert(nameDrugStore != "");
-        assert(nameDrugStore != null);
-        assert(nameDrugStore.length > 2);
-        assert(telephoneDrugStore !="");
-        assert(telephoneDrugStore.length >= 10);
-        assert(telephoneDrugStore < );
+        Assert(nameDrugStore != "");
+        Assert(nameDrugStore != null);
+        Assert(nameDrugStore.length > 2);
+        Assert(telephoneDrugStore !="");
+        Assert(telephoneDrugStore.length >= 10);
+        Assert(telephoneDrugStore < );
 
         super(nameDrugStore, telephoneDrugStore);
     }
@@ -26,9 +26,9 @@ public class DrugStore extends Stablishment {
 
     public void setPostalCode(String postalCode) {
         
-        assert(postalCode.length == 8);
-        assert(postalCode != "");
-        assert(postalCode != null);
+        Assert(postalCode.length == 8);
+        Assert(postalCode != "");
+        Assert(postalCode != null);
 
         this.postalCode = postalCode;
     }

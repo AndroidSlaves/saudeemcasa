@@ -69,6 +69,7 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertDrugstore(DrugStore drugStore) {
+        assert(drugStore != null);
 
         SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
 

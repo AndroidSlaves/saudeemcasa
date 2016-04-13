@@ -22,9 +22,9 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     public HospitalAdapter(Context context, ArrayList<Hospital> lista){
         super(context, 0, lista);
 
-        assert(context != null);
-        assert(lista != null);
-        assert(lista.length() > 0);
+        Assert(context != null);
+        Assert(lista != null);
+        Assert(lista.length() > 0);
         
         this.context = context;
         this.lista = lista;
@@ -36,8 +36,8 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     @Override
     public Hospital getItem(int position) {
         
-        assert(position >= 0);
-        assert(position < 32000); //Int size
+        Assert(position >= 0);
+        Assert(position < 32000); //Int size
         
         return lista.get(position);
     }
@@ -50,9 +50,9 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         
-        assert(position >= 0);
-        assert(convertView != null);
-        assert(parent != null);
+        Assert(position >= 0);
+        Assert(convertView != null);
+        Assert(parent != null);
 
         return populateAdapter(convertView,position);
     }
@@ -66,7 +66,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *
      */
     private Float convertToKM(Float distance){
-        assert(distance > 0);
+        Assert(distance > 0);
 
         return distance/1000;
     }
@@ -81,8 +81,8 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *@return inflated layout.
      * */
     public View populateAdapter(View convertView, int position){
-        assert(convertView != null);
-        assert(position >= 0);
+        Assert(convertView != null);
+        Assert(position >= 0);
 
         Hospital hospitalPosition = this.lista.get(position);
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
@@ -104,8 +104,8 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *           position of the item layout to be accessed.
      * */
     public void setDistance(View convertView, int position) {
-        assert(position >= 0);
-        assert(convertView != null);
+        Assert(position >= 0);
+        Assert(convertView != null);
         
         if (this.lista.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
