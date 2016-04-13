@@ -40,12 +40,15 @@ public class HttpConnection {
      *
      * @param ipAddress
      *           address to be accessed.
-
+     *
      * @return response from http connection.
      *
      * @throws ConnectionErrorException
      */
     public String newRequest(String ipAddress) throws ConnectionErrorException {
+        Assert(ipAddress != null);
+        Assert(ipAddress.length >= 8); // basic case 0.0.0.0
+        
         String response;
         try {
             System.out.println("Starting connection with " + ipAddress);
@@ -77,6 +80,9 @@ public class HttpConnection {
      * @throws ConnectionErrorException
      */
     public String RequestAllDrugstoresByUF(String ipAdress) throws ConnectionErrorException {
+        Assert(ipAddress != null);
+        Assert(ipAddress.length >= 8); // basic case 0.0.0.0
+
         String finalJson = "";
 
         for (int i = 0; i < states.length; i++) {
@@ -89,6 +95,11 @@ public class HttpConnection {
         return "[" + finalJson + "]";
     }
     public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
+        Assert(ipAddress != null);
+        Assert(ipAddress.length >= 8); // basic case 0.0.0.0
+        Assert(id != null);
+        Assert(id >= 0);
+
         String json = newRequest(ipAddress+id);
         JSONArray jsonArray = new JSONArray(json);
         if(jsonArray.length() == 0){
@@ -98,7 +109,9 @@ public class HttpConnection {
         }
     }
     public String Request(HttpGet httpGet, HttpClient client) throws IOException {
-
+        Assert(httpGet != null);
+        Assert(client != null);
+        
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
         return client.execute(httpGet, responseHandler);

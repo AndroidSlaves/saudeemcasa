@@ -24,6 +24,8 @@ public class JSONHelper {
 
 
     public JSONHelper(Context context){
+        Assert(context != null);
+
         drugStoreDao = DrugStoreDao.getInstance(context);
         hospitalDao = HospitalDao.getInstance(context);
     }
@@ -39,6 +41,9 @@ public class JSONHelper {
     * @throws JSONException
     * */
     public boolean hospitalListFromJSON(String hospitalJsonList )throws JSONException {
+        Assert(hospitalJsonList != null);
+        Assert(hospitalJsonList != "");
+
         JSONArray jArray = new JSONArray(hospitalJsonList);
 
         try {
@@ -89,6 +94,8 @@ public class JSONHelper {
     * @throws JSONException
     * */
     public boolean drugstorePublicListFromJSON(String drugstoreJsonList )throws JSONException {
+        Assert(drugstoreJsonList != null);
+        Assert(drugstoreJsonList!= "");
 
         JSONArray jArray = new JSONArray(drugstoreJsonList);
 
@@ -138,6 +145,8 @@ public class JSONHelper {
     * @throws JSONException
     * */
     public boolean drugstorePrivateListFromJSON(String drugstoreJsonList )throws JSONException {
+        Assert(drugstoreJsonList != null);
+        Assert(drugstoreJsonList!= "");
 
         JSONArray jArray = new JSONArray(drugstoreJsonList);
 
