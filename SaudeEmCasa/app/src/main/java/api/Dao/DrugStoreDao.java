@@ -28,6 +28,7 @@ public class DrugStoreDao extends Dao{
     private static String tableName = "Drugstore";
 
     private DrugStoreDao( Context context ) {
+        Assert(context != null);
         DrugStoreDao.database = new DatabaseHelper( context );
     }
 

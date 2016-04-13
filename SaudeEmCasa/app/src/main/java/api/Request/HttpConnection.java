@@ -81,7 +81,7 @@ public class HttpConnection {
      */
     public String RequestAllDrugstoresByUF(String ipAdress) throws ConnectionErrorException {
         Assert(ipAddress != null);
-        Assert(ipAddress.length >= 8); // basic case 0.0.0.0
+        Assert(ipAddress.length() >= 8); // basic case 0.0.0.0
 
         String finalJson = "";
 
