@@ -46,8 +46,8 @@ public class HttpConnection {
      * @throws ConnectionErrorException
      */
     public String newRequest(String ipAddress) throws ConnectionErrorException {
-        Assert(ipAddress != null);
-        Assert(ipAddress.length() >= 8); // basic case 0.0.0.0
+        assert(ipAddress != null);
+        assert(ipAddress.length() >= 8); // basic case 0.0.0.0
         
         String response;
         try {
@@ -80,8 +80,8 @@ public class HttpConnection {
      * @throws ConnectionErrorException
      */
     public String RequestAllDrugstoresByUF(String ipAdress) throws ConnectionErrorException {
-        Assert(ipAddress != null);
-        Assert(ipAddress.length() >= 8); // basic case 0.0.0.0
+        assert(ipAddress != null);
+        assert(ipAddress.length() >= 8); // basic case 0.0.0.0
 
         String finalJson = "";
 
@@ -95,10 +95,10 @@ public class HttpConnection {
         return "[" + finalJson + "]";
     }
     public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
-        Assert(ipAddress != null);
-        Assert(ipAddress.length() >= 8); // basic case 0.0.0.0
-        Assert(id != null);
-        Assert(id >= 0);
+        assert(ipAddress != null);
+        assert(ipAddress.length() >= 8); // basic case 0.0.0.0
+        assert(id != null);
+        assert(id >= 0);
 
         String json = newRequest(ipAddress+id);
         JSONArray jsonArray = new JSONArray(json);
@@ -109,8 +109,8 @@ public class HttpConnection {
         }
     }
     public String Request(HttpGet httpGet, HttpClient client) throws IOException {
-        Assert(httpGet != null);
-        Assert(client != null);
+        assert(httpGet != null);
+        assert(client != null);
 
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
 

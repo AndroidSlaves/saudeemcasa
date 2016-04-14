@@ -28,7 +28,7 @@ public class DrugStoreDao extends Dao{
     private static String tableName = "Drugstore";
 
     private DrugStoreDao( Context context ) {
-        Assert(context != null);
+        assert(context != null);
         DrugStoreDao.database = new DatabaseHelper( context );
     }
 
@@ -70,18 +70,18 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertDrugstore(DrugStore drugStore) {
-        Assert(drugStore != null);
-        Assert(drugStore.getLatitude != null);
-        Assert(drugStore.getLongitude != null);
-        Assert(drugStore.getCity != null);
-        Assert(drugStore.getAddress != null);
-        Assert(drugStore.getState != null);
-        Assert(drugStore.getRate != null);
-        Assert(drugStore.getPostalCode != null);
-        Assert(drugStore.getTelephone != null);
-        Assert(drugStore.getName != null);
-        Assert(drugStore.getType != null);
-        Assert(drugStore.getId != null);
+        assert(drugStore != null);
+        assert(drugStore.getLatitude != null);
+        assert(drugStore.getLongitude != null);
+        assert(drugStore.getCity != null);
+        assert(drugStore.getAddress != null);
+        assert(drugStore.getState != null);
+        assert(drugStore.getRate != null);
+        assert(drugStore.getPostalCode != null);
+        assert(drugStore.getTelephone != null);
+        assert(drugStore.getName != null);
+        assert(drugStore.getType != null);
+        assert(drugStore.getId != null);
 
         SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
 
@@ -151,8 +151,8 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertAllDrugStores(List<DrugStore> drugStoresList) {
-        Assert(drugStoresList != null);
-        Assert(drugStoresList.length())
+        assert(drugStoresList != null);
+        assert(drugStoresList.length())
 
         Iterator<DrugStore> index = drugStoresList.iterator();
 
