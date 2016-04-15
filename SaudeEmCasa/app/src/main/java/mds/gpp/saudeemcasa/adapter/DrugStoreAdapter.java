@@ -24,9 +24,9 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     // Setting DrugStoreAdapter constructor
     public DrugStoreAdapter(Context context, ArrayList<DrugStore> lista){
 
-        assert(context != null);
-        assert(lista != null);
-        assert(lista.length() > 0);
+        assert(context != null) : "context must never be null";
+        assert(lista != null) : "lista must never be null";
+        assert(lista.size() > 0) : "lista must never be empty";
 
         super(context,0,lista);
         this.context = context;
@@ -41,17 +41,16 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
 
     @Override
     public DrugStore getItem(int position) {
-        assert(position >= 0);
-        assert(position < 32000);
+        assert(position >= 0) : "position must never be negative";
 
         return lista.get(position);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        assert(position >= 0);
-        assert(convertView != null);
-        assert(parent != null);
+        assert(position >= 0) : "position must never be null";
+        assert(convertView != null) : "convertView must never be null";
+        assert(parent != null) : "parent must never be null";
 
         return populateAdapter(convertView,position);
     }
@@ -65,7 +64,7 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
      *
      */
     private Float convertToKM(Float distance){
-        assert(distance > 0);
+        assert(distance > 0): "distance must never be negative";
 
         return distance/1000;
 
@@ -81,8 +80,8 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
      *@return inflated layout.
      * */
     public View populateAdapter(View convertView, int position){
-        assert(convertView != null);
-        assert(position >= 0);
+        assert(convertView != null) : "convertView must never be null";
+        assert(position >= 0) : "position must never be null";
         // Override method to get view
         DrugStore drugStorePosition = this.lista.get(position);
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
@@ -106,8 +105,8 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
      *           position of the item layout to be accessed.
      * */
     public void setDistance(View convertView, int position) {
-        assert(position >= 0);
-        assert(convertView != null);
+        assert(position >= 0) : "position must never be null";
+        assert(convertView != null) : "convertView must never be null";
         if (this.lista.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);

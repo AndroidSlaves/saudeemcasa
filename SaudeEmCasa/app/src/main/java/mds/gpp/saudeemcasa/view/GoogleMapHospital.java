@@ -13,7 +13,9 @@ import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 
 /**
- * Created by iolane on 25/11/15.
+ * Class name: GoogleMap (.java)
+ *
+ * Purpose: This class create the view with google maps to show hospital locationa
  */
 public class GoogleMapHospital extends FragmentActivity {
 
@@ -22,6 +24,7 @@ public class GoogleMapHospital extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        assert (savedInstanceState != null) : "Receive a null tratment";
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_google_maps_hospital);

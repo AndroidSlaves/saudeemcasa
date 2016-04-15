@@ -14,7 +14,9 @@ import mds.gpp.saudeemcasa.controller.DrugStoreController;
 
 
 /**
- * Created by iolane on 25/11/15.
+ * Class name: GoogleMap (.java)
+ *
+ * Purpose: This class create the view with google maps to show drugstore location
  */
 public class GoogleMapDrugStore extends FragmentActivity{
 
@@ -23,6 +25,7 @@ public class GoogleMapDrugStore extends FragmentActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        assert (savedInstanceState != null) : "Receive a null tratment";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps_hospital);
         setUpMap();

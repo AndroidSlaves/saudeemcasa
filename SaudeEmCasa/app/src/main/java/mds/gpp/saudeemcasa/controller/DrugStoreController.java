@@ -20,7 +20,11 @@ import mds.gpp.saudeemcasa.model.Stablishment;
 
 import static java.util.Collections.sort;
 
-
+/**
+ * Class name: DrugStoreControler (.java)
+ *
+ * Purpose: This class manipulate the Drugstores
+ */
 public class DrugStoreController {
 
     private static DrugStoreController instance = null;
@@ -31,6 +35,7 @@ public class DrugStoreController {
     private String androidId;
     
     private DrugStoreController(Context context) {
+        assert (context != null) : "Receive a null tratment";
         this.context = context;
         drugStoreDao = DrugStoreDao.getInstance(context);
     }
@@ -41,6 +46,7 @@ public class DrugStoreController {
      * @return The unique instance of DrugstoreController.
      */
     public static DrugStoreController getInstance(Context context) {
+        assert (context != null) : "Receive a null tratment";
         if (instance == null) {
             instance = new DrugStoreController(context);
         } else {
@@ -55,6 +61,7 @@ public class DrugStoreController {
      *          the selected drugstore
      * */
     public void setDrugStore( DrugStore drugStore ) {
+        assert (drugStore != null) : "Receive a null tratment";
         DrugStoreController.drugStore = drugStore;
     }
     /**
@@ -118,6 +125,10 @@ public class DrugStoreController {
      *
      * */
     public static boolean setDistance(Context context,ArrayList<DrugStore> list) {
+        assert (context != null) : "Receive a null tratment";
+        assert (list != null) : "Receive a null tratment";
+        assert (list.size() > 0) : "Receive a empty tratment";
+
         GPSTracker gps = new GPSTracker(context);
 
         if(gps.canGetLocation()) {
@@ -159,6 +170,8 @@ public class DrugStoreController {
     }
 
     public void setAndroidId(String androidId) {
+        assert (androidId != null) : "Receive a null tratment";
+        assert (androidId != "") : "Receive a empty tratment";
         this.androidId = androidId;
     }
 
@@ -166,13 +179,12 @@ public class DrugStoreController {
         return androidId;
     }
 
-    /*
+       /*
         * Creates object that will determine how the comparation is done for
         * setDistante function sort.
         * */
     public static class DistanceComparator implements Comparator<Stablishment>
     {
-
         /**
          * Use responseHandler created to request the requested through a URL.
          *
@@ -185,6 +197,8 @@ public class DrugStoreController {
          * @return which stablishment has the gratter distance.
          */
         public int compare(Stablishment stablishment1, Stablishment stablishment2) {
+            assert (stablishment1 != null) : "Receive a null tratment";
+            assert (stablishment2 != null) : "Receive a null tratment";
             return stablishment1.getDistance()<(stablishment2.getDistance())? -1 : 1;
         }
 
@@ -205,6 +219,12 @@ public class DrugStoreController {
      * @throws ConnectionErrorException
      */
     public String updateRate(int rate,String androidId,String drugstoreId ) throws ConnectionErrorException {
+        assert (rate >= 0) : "Receive a negative tratment";
+        assert (androidId != null) : "Receive a null tratment";
+        assert (androidId != "") : "Receive a empty tratment";
+        assert (drugstoreId != null) : "Receive a null tratment";
+        assert (drugstoreId != "") : "Receive a empty tratment";
+
         HttpConnection connection = new HttpConnection();
         String response = null;
 

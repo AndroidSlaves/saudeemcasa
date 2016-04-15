@@ -1,4 +1,4 @@
- : "drugstoreJsonList must never be null"package api.Request;
+package api.Request;
 
 
 import android.content.Entity;
@@ -73,13 +73,13 @@ public class HttpConnection {
     /**
      * Save or update rate from user on server database.
      *
-     * @param ipAdress
+     * @param ipAddress
      *          address to be accessed.
      * @return response from http connection.
      *
      * @throws ConnectionErrorException
      */
-    public String RequestAllDrugstoresByUF(String ipAdress) throws ConnectionErrorException {
+    public String RequestAllDrugstoresByUF(String ipAddress) throws ConnectionErrorException {
         assert(ipAddress != null) : "ipAddress must never be null";
         assert(ipAddress.length() >= 8) : "ipAddress must never be smaller than 8 characters";
 
@@ -87,7 +87,7 @@ public class HttpConnection {
 
         for (int i = 0; i < states.length; i++) {
             String tmp;
-            tmp = newRequest(ipAdress + "/uf/" + states[i]);
+            tmp = newRequest(ipAddress + "/uf/" + states[i]);
 
             finalJson = finalJson + "," + tmp.substring(1, tmp.length() - 1);
         }
@@ -97,7 +97,7 @@ public class HttpConnection {
     public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
         assert(ipAddress != null) : "ipAddress must never be null";
         assert(ipAddress.length() >= 8) : "ipAddress must never be smaller than 8 characters";
-        assert(id >= 0) : "id must never be negative";
+        assert(id != null) : "id must never be negative";
 
         String json = newRequest(ipAddress+id);
         JSONArray jsonArray = new JSONArray(json);
