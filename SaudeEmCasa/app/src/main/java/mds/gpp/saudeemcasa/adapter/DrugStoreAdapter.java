@@ -26,7 +26,7 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
 
         assert(context != null) : "context must never be null";
         assert(lista != null) : "lista must never be null";
-        assert(lista.length() > 0) : "lista must never be empty";
+        assert(lista.size() > 0) : "lista must never be empty";
 
         super(context,0,lista);
         this.context = context;

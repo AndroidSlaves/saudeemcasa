@@ -30,6 +30,8 @@ public class LoadingScreen extends Activity {
     // to solve ERRO _non-zero exit value 2_
     @Override
     protected void attachBaseContext(Context base) {
+        assert (base != null) : "Receive a null tratment";
+
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
@@ -109,6 +111,9 @@ public class LoadingScreen extends Activity {
 
     private void showMessageOnThread( final AlertDialog message,
                                       Handler messageHandler ) {
+        assert(messageHandler != null) : "messageHandler must never be null";
+        assert(message != null) : "message must never be null";
+
 
         messageHandler.post(new Runnable() {
             public void run() {
