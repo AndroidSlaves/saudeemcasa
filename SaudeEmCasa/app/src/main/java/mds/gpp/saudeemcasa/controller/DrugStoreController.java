@@ -20,7 +20,11 @@ import mds.gpp.saudeemcasa.model.Stablishment;
 
 import static java.util.Collections.sort;
 
-
+/**
+ * Class name: DrugStoreControler (.java)
+ *
+ * Purpose: This class manipulate the Drugstores
+ */
 public class DrugStoreController {
 
     private static DrugStoreController instance = null;
@@ -181,7 +185,6 @@ public class DrugStoreController {
         * */
     public static class DistanceComparator implements Comparator<Stablishment>
     {
-
         /**
          * Use responseHandler created to request the requested through a URL.
          *
