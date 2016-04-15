@@ -24,7 +24,7 @@ public class JSONHelper {
 
 
     public JSONHelper(Context context){
-        Assert(context != null);
+        assert(context != null);
 
         drugStoreDao = DrugStoreDao.getInstance(context);
         hospitalDao = HospitalDao.getInstance(context);
@@ -41,8 +41,8 @@ public class JSONHelper {
     * @throws JSONException
     * */
     public boolean hospitalListFromJSON(String hospitalJsonList )throws JSONException {
-        Assert(hospitalJsonList != null);
-        Assert(hospitalJsonList != "");
+        assert(hospitalJsonList != null) : "hospitalJsonList must never be null";
+        assert(hospitalJsonList != "") : "hospitalJsonList must never be empty";
 
         JSONArray jArray = new JSONArray(hospitalJsonList);
 
@@ -94,8 +94,8 @@ public class JSONHelper {
     * @throws JSONException
     * */
     public boolean drugstorePublicListFromJSON(String drugstoreJsonList )throws JSONException {
-        Assert(drugstoreJsonList != null);
-        Assert(drugstoreJsonList!= "");
+        assert(drugstoreJsonList != null) : "drugstoreJsonList must never be null";
+        assert(drugstoreJsonList!= "") : "drugstoreJsonList must never be empty";
 
         JSONArray jArray = new JSONArray(drugstoreJsonList);
 
@@ -145,8 +145,8 @@ public class JSONHelper {
     * @throws JSONException
     * */
     public boolean drugstorePrivateListFromJSON(String drugstoreJsonList )throws JSONException {
-        Assert(drugstoreJsonList != null);
-        Assert(drugstoreJsonList!= "");
+        assert(drugstoreJsonList != null) : "drugstoreJsonList must never be null";
+        assert(drugstoreJsonList!= "") : "drugstoreJsonList must never be empty";
 
         JSONArray jArray = new JSONArray(drugstoreJsonList);
 

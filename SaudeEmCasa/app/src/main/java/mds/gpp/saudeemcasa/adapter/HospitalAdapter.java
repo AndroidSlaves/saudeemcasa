@@ -20,9 +20,9 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     public static final int COUNT = 15;
 
     public HospitalAdapter(Context context, ArrayList<Hospital> lista){
-        Assert(context != null);
-        Assert(lista != null);
-        Assert(lista.length() > 0);
+        assert(context != null) : "context must never be null";
+        assert(lista != null) : "lista must never be null";
+        assert(lista.length() > 0) : "lista must never be null";
         
         super(context, 0, lista);        
         this.context = context;
@@ -35,8 +35,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     @Override
     public Hospital getItem(int position) {
         
-        Assert(position >= 0);
-        Assert(position < 32000); //Int size
+        assert(position >= 0) : "position must never be null";
         
         return lista.get(position);
     }
@@ -49,9 +48,9 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         
-        Assert(position >= 0);
-        Assert(convertView != null);
-        Assert(parent != null);
+        assert(position >= 0) : "position must never be negative";
+        assert(convertView != null) : "convertView must never be null";
+        assert(parent != null) : "parent must never be null";
 
         return populateAdapter(convertView,position);
     }
@@ -65,7 +64,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *
      */
     private Float convertToKM(Float distance){
-        Assert(distance > 0);
+        assert(distance > 0) : "distance must never be negative";
 
         return distance/1000;
     }
@@ -80,8 +79,8 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *@return inflated layout.
      * */
     public View populateAdapter(View convertView, int position){
-        Assert(convertView != null);
-        Assert(position >= 0);
+        assert(convertView != null) : "convertView must never be null";
+        assert(position >= 0) : "position must never be negative";
 
         Hospital hospitalPosition = this.lista.get(position);
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
@@ -103,8 +102,8 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *           position of the item layout to be accessed.
      * */
     public void setDistance(View convertView, int position) {
-        Assert(position >= 0);
-        Assert(convertView != null);
+        assert(position >= 0) : "position must never be negative";
+        assert(convertView != null) : "convertView must never be null";
         
         if (this.lista.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
