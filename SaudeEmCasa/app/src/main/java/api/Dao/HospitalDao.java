@@ -25,10 +25,14 @@ public class HospitalDao extends Dao{
     private static String tableName = "Hospital";
 
     private HospitalDao( Context context ) {
+        assert (context != null) : "Context must never be null.";
+
         HospitalDao.database = new DatabaseHelper( context );
     }
 
     public static HospitalDao getInstance( Context context ) {
+        assert (context != null) : "Context must never be null.";
+
         if( HospitalDao.instance != null ) {
 			/* !Nothing To Do. */
 
@@ -66,6 +70,7 @@ public class HospitalDao extends Dao{
     }
 
     public boolean insertHospital(Hospital hospital) {
+        assert (hospital != null) : "hospital can't be null.";
 
         SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
 
@@ -154,6 +159,9 @@ public class HospitalDao extends Dao{
         return listHospitals;
     }
     public boolean insertAllHospitals( List<Hospital> hospitalList ) {
+        assert (hospitalList != null) : "hospitalList can't be null";
+        assert (hospitalList.isEmpty() == true) : "hospitalList must have at least one item";
+
         Iterator<Hospital> index = hospitalList.iterator();
 
         boolean result = true;
