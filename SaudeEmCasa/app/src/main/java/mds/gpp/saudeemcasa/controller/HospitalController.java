@@ -4,7 +4,6 @@ import android.content.Context;
 import android.location.Location;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class HospitalController {
     private static Context context;
     private String androidId;
 
-    private HxospitalController(Contet context) {
+    private HospitalController(Context context) {
         this.context = context;
         hospitalDao = HospitalDao.getInstance(context);
     }
@@ -60,6 +59,8 @@ public class HospitalController {
      *          the selected hospital
      * */
     public void setHospital( Hospital hospital ) {
+        assert (hospital != null) : "Null object treatment";
+
         HospitalController.hospital = hospital;
     }
     /**
@@ -118,6 +119,10 @@ public class HospitalController {
      *
      * */
     public boolean setDistance(Context context, ArrayList<Hospital> list) {
+
+        assert (list.isEmpty() == true) : "Empty list treatment";
+        assert (list != null) : "Null list treatment";
+
         GPSTracker gps = new GPSTracker(context);
         if(gps.canGetLocation()) {
             double userLongitude = gps.getLongitude();
@@ -154,6 +159,9 @@ public class HospitalController {
     }
 
     public void setAndroidId(String androidId) {
+        assert (androidId != null) : "Null androidId treatment.";
+        assert (androidId.length() > 2) : "Minor character androidId treatment.";
+
         this.androidId = androidId;
     }
 
@@ -180,6 +188,9 @@ public class HospitalController {
          * @return which stablishment has the gratter distance.
          */
         public int compare(Stablishment stablishment1, Stablishment stablishment2) {
+            assert (stablishment1 != null) : "stablishment1 null object treatment.";
+            assert (stablishment2 != null) : "stablishment2 null object treatment.";
+
             return stablishment1.getDistance()<(stablishment2.getDistance())? -1 : 1;
         }
 
@@ -200,6 +211,13 @@ public class HospitalController {
      * @throws ConnectionErrorException
      */
     public String updateRate(int rate,String androidId,String hospitalId ) throws ConnectionErrorException {
+        assert (rate >= 0 && rate <= 5) : "Minimum and maximum rate value interval.";
+        assert (androidId != null) : "Null androidId treatment.";
+        assert (androidId.length() > 2) : "Minor character androidId treatment.";
+        assert (hospitalId != null) : "Nothing stored on hospitalId.";
+        assert (hospitalId.length() >= 1) : "Verify hospitalId minor character.";
+
+
         HttpConnection connection = new HttpConnection();
         String response;
         response = connection.newRequest("http://159.203.95.153:3000"+"/"+"rate"+"/"+"gid"+"/"+hospitalId+"/"+"aid"+"/"+androidId+"/"+"rating"+"/"+rate);

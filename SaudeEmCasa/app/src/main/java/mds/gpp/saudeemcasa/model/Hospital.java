@@ -8,6 +8,12 @@ public class Hospital extends Stablishment {
 
     public Hospital(String name, String telephone) {
         super(name, telephone);
+
+        assert (name != null) : "Null attribute treatment.";
+        assert (name.length() > 1) : "Treatment to minor of character in a name ";
+        assert (name != "") : "Empty name treatment";
+        assert (telephone.length() >= 10) : "Treatment to minor of character in telephone";
+
     }
 
     protected String number = "";
@@ -18,6 +24,8 @@ public class Hospital extends Stablishment {
     }
 
     public void setNumber(String number) {
+        assert (number != null) : "Null attribute treatment.";
+
         this.number = number;
     }
 
@@ -26,6 +34,10 @@ public class Hospital extends Stablishment {
     }
 
     public void setDistrict(String district) {
+        assert (district != null) : "Null attribute treatment.";
+        assert (district != "") : "Empty district treatment.";
+        assert (district.length() > 2) : "Minor character treatment.";
+
         this.district = district;
     }
 
