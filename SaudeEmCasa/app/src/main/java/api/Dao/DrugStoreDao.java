@@ -28,7 +28,7 @@ public class DrugStoreDao extends Dao{
     private static String tableName = "Drugstore";
 
     private DrugStoreDao( Context context ) {
-        assert(context != null);
+        assert(context != null) : "context must never be null";
         DrugStoreDao.database = new DatabaseHelper( context );
     }
 
@@ -70,18 +70,18 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertDrugstore(DrugStore drugStore) {
-        assert(drugStore != null);
-        assert(drugStore.getLatitude != null);
-        assert(drugStore.getLongitude != null);
-        assert(drugStore.getCity != null);
-        assert(drugStore.getAddress != null);
-        assert(drugStore.getState != null);
-        assert(drugStore.getRate != null);
-        assert(drugStore.getPostalCode != null);
-        assert(drugStore.getTelephone != null);
-        assert(drugStore.getName != null);
-        assert(drugStore.getType != null);
-        assert(drugStore.getId != null);
+        assert(drugStore != null) : "drugStore object must never be null";
+        assert(drugStore.getLatitude != null) : "latitude field must never be null";
+        assert(drugStore.getLongitude != null) : "longitude field must never be null";
+        assert(drugStore.getCity != null) : "city field must never be null";
+        assert(drugStore.getAddress != null) : "address field must never be null";
+        assert(drugStore.getState != null) : "state field must never be null";
+        assert(drugStore.getRate != null) : "rate field must never be null";
+        assert(drugStore.getPostalCode != null) : "postalCode field must never be null";
+        assert(drugStore.getTelephone != null) : "telephone field must never be null";
+        assert(drugStore.getName != null) : "name field must never be null";
+        assert(drugStore.getType != null) : "type field must never be null";
+        assert(drugStore.getId != null) : "id field must never be null";
 
         SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
 
@@ -151,8 +151,8 @@ public class DrugStoreDao extends Dao{
     }
 
     public boolean insertAllDrugStores(List<DrugStore> drugStoresList) {
-        assert(drugStoresList != null);
-        assert(drugStoresList.length())
+        assert(drugStoresList != null) : "drugStoresList must never be null";
+        assert(drugStoresList.length > 0) : "drugStoresList field must never be empty";
 
         Iterator<DrugStore> index = drugStoresList.iterator();
 

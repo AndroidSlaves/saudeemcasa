@@ -1,4 +1,4 @@
-package api.Request;
+ : "drugstoreJsonList must never be null"package api.Request;
 
 
 import android.content.Entity;
@@ -46,8 +46,8 @@ public class HttpConnection {
      * @throws ConnectionErrorException
      */
     public String newRequest(String ipAddress) throws ConnectionErrorException {
-        assert(ipAddress != null);
-        assert(ipAddress.length() >= 8); // basic case 0.0.0.0
+        assert(ipAddress != null) : "ipAddress must never be null";
+        assert(ipAddress.length() >= 8) : "ipAddress must never be smaller then 8 characters";
         
         String response;
         try {
@@ -80,8 +80,8 @@ public class HttpConnection {
      * @throws ConnectionErrorException
      */
     public String RequestAllDrugstoresByUF(String ipAdress) throws ConnectionErrorException {
-        assert(ipAddress != null);
-        assert(ipAddress.length() >= 8); // basic case 0.0.0.0
+        assert(ipAddress != null) : "ipAddress must never be null";
+        assert(ipAddress.length() >= 8) : "ipAddress must never be smaller than 8 characters";
 
         String finalJson = "";
 
@@ -95,10 +95,9 @@ public class HttpConnection {
         return "[" + finalJson + "]";
     }
     public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
-        assert(ipAddress != null);
-        assert(ipAddress.length() >= 8); // basic case 0.0.0.0
-        assert(id != null);
-        assert(id >= 0);
+        assert(ipAddress != null) : "ipAddress must never be null";
+        assert(ipAddress.length() >= 8) : "ipAddress must never be smaller than 8 characters";
+        assert(id >= 0) : "id must never be negative";
 
         String json = newRequest(ipAddress+id);
         JSONArray jsonArray = new JSONArray(json);
@@ -109,8 +108,8 @@ public class HttpConnection {
         }
     }
     public String Request(HttpGet httpGet, HttpClient client) throws IOException {
-        assert(httpGet != null);
-        assert(client != null);
+        assert(httpGet != null) : "httpGet must never be null";
+        assert(client != null) : "client must never be null";
 
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
