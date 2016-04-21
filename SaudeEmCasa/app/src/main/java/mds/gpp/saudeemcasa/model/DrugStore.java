@@ -7,13 +7,6 @@ public class DrugStore extends Stablishment {
     }
 
     public DrugStore(String nameDrugStore, String telephoneDrugStore) {
-        assert (nameDrugStore != "") : "nameDrugStore must never be empty";
-        assert (nameDrugStore != null) : "nameDrugStore must never be null";
-        assert (nameDrugStore.length() > 1) : "nameDrugStore must never be one letter";
-        assert (telephoneDrugStore != "") : "telephoneDrugStore must never be empty";
-        assert (telephoneDrugStore.length() >= 10) : "telephoneDrugStore must never be smaller"
-                                                    +" than 10 characters"; 
-        
         super(nameDrugStore, telephoneDrugStore);
     }
 
