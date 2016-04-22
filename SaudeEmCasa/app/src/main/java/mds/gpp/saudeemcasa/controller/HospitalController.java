@@ -77,7 +77,6 @@ public class HospitalController {
      * @return the hospitalList
      * */
     public static List<Hospital> getAllHospitals(){
-
         return hospitalList;
     }
     /*
@@ -86,15 +85,19 @@ public class HospitalController {
         * Receives the response from server, take objects out of json and add to database
         * */
     public void initControllerHospital() throws IOException, JSONException, ConnectionErrorException {
+            String ipAddress = "http://159.203.95.153:3000/habilitados";
+            Boolean dbEmpty = hospitalDao.isDbEmpty();
 
-            if (hospitalDao.isDbEmpty()) {
+            if (dbEmpty) {
+
                 HttpConnection httpConnection = new HttpConnection();
-
-                String jsonHospital = httpConnection.newRequest("http://159.203.95.153:3000/habilitados");
+                String jsonHospital = httpConnection.newRequest(ipAddress);
                 JSONHelper jsonParser = new JSONHelper(context);
 
                 if(jsonHospital !=null){
-                    if(jsonParser.hospitalListFromJSON(jsonHospital)){
+                    Boolean jsonResult = jsonParser.hospitalListFromJSON(jsonHospital);
+
+                    if(jsonResult){
                         hospitalList = hospitalDao.getAllHospitals();
                     }else{/*do nothing*/}
                 }else {/*do nothing*/}
@@ -103,7 +106,6 @@ public class HospitalController {
             } else {
                 //just setting hospitals to local list
                 hospitalList = hospitalDao.getAllHospitals();
-
             }
     }
     /**
@@ -119,39 +121,49 @@ public class HospitalController {
      *
      * */
     public boolean setDistance(Context context, ArrayList<Hospital> list) {
-
         assert (list.isEmpty() == true) : "Empty list treatment";
         assert (list != null) : "Null list treatment";
 
         GPSTracker gps = new GPSTracker(context);
-        if(gps.canGetLocation()) {
+        boolean canGetLocation = gps.canGetLocation();
+        if(canGetLocation) {
             double userLongitude = gps.getLongitude();
             double userLatitude = gps.getLatitude();
-            for (int i = 0; i < list.size(); i++) {
-                float resultsadapter[] = new float[1];
 
+            for (int i = 0; i < list.size(); i++) {
+                float resultsAdapter[] = new float[1];
+                // REVIEW FUNCTION
                 Location.distanceBetween(Double.parseDouble(list.get(i).getLatitude()),
                         Double.parseDouble(list.get(i).getLongitude()),
-                        userLatitude, userLongitude, resultsadapter);
-
-                list.get(i).setDistance(resultsadapter[0]);
+                        userLatitude, userLongitude, resultsAdapter);
+                list.get(i).setDistance(resultsAdapter[0]);
             }
+
             sort(list, new DistanceComparator());
+
             return true;
         }else {
             return false;
         }
 
     }
-    /*
-    * Request the rating for the 15 first hospitals so that it can be shown
-    * at the HospitalList
-    * */
+    /**
+     * Request the rating for the 15 first hospitals so that it can be shown
+     * at the HospitalList
+     *
+     * @throws ConnectionErrorException
+     * */
     public void requestRating() throws ConnectionErrorException {
         HttpConnection httpConnection = new HttpConnection();
-        for(int i = 0;i<15;i++){
+        int numberOfItemsOnTheList = 15;
+
+        for( int i = 0 ;i < numberOfItemsOnTheList ; i++ ){
             try {
-                hospitalList.get(i).setRate(httpConnection.getRating(hospitalList.get(i).getId(),"http://159.203.95.153:3000/rate/gid/"));
+                String ipAddress = "http://159.203.95.153:3000/rate/gid/";
+                String hospitalId = hospitalList.get(i).getId();
+
+                float rate = httpConnection.getRating(hospitalId,ipAddress);
+                hospitalList.get(i).setRate(rate);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -190,7 +202,7 @@ public class HospitalController {
         public int compare(Stablishment stablishment1, Stablishment stablishment2) {
             assert (stablishment1 != null) : "stablishment1 null object treatment.";
             assert (stablishment2 != null) : "stablishment2 null object treatment.";
-
+            // Needs reduce in the complexity
             return stablishment1.getDistance()<(stablishment2.getDistance())? -1 : 1;
         }
 
@@ -217,10 +229,10 @@ public class HospitalController {
         assert (hospitalId != null) : "Nothing stored on hospitalId.";
         assert (hospitalId.length() >= 1) : "Verify hospitalId minor character.";
 
-
         HttpConnection connection = new HttpConnection();
-        String response;
-        response = connection.newRequest("http://159.203.95.153:3000"+"/"+"rate"+"/"+"gid"+"/"+hospitalId+"/"+"aid"+"/"+androidId+"/"+"rating"+"/"+rate);
+
+        String ipAddress = "http://159.203.95.153:3000/rate/gid/"+hospitalId+"/aid/"+androidId+"/rating/"+rate;
+        String response = connection.newRequest(ipAddress);
 
         return response;
     }
