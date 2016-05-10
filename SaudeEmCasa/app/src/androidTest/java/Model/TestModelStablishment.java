@@ -27,15 +27,15 @@ public class TestModelStablishment extends TestCase{
     @Test
     public void testSetId(){
         Stablishment stablishment = new Stablishment();
-        stablishment.setId(1);
-        assertTrue(stablishment.getId() == 1);
+        stablishment.setId("1");
+        assertTrue(stablishment.getId() == "1");
     }
 
     @Test
     public void testGetId(){
         Stablishment stablishment = new Stablishment();
-        stablishment.setId(1);
-        assertEquals(stablishment.getId(), 1);
+        stablishment.setId("1");
+        assertEquals(stablishment.getId(), "1");
     }
 
     @Test
