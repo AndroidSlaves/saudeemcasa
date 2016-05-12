@@ -1,23 +1,25 @@
+/*****************************
+ * Class name: HospitalDao (.java)
+ *
+ * Purpose: An activity in order to create a list of hospitals with the distance between the user
+ * and the respective hospitals.
+ ****************************/
+
 package api.Dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import api.Helper.DatabaseHelper;
-import mds.gpp.saudeemcasa.model.DrugStore;
 import mds.gpp.saudeemcasa.model.Hospital;
 
-/**
- * Created by lucas on 9/27/15.
- */
-public class HospitalDao extends Dao{
+public class HospitalDao extends Dao {
     private static HospitalDao instance;
 
     private static String tableColumns[]={"latitude","longitude","city","address","state","rate","district","telephone","name","type","number","hospitalGid"};
