@@ -1,3 +1,10 @@
+/*****************************
+ * Class name: ChooseScreen (.java)
+ *
+ * Purpose: Screen that allows the user's choice for application information and government
+ * programs, and the lists of hospitals and pharmacies.
+ ****************************/
+
 package mds.gpp.saudeemcasa.view;
 
 import android.app.Activity;
@@ -11,14 +18,15 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import api.Exception.ConnectionErrorException;
+
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 import mds.gpp.saudeemcasa.helper.GPSTracker;
 
-public class ChooseScreen extends Activity{
+public class ChooseScreen extends Activity {
 
-    GPSTracker gps;
+    public GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +60,8 @@ public class ChooseScreen extends Activity{
         infoSaudeEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent nextScreen = new Intent(getBaseContext(), InfoScreenSaudeEmCasa.class);
                 startActivity(nextScreen);
-
             }
         });
 
@@ -64,7 +70,6 @@ public class ChooseScreen extends Activity{
             public void onClick(View v) {
                 Intent nextScreen = new Intent(getBaseContext(), InfoScreenMelhorEmCasa.class);
                 startActivity(nextScreen);
-
             }
         });
 
@@ -73,13 +78,15 @@ public class ChooseScreen extends Activity{
             public void onClick(View v) {
                 Intent nextScreen = new Intent(getBaseContext(), InfoScreenDrugStore.class);
                 startActivity(nextScreen);
-
             }
         });
 
     }
 
-    public void hospitalListThread(){
+    /**
+     * This thread is used to get the ratings of each hospital from several.
+     * */
+    public void hospitalListThread() {
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Requerindo avaliações...");
         progress.show();
@@ -91,14 +98,19 @@ public class ChooseScreen extends Activity{
                     Intent nextScreen = new Intent(getBaseContext(), HospitalList.class);
                     startActivity(nextScreen);
                 } catch (ConnectionErrorException e) {
-                    Toast.makeText(getApplicationContext(),"Houve um error de conexão.\nverifique sua conexão com a internet. ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Houve um error de conexão.\nVerifique" +
+                            " sua conexão com a internet. ",Toast.LENGTH_LONG).show();
                 }
                 progress.dismiss();
                 Looper.loop();
             }
         }.start();
     }
-    public void drugstoreListThread(){
+
+    /**
+     * This thread is used to get the ratings of each drugstore from server.
+     * */
+    public void drugstoreListThread() {
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Requerindo avaliações...");
         progress.show();
@@ -110,7 +122,8 @@ public class ChooseScreen extends Activity{
                     Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class);
                     startActivity(nextScreen);
                 } catch (ConnectionErrorException e) {
-                    Toast.makeText(getApplicationContext(), "Houve um error de conexão.\nverifique sua conexão com a internet. ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Houve um erro de conexão.\nVerifique " +
+                            "sua conexão com a internet. ", Toast.LENGTH_LONG).show();
                 }
 
                 progress.dismiss();
@@ -119,6 +132,4 @@ public class ChooseScreen extends Activity{
         }.start();
 
     }
-
-
 }
