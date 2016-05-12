@@ -1,9 +1,17 @@
-Class: ConnectionErrorException
-    // Exception class that should occur when there is some problem with internet connection.
+/************************
+ * Class name: ConnectionErrorException (.java)
+ *
+ * Purpose: Exception class that should occur when there is some problem with internet connection.
+ ************************/
+
 Method:
     ConnectionErrorException()
-        // Creating the exception object empty
+        // Creating the exception object default
+    
     ConnectionErrorException(String message)
-        // Creates the exception object with a message to be shown.
+        /**
+         * Creates the exception object with a message to be shown.
+         * @param message receive a error message.
+         */
 
 
