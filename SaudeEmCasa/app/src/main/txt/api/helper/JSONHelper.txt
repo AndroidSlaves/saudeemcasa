@@ -1,5 +1,8 @@
-Class: JSONHelper
-    // Class that helps to treat the data received in the JSON format from the server.
+/************************
+ * Class name: JSONHelper (.java)
+ *
+ * Purpose: Class that helps to treat the data received in the JSON format from the server.
+ ************************/
 
 Attributes:
     HospitalDao hospitalDao
@@ -13,16 +16,23 @@ Methods:
         // Creates the instance of the JSONHelper class which can perform its methods.
 
     hospitalListFromJSON(String hospitalJsonList)
-        /* Get data from the list of hospitals in the JSON format, store it into a hospital object
-         and send it to be stored in the HospitalDao. */
-        Variables: JSONArray jArray // Structure from the JSON received ready to extract data.
-
+        /*
+         * @param hospitalJsonList used to store a list of object hospital.
+         * Get data from the list of hospitals in the JSON format, store it into a hospital object
+         * and send it to be stored in the HospitalDao.
+         * Variables:
+         * JSONArray jArray Structure from the JSON received ready to extract data.
+         */
     drugstorePublicListFromJSON(String drugstoreJsonList )
-        /* get data from the list of public drugstores in the JSON format, store it into a drugstore object
-         and send it to be stored in the DrugstoreDao.*/
-        Variables: JSONArray jArray // Structure from the JSON received ready to extract data.
+        /* get data from the list of public drugstores in the JSON format, store it into a drugstore
+         * object and send it to be stored in the DrugstoreDao.
+         * Variables:
+         * JSONArray jArray Structure from the JSON received ready to extract data.
+         */
 
     drugstorePrivateListFromJSON(String drugstoreJsonList )
-        /* get data from the list of private drugstores in the JSON format, store it into a drugstore object
-        and send it to be stored in the DrugstoreDao.*/
-        Variables: JSONArray jArray // Structure from the JSON received ready to extract data.
+        /* get data from the list of private drugstores in the JSON format, store it into a
+         * drugstore object and send it to be stored in the DrugstoreDao.
+         * Variables:
+         * JSONArray jArray Structure from the JSON received ready to extract data.
+         */
