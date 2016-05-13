@@ -1,13 +1,19 @@
+/*****************************
+ * Class name: ConnectionErrorException (.java)
+ *
+ * Purpose: Exception class that should occur when there is some problem with internet connection.
+ *****************************/
+
 package api.Exception;
 
-/**
- * Created by lucas on 10/23/15.
- */
-public class ConnectionErrorException extends Exception{
-    public ConnectionErrorException(){
-    /*Nothing to do here*/
+public class ConnectionErrorException extends Exception {
+
+    public ConnectionErrorException() {
+        // Nothing to do here
     }
-    public ConnectionErrorException(String message){
+
+    // Creates the exception object with a message to be shown.
+    public ConnectionErrorException(String message) {
         super(message);
     }
 }
