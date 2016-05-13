@@ -43,7 +43,11 @@ public class GPSTracker extends Service implements LocationListener{
         getLocation();
     }
 
-    /*
+    /**
+     *
+     * @return
+     *              Geolocation of user, contains longitude and latitude.
+     *
      * Get the current location of the user, with latitude and longitude. Checks the GPS connection
      * and activation, possible paths and check location by GPS or WiFi.
      */
