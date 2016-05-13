@@ -62,7 +62,11 @@ public class LoadingScreen extends Activity {
         requestStablishment();
     }
 
-
+    /*
+     * Responsible for requesting communication with the Stabliment. Building alert dialogs,
+     * defined the connection failure.
+	 * Messages dialogue progress and start communication with the hospital or drugstore controller.
+	 */
     public void requestStablishment() {
         final AlertDialog.Builder msgNeutralBuilder = new AlertDialog.Builder( this );
 
@@ -147,12 +151,19 @@ public class LoadingScreen extends Activity {
         });
     }
 
+    /*
+     * Method to end the LoadingScreen activity. After the activity close, call the next screen
+     * for user choose hospital list or drugstore list.
+     */
     private void toListScreen() {
         finish();
         Intent nextScreen = new Intent(getBaseContext(), ChooseScreen.class);
         startActivity(nextScreen);
     }
 
+    /*
+     * Method responsible to retry the connection to the server, if failed once.
+     */
     private class RetryButtonListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick( DialogInterface dialog, int which ) {
@@ -165,6 +176,9 @@ public class LoadingScreen extends Activity {
         }
     }
 
+    /*
+     * Method responsible to end or cancel the server request, if failed once. Close application.
+     */
     private class CancelButtonListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick( DialogInterface dialog, int which ) {
