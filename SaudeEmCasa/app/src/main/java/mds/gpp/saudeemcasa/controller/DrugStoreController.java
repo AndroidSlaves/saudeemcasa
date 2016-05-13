@@ -89,7 +89,7 @@ public class DrugStoreController {
     * */
     public void initControllerDrugstore() throws IOException, JSONException,ConnectionErrorException {
 
-            if (drugStoreDao.isDbEmpty()) {
+            if (drugStoreDao.isDatabaseEmpty()) {
 
                 HttpConnection httpConnection = new HttpConnection();
 
