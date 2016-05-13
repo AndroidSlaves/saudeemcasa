@@ -3,10 +3,10 @@ package mds.gpp.saudeemcasa.model;
 /**
  * Class name: Stablishment (.java)
  *
- * Purpose: This class modeling stablishments like the Hospitals and the Drugstores
+ * Purpose: This class modeling stablishments like the Hospitals and the drugstores
  */
 public class Stablishment {
-
+    //Attributes of the stablishment.
     protected String latitude = "";
     protected String longitude = "";
     protected String type = "";
@@ -18,10 +18,20 @@ public class Stablishment {
     protected float rate = 0;
     protected String id;
     protected float distance = 0;
-
+    /**
+     * Default constructor.
+     *
+     */
     public Stablishment() {
     }
-
+    /**
+     * Constructor with name and telephone for initialization
+     *
+     * @param name
+     * Stablishment name that will be set on initialization
+     * @param telephone
+     * Stablishment telephone that will be set on initialization
+     */
     public Stablishment(String name, String telephone) {
         assert (name != null) : "Receive a null tratment";
         assert (name.length() > 1) : "Tratment to minor of character in a name ";
@@ -32,9 +42,9 @@ public class Stablishment {
         this.telephone = telephone;
     }
     /**
-     * Returns the identification number value stored for drugstore
+     * Returns the identification number value stored for stablishment
      *
-     * @return Drugstore identification number.
+     * @return Stablishment identification number.
      */
     public String getId() {
         return id;
@@ -51,9 +61,9 @@ public class Stablishment {
         this.id = id;
     }
     /**
-     * Returns the latitude position value stored for drugstore
+     * Returns the latitude position value stored for stablishment
      *
-     * @return Drugstore latitude.
+     * @return Stablishment latitude.
      */
     public String getLatitude() {
         return latitude;
@@ -70,9 +80,9 @@ public class Stablishment {
         this.latitude = latitude;
     }
     /**
-     * Returns the longitude number value stored for drugstore
+     * Returns the longitude number value stored for stablishment
      *
-     * @return Drugstore longitude number.
+     * @return Stablishment longitude number.
      */
     public String getLongitude() {
         return longitude;
@@ -89,9 +99,9 @@ public class Stablishment {
         this.longitude = longitude;
     }
     /**
-     * Returns the city name where the drugstore is located
+     * Returns the city name where the stablishment is located
      *
-     * @return Drugstore city name.
+     * @return Stablishment city name.
      */
     public String getCity() {
         return city;
@@ -108,9 +118,9 @@ public class Stablishment {
         this.city = city;
     }
     /**
-     * Returns the address that points where the drugstore is located
+     * Returns the address that points where the stablishment is located
      *
-     * @return Drugstore address.
+     * @return Stablishment address.
      */
     public String getAddress() {
         return address;
@@ -125,9 +135,9 @@ public class Stablishment {
         this.address = address;
     }
     /**
-     * Returns the state name where the drugstore is located
+     * Returns the state name where the stablishment is located
      *
-     * @return Drugstore state name.
+     * @return Stablishment state name.
      */
     public String getState() {
         return state;
@@ -144,9 +154,9 @@ public class Stablishment {
         this.state = state;
     }
     /**
-     * Returns the rate given to  this drugstore
+     * Returns the rate given to  this stablishment
      *
-     * @return Drugstore rate number. (Integer between 1 and 5)
+     * @return Stablishment rate number. (Integer between 1 and 5)
      */
     public float getRate() {
         return rate;
@@ -155,16 +165,16 @@ public class Stablishment {
      * Used to access the variable rate and stored given data in this Stablishment
      *
      * @param rate
-     * Rate number attributed to this drugstore that will be stored.
+     * Rate number attributed to this stablishment that will be stored.
      */
     public void setRate(float rate) {
         assert (rate >= 0) : "Receive a negative tratment";
         this.rate = rate;
     }
     /**
-     * Returns the drugstore telephone
+     * Returns the stablishment telephone
      *
-     * @return the drugstore telephone.
+     * @return the stablishment telephone.
      */
     public String getTelephone() {
         return telephone;
@@ -173,7 +183,7 @@ public class Stablishment {
      * Used to access the variable telephone and stored given data in this Stablishment
      *
      * @param telephone
-     * Telephone number attributed to this drugstore that will be stored.
+     * Telephone number attributed to this stablishment that will be stored.
      */
     public void setTelephone(String telephone) {
         assert (telephone != null) : "Receive a null tratment";
@@ -182,9 +192,9 @@ public class Stablishment {
         this.telephone = telephone;
     }
     /**
-     * Returns The drugstore market name.
+     * Returns The stablishment market name.
      *
-     * @return The drugstore market name.
+     * @return The stablishment market name.
      */
     public String getName() {
         return name;
@@ -193,7 +203,7 @@ public class Stablishment {
      * Used to access the variable name and stored given data in this Stablishment
      *
      * @param name
-     * Name number attributed to this drugstore that will be stored.
+     * Name number attributed to this stablishment that will be stored.
      */
     public void setName(String name) {
         assert (name != null) : "Receive a null tratment";
@@ -201,9 +211,9 @@ public class Stablishment {
         this.name = name;
     }
     /**
-     * Returns The type of drugstore this is.
+     * Returns The type of stablishment this is.
      *
-     * @return The type of the drugstore. (private or public)
+     * @return The type of the stablishment. (private or public)
      */
     public String getType() {
         return type;
@@ -212,7 +222,7 @@ public class Stablishment {
      * Used to access the variable type and stored given data in this Stablishment
      *
      * @param type
-     * Type attributed to this drugstore that will be stored.
+     * Type attributed to this stablishment that will be stored.
      */
     public void setType(String type) {
         assert (type != null) : "Receive a null tratment";
@@ -220,9 +230,9 @@ public class Stablishment {
         this.type = type;
     }
     /**
-     * Returns the distance between this drugstore and the user's location.
+     * Returns the distance between this stablishment and the user's location.
      *
-     * @return the distance between this drugstore and the user's location (In meters).
+     * @return the distance between this stablishment and the user's location (In meters).
      */
     public float getDistance() {
         return distance;
@@ -231,7 +241,7 @@ public class Stablishment {
      * Used to access the variable distance and stored given data in this Stablishment
      *
      * @param distance
-     * the distance between this drugstore and the user's location (In meters) that will be stored.
+     * the distance between this stablishment and the user's location (In meters) that will be stored.
      */
     public void setDistance(float distance) {
         assert (distance >= 0) : "Receive a negative tratment";
