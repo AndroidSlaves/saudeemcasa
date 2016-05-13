@@ -95,7 +95,6 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
      *           float value to be converted.
      *
      * @return distance value in km.
-     *
      */
     private Float convertToKM(Float distance){
         assert (distance > 0): "distance must never be negative";
