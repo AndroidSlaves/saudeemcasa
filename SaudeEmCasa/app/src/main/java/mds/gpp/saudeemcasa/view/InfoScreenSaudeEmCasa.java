@@ -1,3 +1,9 @@
+/*****************************
+ * Class name: InfoScreenSaudeEmCasa (.java)
+ *
+ * Purpose: Show information about SaudeEmCasa Application.
+ ****************************/
+
 package mds.gpp.saudeemcasa.view;
 
 import android.os.Bundle;
@@ -9,6 +15,11 @@ import mds.gpp.saudeemcasa.R;
 public class InfoScreenSaudeEmCasa extends FragmentActivity{
     //View menu;
 
+    /**
+     *
+     * @param savedInstanceState
+     *              Save the previous screen intented.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_screen_saude_em_casa);
