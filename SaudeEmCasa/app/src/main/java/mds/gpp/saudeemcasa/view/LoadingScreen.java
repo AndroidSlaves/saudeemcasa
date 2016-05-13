@@ -37,7 +37,7 @@ public class LoadingScreen extends Activity {
       *             Define the basic context for this Context Wrapper.
       */
 
-    // to solve ERRO _non-zero exit value 2_
+    // (*) To solve ERROR: _non-zero exit value 2_
     @Override
     protected void attachBaseContext(Context base) {
         assert (base != null) : "Receive a null tratment";
@@ -157,6 +157,7 @@ public class LoadingScreen extends Activity {
      */
     private void toListScreen() {
         finish();
+
         Intent nextScreen = new Intent(getBaseContext(), ChooseScreen.class);
         startActivity(nextScreen);
     }
