@@ -48,8 +48,7 @@ public class DrugStoreController {
         drugStoreDao = DrugStoreDao.getInstance(context);
     }
     /**
-     * Return the unique instance of DrugstoreController active in the
-     * project.
+     * Return the unique instance of DrugstoreController active in the project.
      *
      * @param context
      * activity context where this method was called.
@@ -198,7 +197,7 @@ public class DrugStoreController {
      *
      * @param androidId
      * Identifier of the android user of this session.
-     * 
+     *
      */
     public void setAndroidId(String androidId) {
         assert (androidId != null) : "Receive a null treatment";
