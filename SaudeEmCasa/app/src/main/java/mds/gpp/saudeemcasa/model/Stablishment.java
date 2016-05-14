@@ -1,10 +1,11 @@
 package mds.gpp.saudeemcasa.model;
 
-/**
+/*****************************
  * Class name: Stablishment (.java)
  *
- * Purpose: This class modeling stablishments like the Hospitals and the drugstores
- */
+ * Purpose: Represents a generic Stablishment entity. Stores the data
+ * that characterize the Stablishment organization.
+ ****************************/
 public class Stablishment {
     //Attributes of the stablishment.
     protected String latitude = "";
@@ -18,6 +19,7 @@ public class Stablishment {
     protected float rate = 0;
     protected String id;
     protected float distance = 0;
+
     /**
      * Default constructor.
      *
@@ -41,6 +43,7 @@ public class Stablishment {
         this.name = name;
         this.telephone = telephone;
     }
+
     /**
      * Returns the identification number value stored for stablishment
      *
@@ -247,5 +250,4 @@ public class Stablishment {
         assert (distance >= 0) : "Receive a negative tratment";
         this.distance = distance;
     }
-
 }
