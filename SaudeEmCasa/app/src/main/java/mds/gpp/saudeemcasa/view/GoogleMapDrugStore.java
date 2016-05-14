@@ -12,12 +12,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 
-
-/**
+/*****************************
  * Class name: GoogleMap (.java)
  *
  * Purpose: This class create the view with google maps to show drugstore location
- */
+ ****************************/
 public class GoogleMapDrugStore extends FragmentActivity{
 
     private GoogleMap mMap;
@@ -36,7 +35,11 @@ public class GoogleMapDrugStore extends FragmentActivity{
         super.onResume();
         setUpMap();
     }
-
+    /**
+     * Do a null check to confirm that we have not already instantiated the map. Try to obtain the
+     * map from the SupportMapFragment. Check if we were successful in obtaining the map.
+     *
+     */
     private void setUpMap() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap != null) {
@@ -54,7 +57,11 @@ public class GoogleMapDrugStore extends FragmentActivity{
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
 
-    //Start the map on the right position
+    /**
+     * This functions get the latitude and longitude from the drugstore in the context and put a
+     * marker point there with zoom 10 (10 shows elegance).
+     *
+     */
     private void oneLocationMap() {
         String nome = controller.getDrugstore().getName();
         String latitude = controller.getDrugstore().getLatitude();
