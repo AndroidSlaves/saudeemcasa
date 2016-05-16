@@ -48,6 +48,7 @@ public class DrugStoreController {
         this.context = context;
         drugStoreDao = DrugStoreDao.getInstance(context);
     }
+
     /**
      * Return the unique instance of DrugstoreController active in the project.
      *
@@ -66,6 +67,7 @@ public class DrugStoreController {
         }
         return instance;
     }
+
     /**
      * Stores the given drugstore as the active (clicked) drugstore.
      *
@@ -77,6 +79,7 @@ public class DrugStoreController {
         assert (drugStore != null) : "Receive a null treatment";
         DrugStoreController.drugStore = drugStore;
     }
+
     /**
      * Get store  drugstore
      *
@@ -93,10 +96,10 @@ public class DrugStoreController {
      * @return the list of the nearest drugstores.
      *
      */
-
     public List<DrugStore> getAllDrugstores(){
         return drugStoreList;
     }
+
     /**
      * Method that is first initiated when the application is opened. It connects to the server and
      * the database on first use or just get the data from the database for usage.
@@ -122,11 +125,12 @@ public class DrugStoreController {
                 String jsonPrivate = httpConnectionPrivate.RequestAllDrugstoresByUF("http://159.203.95.153:3000/farmacia_popular_conveniada");
                 /*This check happens because there may be failure during the requisition which would
                 continue the steps with information missing. This maybe replaced by and exception.*/
-                if(jsonPublic != null && jsonPrivate !=null){
+                if(jsonPublic != null && jsonPrivate != null){
 
                     JSONHelper jsonParser = new JSONHelper(context);
 
-                    if(jsonParser.drugstorePublicListFromJSON(jsonPublic) && jsonParser.drugstorePrivateListFromJSON(jsonPrivate)){
+                    if(jsonParser.drugstorePublicListFromJSON(jsonPublic) &&
+                            jsonParser.drugstorePrivateListFromJSON(jsonPrivate)){
                         drugStoreList = drugStoreDao.getAllDrugStores();
                     }else{/*Nothing to do*/}
                 }else {/*Nothing to do*/}
@@ -135,6 +139,7 @@ public class DrugStoreController {
                 drugStoreList = drugStoreDao.getAllDrugStores();
             }
     }
+
     /**
      * Set distance based on the coordenates for each drugstore and then sort the list.
      *
@@ -175,7 +180,6 @@ public class DrugStoreController {
         }
 
     }
-    
 
     /**
      * Request the rating for the 15 first drugstores so that it can be shown at the HospitalList.
@@ -187,12 +191,14 @@ public class DrugStoreController {
         HttpConnection httpConnection = new HttpConnection();
         for(int i = 0;i<15;i++){
             try {
-                drugStoreList.get(i).setRate(httpConnection.getRating(drugStoreList.get(i).getId(),"http://159.203.95.153:3000/rate/gid/"));
+                drugStoreList.get(i).setRate(httpConnection.getRating(drugStoreList.get(i).
+                        getId(), "http://159.203.95.153:3000/rate/gid/"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
+
     /**
      * Saves the unique identifier of the android user.
      *
@@ -205,6 +211,7 @@ public class DrugStoreController {
         assert (androidId != "") : "Receive a empty treatment";
         this.androidId = androidId;
     }
+
     /**
      * Gets the unique identifier of the android user.
      *
@@ -219,8 +226,8 @@ public class DrugStoreController {
      * Creates object that will determine how the comparation is done for setDistante function sort.
      *
      */
-    public static class DistanceComparator implements Comparator<Stablishment>
-    {
+    public static class DistanceComparator implements Comparator<Stablishment> {
+
         /**
          * Use responseHandler created to request the requested through a URL.
          *
@@ -240,6 +247,7 @@ public class DrugStoreController {
         }
 
     }
+
     /**
      * Save or update rate from user on server database.
      *
@@ -256,7 +264,8 @@ public class DrugStoreController {
      * @throws ConnectionErrorException there maybe a failure when connecting to the server.
      *
      */
-    public String updateRate(int rate,String androidId,String drugstoreId ) throws ConnectionErrorException {
+    public String updateRate(int rate,String androidId,String drugstoreId )
+            throws ConnectionErrorException {
         assert (rate >= 0) : "Receive a negative tratment";
         assert (androidId != null) : "Receive a null tratment";
         assert (androidId != "") : "Receive a empty tratment";
@@ -264,9 +273,10 @@ public class DrugStoreController {
         assert (drugstoreId != "") : "Receive a empty tratment";
 
         HttpConnection connection = new HttpConnection();
-        String response = null;
+        String response = "";
 
-        response = connection.newRequest("http://159.203.95.153:3000"+"/"+"rate"+"/"+"gid"+"/"+drugstoreId+"/"+"aid"+"/"+androidId+"/"+"rating"+"/"+rate);
+        response = connection.newRequest("http://159.203.95.153:3000" + "/" + "rate" + "/" + "gid" +
+                "/" + drugstoreId + "/" + "aid" + "/" + androidId + "/" + "rating" + "/" + rate);
 
         return response;
     }
