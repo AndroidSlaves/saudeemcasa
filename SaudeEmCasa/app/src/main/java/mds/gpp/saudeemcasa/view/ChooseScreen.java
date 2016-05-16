@@ -27,6 +27,9 @@ import mds.gpp.saudeemcasa.helper.GPSTracker;
 public class ChooseScreen extends Activity {
 
     public GPSTracker gps;
+    public final String connectionErrorText = "Houve um erro de conexão.\nVerifique " +
+            "sua conexão com a internet.";
+    public final String rateFetchText = "Requerindo avaliações...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,8 @@ public class ChooseScreen extends Activity {
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
-        Button hospitalButton = (Button) findViewById(R.id.melhor_em_casa_button);
-        Button drugStoreButton = (Button) findViewById(R.id.farm_popular_button);
-        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(R.id.infoButton);
-        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(R.id.melhorEmCasaInfoButton);
-        ImageButton infoDrugStoreButton = (ImageButton) findViewById(R.id.farmPopularInfoButton);
-
         gps = new GPSTracker(this);
-
+        Button hospitalButton = (Button) findViewById(R.id.melhor_em_casa_button);
         hospitalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +47,7 @@ public class ChooseScreen extends Activity {
             }
         });
 
+        Button drugStoreButton = (Button) findViewById(R.id.farm_popular_button);
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +55,7 @@ public class ChooseScreen extends Activity {
             }
         });
 
+        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(R.id.infoButton);
         infoSaudeEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +64,7 @@ public class ChooseScreen extends Activity {
             }
         });
 
+        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(R.id.melhorEmCasaInfoButton);
         infoMelhorEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +73,7 @@ public class ChooseScreen extends Activity {
             }
         });
 
+        ImageButton infoDrugStoreButton = (ImageButton) findViewById(R.id.farmPopularInfoButton);
         infoDrugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,18 +89,20 @@ public class ChooseScreen extends Activity {
      * */
     public void hospitalListThread() {
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setMessage("Requerindo avaliações...");
-        progress.show();
+        showProgress(progress, rateFetchText);
+
         new Thread() {
             public void run() {
                 Looper.prepare();
+
                 try {
                     HospitalController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), HospitalList.class);
                     startActivity(nextScreen);
+
                 } catch (ConnectionErrorException e) {
-                    Toast.makeText(getApplicationContext(),"Houve um error de conexão.\nVerifique" +
-                            " sua conexão com a internet. ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), connectionErrorText,
+                            Toast.LENGTH_LONG).show();
                 }
                 progress.dismiss();
                 Looper.loop();
@@ -112,24 +115,45 @@ public class ChooseScreen extends Activity {
      * */
     public void drugstoreListThread() {
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setMessage("Requerindo avaliações...");
-        progress.show();
+        showProgress(progress,rateFetchText);
+
         new Thread() {
             public void run() {
                 Looper.prepare();
+
                 try {
                     DrugStoreController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class);
                     startActivity(nextScreen);
-                } catch (ConnectionErrorException e) {
-                    Toast.makeText(getApplicationContext(), "Houve um erro de conexão.\nVerifique " +
-                            "sua conexão com a internet. ", Toast.LENGTH_LONG).show();
+
+                } catch (ConnectionErrorException connectionError) {
+                    Toast.makeText(getApplicationContext(),connectionErrorText,
+                            Toast.LENGTH_LONG).show();
                 }
 
                 progress.dismiss();
                 Looper.loop();
             }
         }.start();
+    }
 
+    /*
+    * Show dialog box with progress and message.
+    *
+    * @param progress
+    *           Dialog box that will show the specified message.
+    * @param message
+    *           Text message to be shown in the dialog box.
+    *
+    * @returns progress in order to test it.
+    * */
+    private ProgressDialog showProgress(ProgressDialog progress, String message){
+        assert (message != null): "Message must never be null";
+        assert (progress !=null): "Progress must never be null";
+
+        progress.setMessage(message);
+        progress.show();
+
+        return progress;
     }
 }

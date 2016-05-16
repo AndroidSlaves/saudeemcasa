@@ -174,6 +174,7 @@ public class HospitalController {
      * */
     public void requestRating() throws ConnectionErrorException {
         HttpConnection httpConnection = new HttpConnection();
+
         final int numberOfItemsOnTheList = 15;
         String ipAddress = "http://159.203.95.153:3000/rate/gid/";
 
@@ -248,9 +249,8 @@ public class HospitalController {
         assert (hospitalId.length() >= 1) : "Verify hospitalId minor character.";
 
         HttpConnection connection = new HttpConnection();
-
-        String ipAddress = "http://159.203.95.153:3000/rate/gid/" + hospitalId + "/aid/" + androidId
-                + "/rating/" + rate;
+        String serverIpAddress = "http://159.203.95.153:3000/rate/gid/";
+        String ipAddress = serverIpAddress+ hospitalId + "/aid/" + androidId + "/rating/" + rate;
         String response = connection.newRequest(ipAddress);
 
         return response;

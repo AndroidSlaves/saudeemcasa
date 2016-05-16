@@ -1,48 +1,84 @@
-Class: DrugStoreDao
-    /* This class is responsable for making all the operations with the database in regard of the
-    drugstore information */
+/************************
+ * Class name: DrugStoreDao (.java)
+ *
+ * Purpose: This class is responsable for making all the operations with the database in regard of
+ *          the drugstore information.
+ ************************/
 
 Attributes:
+
     String tableColumns[]
         // Static string that have all the database columns names.
 
     DrugstoreDao instance
-        /* Instance of DrugstoreDao store whenever it is created so when instantiated again it
-         cannot create another object. */
+        /*
+         * Instance of DrugstoreDao store whenever it is created so when instantiated again it
+         * cannot create another object.
+         */
+
+    String tableName
+    // private static string used to access the table of Drugstore's name.
 
 Methods:
+
     DrugStoreDao( Context context )
-        /* Creates an instace of DrugstoreDao with the context where it is in. this method is
-         called only by getInstance(). */
+        /**
+         * @param context
+         *              used to verify the indexed context
+         *
+         * Creates an instace of DrugstoreDao with the context where it is in. this method is
+         * called only by getInstance().
+         */
 
     DrugStoreDao getInstance( Context context )
-        /* Checks if there is a instance of DrugStoreDao, if there isn't, it creates a new one, if
-         there is, it return the existing one. */
+         /**
+          * Checks if there is a instance of DrugStoreDao, if there isn't, it creates a new one
+          *
+          * @param context
+          *              receive the context to verify the isntance
+          *
+          * @return it return the existing context (Context).
+          */
 
-    isDbEmpty()
-        // Verifies if database is empty by selecting one object and verifying if it is null.
-         variables: String query // String that contains the a database command: SELECT.
-                   Cursor cursor /* object returned from the database after executing the query
-                                    command. */
+    isDbEmpty()isDatabaseEmpty
+        /*
+         * Verifies if database is empty by selecting one object and verifying if it is null.
+         * variables:
+         * String query: that contains the a database command: SELECT.
+         * Cursor cursor: object returned from the database after executing the query command.
+         */
 
     insertDrugstore(DrugStore drugStore)
-        /* Method that takes an drugstore object, convert it into a value table and insert it into
-         the database. In the end it returns the outcome of the operation. */
-         Variables: SQLiteDatabase sqLiteDatabase /* Open writable Database so element can be
-                                                    inserted. */
-                    ContentValues values /* Table of values that is used to insert the element into
-                                         the database. */
+        /*
+         * @param drugStore used to add a drugstore
+         *
+         * Method that takes an drugstore object, convert it into a value table and insert it into
+         * the database. In the end it returns the outcome of the operation.
+         * param: drugStoresList receive a list of drugstore
+         * Variables:
+         * SQLiteDatabase sqLiteDatabase: Open writable Database so element can be inserted
+         * ContentValues values
+         * Table of values that is used to insert the element into the database.
+         */
 
     List<DrugStore> getAllDrugStores()
-        // Creates a list of drugstore objects from data coming from the database and return it
-        variables: String query // String that contains the a database command: SELECT.
-                   Cursor cursor /* object returned from the database after executing the query
-                                 command. It indicates which element of the data base it is at. */
+        /*
+         * Creates a list of drugstore objects from data coming from the database and return it
+         * variables:
+         * String query: contains the a database command: SELECT.
+         * Cursor cursor: object returned from the database after executing the query
+         * command. It indicates which element of the data base it is at.
+         */
 
     insertAllDrugStores(List<DrugStore> drugStoresList)
-        // Method that takes a list of drugstore objects and calls the insertDrugstore method for
-         each one.
-         variables: Iterator<DrugStore> index // Makes the interaction with each object of the list
+        /*
+         * @param drugStoreList used to add all of the drugstores in a list
+         *
+         * Method that takes a list of drugstore objects and calls the insertDrugstore method for
+         * each one.
+         * variables: Iterator<DrugStore> index
+         * Makes the interaction with each object of the list
+         */
 
     deleteAllDrugStores()
         // Calls method deleteAndClose from the Dao class, which deletes the database file.

@@ -64,20 +64,12 @@ public class TestDrugStoreDao extends ActivityInstrumentationTestCase2<LoadingSc
 
         //Method call to delete the existent local bank
         drugStoreDao.deleteAllDrugStores();
-<<<<<<< HEAD
-
-=======
->>>>>>> 9bda14f0ac28ef4971144c588fbf4ba02063b1cf
     }
 
     //Test method to verify that the local bank is empty.
     public void testIsDbEmpty() throws Exception {
         drugStoreDao = DrugStoreDao.getInstance(myActivity.getApplicationContext());
         assertTrue(drugStoreDao.isDbEmpty());
-<<<<<<< HEAD
-
-=======
->>>>>>> 9bda14f0ac28ef4971144c588fbf4ba02063b1cf
     }
 
     @Override

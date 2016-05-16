@@ -1,3 +1,10 @@
+/************************
+ * Class name: HospitalAdapter (.java)
+ *
+ * Purpose: Class that create an item list for the user by inflating the items and putting them on
+ *          the screen.
+ ************************/
+
 package mds.gpp.saudeemcasa.adapter;
 
 import android.content.Context;
@@ -5,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,28 +21,56 @@ import mds.gpp.saudeemcasa.model.Hospital;
 
 public class HospitalAdapter extends ArrayAdapter<Hospital>   {
 
+    //Represents the context where the application in taking place, the screen where the user is.
     private Context context;
-    private ArrayList<Hospital> lista;
+
+    // represent the list of hospitals that will inflate the visual list for the user.
+    private ArrayList<Hospital> list;
+
+    // represent the number of items that the list will have.
     public static final int COUNT = 15;
 
-    public HospitalAdapter(Context context, ArrayList<Hospital> lista){
-        super(context, 0, lista);
+    /**
+     * Create a hospitalAdapter with the context where it will be used and the list of
+     * hospitals that will populate the shown to the user
+     *
+     * @param context
+     *        calls the context where the list will populate.
+     *
+     * @param list
+     *        list of hospitals that will inflate the visual list for the user.
+     *
+     */
+    public HospitalAdapter(Context context, ArrayList<Hospital> list){
+        super(context, 0, list);
         assert (context != null) : "context must never be null";
-        assert (lista != null) : "lista must never be null";
-        assert (lista.size() > 0) : "lista must never be null";
+        assert (list != null) : "list must never be null";
+        assert (list.size() > 0) : "list must never be null";
+
         this.context = context;
-        this.lista = lista;
+        this.list = list;
     }
 
+    /**
+     * Method that returns the number of items in the list to be shown to the user.
+     *
+     * @return the number of items that the list will have.
+     */
     @Override
     public int getCount() { return COUNT; }
 
+    /**
+     * @param position
+     *        used to take the item position.
+     *
+     * @return the object hospital in the position specified in the parameter.
+     */
     @Override
     public Hospital getItem(int position) {
         
         assert (position >= 0) : "position must never be null";
         
-        return lista.get(position);
+        return list.get(position);
     }
     //fix this function
     @Override
@@ -44,6 +78,16 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
         return position;
     }
 
+    /**
+     * @param position
+     *        itens positions
+     * @param convertView
+     *        container view
+     * @param parent
+     *        a group of views of the list.
+     *
+     * @return a view  item from the view list.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         
@@ -53,35 +97,36 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
 
         return populateAdapter(convertView,position);
     }
+
     /**
      * convert the distance value from meters to kilometers.
      *
      * @param distance
-     *           float value to be converted.
+     *        float value to be converted.
      *
      * @return distance value in km.
-     *
      */
     private Float convertToKM(Float distance){
         assert (distance > 0) : "distance must never be negative";
 
         return distance/1000;
     }
+
     /**
      * Inflate the list view so that a list can be created with the specified elements.
      *
      * @param convertView
-     *           View to inflated.
-     *
+     *        view to inflated.
      * @param position
-     *           index in the view list.
-     *@return inflated layout.
-     * */
+     *        index in the view list.
+     *
+     * @return inflated layout.
+     */
     public View populateAdapter(View convertView, int position){
         assert (convertView != null) : "convertView must never be null";
         assert (position >= 0) : "position must never be negative";
 
-        Hospital hospitalPosition = this.lista.get(position);
+        Hospital hospitalPosition = this.list.get(position);
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
 
         TextView textView = (TextView) convertView.findViewById(R.id.textView2_item);
@@ -91,28 +136,29 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
 
         return convertView;
     }
+
     /**
      * set distance value in the item layout
      *
      * @param convertView
-     *           View to be accessed.
-     *
+     *        view to be accessed.
      * @param position
-     *           position of the item layout to be accessed.
-     * */
+     *        position of the item layout to be accessed.
+     */
     public void setDistance(View convertView, int position) {
         assert (position >= 0) : "position must never be negative";
         assert (convertView != null) : "convertView must never be null";
         
-        if (this.lista.get(position).getDistance() < 1f) {
+        if (this.list.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(this.lista.get(position).getDistance() + " m");
+            textViewDistance.setText(this.list.get(position).getDistance() + " m");
         } else {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(convertToKM(this.lista.get(position).getDistance()).toString() + " Km");
+            textViewDistance.setText(convertToKM(this.list.get(position).getDistance()).toString() + " Km");
         }
     }
 
 }
+

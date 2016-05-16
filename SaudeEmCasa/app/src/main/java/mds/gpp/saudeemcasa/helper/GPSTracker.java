@@ -1,3 +1,9 @@
+/*****************************
+ * Class name: GPSTracker (.java)
+ *
+ * Purpose: Implement GPS for mobile phone.
+ ****************************/
+
 package mds.gpp.saudeemcasa.helper;
 
 import android.app.Service;
@@ -10,9 +16,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-/**
- * Created by gabriel on 29/09/15.
- */
 public class GPSTracker extends Service implements LocationListener{
 
     private final Context context;
@@ -30,11 +33,24 @@ public class GPSTracker extends Service implements LocationListener{
 
     protected LocationManager locationManager;
 
+    /**
+     *
+     * @param context
+     *              Define the context where GPS will be instantiated.
+     */
     public GPSTracker(Context context) {
         this.context = context;
         getLocation();
     }
 
+    /**
+     *
+     * @return
+     *              Geolocation of user, contains longitude and latitude.
+     *
+     * Get the current location of the user, with latitude and longitude. Checks the GPS connection
+     * and activation, possible paths and check location by GPS or WiFi.
+     */
     public Location getLocation() {
 
         try {
@@ -90,12 +106,18 @@ public class GPSTracker extends Service implements LocationListener{
         return location;
     }
 
+    /*
+     * Method requesting the cancellation of GPS updates, or stop updating the user's location.
+     */
     public void stopUsingGPS() {
         if(locationManager != null) {
             locationManager.removeUpdates(GPSTracker.this);
         }
     }
 
+    /*
+     * Redeem user's position, returning only the latitude coordinate the user is located.
+     */
     public double getLatitude() {
         if(location != null) {
             latitude = location.getLatitude();
@@ -103,6 +125,9 @@ public class GPSTracker extends Service implements LocationListener{
         return latitude;
     }
 
+    /*
+     * Redeem the user's position, returning only the longitude coordinate the user is located.
+     */
     public double getLongitude() {
         if(location != null) {
             longitude = location.getLongitude();
@@ -110,6 +135,9 @@ public class GPSTracker extends Service implements LocationListener{
         return longitude;
     }
 
+    /*
+     * Check the variable canGetLocation and returns its result.
+     */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }

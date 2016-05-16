@@ -1,3 +1,9 @@
+/*****************************
+ * Class name: LoadingScreen(.java)
+ *
+ * Purpose: Initial screen of application, download data from server and stores into database.
+ ****************************/
+
 package mds.gpp.saudeemcasa.view;
 
 import android.app.Activity;
@@ -19,15 +25,19 @@ import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 
-/**
- * Created by freemanpivo on 9/25/15.
- */
 
 public class LoadingScreen extends Activity {
+
     HospitalController hospitalController;
     private Handler messageHandler = new Handler();
 
-    // to solve ERRO _non-zero exit value 2_
+    /**
+      *
+      * @param base
+      *             Define the basic context for this Context Wrapper.
+      */
+
+    // (*) To solve ERROR: _non-zero exit value 2_
     @Override
     protected void attachBaseContext(Context base) {
         assert (base != null) : "Receive a null tratment";
@@ -36,16 +46,27 @@ public class LoadingScreen extends Activity {
         MultiDex.install(this);
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     *              Save the previous instance of LoadingScreen.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
         final ImageView logoSaudeEmCasa = (ImageView) findViewById(R.id.saude_em_casa_logo);
-        //---------//
+
         requestStablishment();
     }
 
+    /*
+     * Responsible for requesting communication with the Stabliment. Building alert dialogs,
+     * defined the connection failure.
+	 * Messages dialogue progress and start communication with the hospital or drugstore controller.
+	 */
     public void requestStablishment() {
         final AlertDialog.Builder msgNeutralBuilder = new AlertDialog.Builder( this );
 
@@ -54,11 +75,11 @@ public class LoadingScreen extends Activity {
         msgNeutralBuilder.setNegativeButton("Cancel", new CancelButtonListener());
 
         final AlertDialog messageFailedConnection = msgNeutralBuilder.create();
-        //DIALOG
+
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Carregando dados...");
         progress.show();
-        //-----//
+
         new Thread() {
 
             public void run() {
@@ -109,6 +130,14 @@ public class LoadingScreen extends Activity {
         }.start();
     }
 
+
+    /**
+     *
+     * @param message
+     *              Stores message for runtime error.
+     * @param messageHandler
+     *              Support the error message, show after thread run.
+     */
     private void showMessageOnThread( final AlertDialog message,
                                       Handler messageHandler ) {
         assert(messageHandler != null) : "messageHandler must never be null";
@@ -121,11 +150,21 @@ public class LoadingScreen extends Activity {
             }
         });
     }
+
+    /*
+     * Method to end the LoadingScreen activity. After the activity close, call the next screen
+     * for user choose hospital list or drugstore list.
+     */
     private void toListScreen() {
         finish();
+
         Intent nextScreen = new Intent(getBaseContext(), ChooseScreen.class);
         startActivity(nextScreen);
     }
+
+    /*
+     * Method responsible to retry the connection to the server, if failed once.
+     */
     private class RetryButtonListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick( DialogInterface dialog, int which ) {
@@ -137,6 +176,10 @@ public class LoadingScreen extends Activity {
                 LoadingScreen.this.finish();
         }
     }
+
+    /*
+     * Method responsible to end or cancel the server request, if failed once. Close application.
+     */
     private class CancelButtonListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick( DialogInterface dialog, int which ) {

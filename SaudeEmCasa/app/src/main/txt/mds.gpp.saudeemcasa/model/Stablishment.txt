@@ -1,5 +1,5 @@
 Classe: Stablishment
-
+    This class modeling stablishments like the Hospitals and the Drugstores
 VARIABLES:
 
 *latitude: receive a latitude from a Hospital or a Drugstore
@@ -32,49 +32,50 @@ FUNCTIONS
 
 *Stablishment(String name, String telephone): defined constructor
 
-*getId(): used to return the id number value stored
-        
-*setId(String id): used to access the variable id address and store the data
-
+*getId(): used to return the identification number value stored for drugstore
+    @return Drugstore identification number.
+*setId(String id): used to access the variable id and store the data
+    @param id: identification number to be store.
 *getLatitude(): used to return the latitude number value stored
-
+    @return Drugstore latitude.
 *setLatitude(String latitude): used to access the variable latitude address and store the data
-
+    @param latitude: Latitude number to be stored.
 *getLongitude(): used to return the longitude number value stored
-
+    @return Drugstore longitude number.
 *setLongitude(String longitude): used to access the variable longitude address and store the data
-
+    @param longitude: Longitude number to be stored.
 *setCity(String city): used to access the variable city address and store the data
-
+    @param sity: name that will be stored
 *setAddress(String address): used to access the variable "address" address and store the data
-
+    @param address: Address text that will be stored
 *setState(String state): used to access the variable state address and store the data
-
+    @param state: State name that will be stored.
 *setRate(float rate): used to access the variable rate address and store the data
-
+    @param rate: Rate number attributed to this drugstore that will be stored.
 *getCity(): used to return the city value stored
-
+    @return drugstore city name.
 *getAddress(): used to return the address value stored
-
+    @return drugstore address.
 *getState(): used to return the state value stored
-
+    @return drugstore state name.
 *getRate(): used to return the rate value stored
-
+    @return drugstore rate number. (Integer between 1 and 5)
 *getTelephone(): used to return the telephone number value stored
-
+    @return the drugstore telephone.
 *setTelephone(String telephone): used to access the variable telephone address and store the data
-
+    @telephone: Telephone number attributed to this drugstore that will be stored.
 *getName(): used to return the name value stored
-
+    @return The drugstore market name.
 *setName(String name): used to access the variable "name" address and store the data
-
+    @param name: Name number attributed to this drugstore that will be stored.
 *getType(): used to return the type value stored
-
+    @return The type of the drugstore. (private or public)
 *setType(String type): used to access the variable type address and store the data
-
+    @type: Type attributed to this drugstore that will be stored.
 *getDistance(): used to return the distance value stored
-
+    @return the distance between this drugstore and the user's location (In meters).
 *setDistance(float distance): used to access the variable distance address and store the data
+    @param distance: the distance between this drugstore and the user's location (In meters) that will be stored.
 
 
 
