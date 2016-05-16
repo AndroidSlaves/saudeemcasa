@@ -1,0 +1,28 @@
+Class: JSONHelper
+    // Class that helps to treat the data received in the JSON format from the server.
+
+Attributes:
+    HospitalDao hospitalDao
+        // The instance of the HospitalDao that will store the data treated from the JSON.
+
+    DrugStoreDao drugStoreDao
+        // The instance of the DrugstoreDao that will store the data treated from the JSON.
+
+Methods:
+    JSONHelper(Context context)
+        // Creates the instance of the JSONHelper class which can perform its methods.
+
+    hospitalListFromJSON(String hospitalJsonList)
+        /* Get data from the list of hospitals in the JSON format, store it into a hospital object
+         and send it to be stored in the HospitalDao. */
+        Variables: JSONArray jArray // Structure from the JSON received ready to extract data.
+
+    drugstorePublicListFromJSON(String drugstoreJsonList )
+        /* get data from the list of public drugstores in the JSON format, store it into a drugstore object
+         and send it to be stored in the DrugstoreDao.*/
+        Variables: JSONArray jArray // Structure from the JSON received ready to extract data.
+
+    drugstorePrivateListFromJSON(String drugstoreJsonList )
+        /* get data from the list of private drugstores in the JSON format, store it into a drugstore object
+        and send it to be stored in the DrugstoreDao.*/
+        Variables: JSONArray jArray // Structure from the JSON received ready to extract data.

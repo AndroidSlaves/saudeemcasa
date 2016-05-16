@@ -1,8 +1,5 @@
-/************************
- * Class name: DatabaseHelper (.java)
- *
- * Purpose: Class that defines and creates the database.
- ************************/
+Class: DatabaseHelper
+    // Class that defines and creates the database.
 
 Attributes:
     String DATABASE_NAME
@@ -54,43 +51,43 @@ Attributes:
         // Represents the column of the drugstore database for the government ID.
 
     String HOSPITAL_LATITUDE
-        // Represents the hospital latitude in the database.
+        // represents the drugstore latitude in the database.
 
     String HOSPITAL_LONGETUDE
-        // Represents the hospital longetude in the database.
+        // represents the drugstore longetude in the database.
 
     String HOSPITAL_CITY
-        // Represents column with the name of the city where the hospital is located.
+        // represents column with the name of the city where the drugstore is located.
 
     String HOSPITAL_ADDRESS
-        // Represents the hospital address in the database.
+        // represents the drugstore address in the database.
 
     String HOSPITAL_STATE
-        // Represents the hospital state in the database.
+        // represents the drugstore state in the database.
 
     String HOSPITAL_RATE
-        // Represents the hospital rate in the database.
+        // represents the drugstore rate in the database.
 
     String HOSPITAL_TELEPHONE
-        // Represents the hospital telephone in the database.
+        // represents the drugstore telephone in the database.
 
     String HOSPITAL_NAME
-        // Represents the hospital name in the database.
+        // represents the drugstore name in the database.
 
     String HOSPITAL_TYPE
-        // Represents the hospital type in the database.
+        // represents the drugstore type in the database.
 
     String HOSPITAL_ID
-        // Represents the hospital Id in the database.
+        // represents the drugstore Id in the database.
 
     String HOSPITAL_NUMBER
-        // Represents the hospital number in the database.
+        // represents the drugstore number in the database.
 
     String HOSPITAL_DISTRICT
-        // Represents the hospital district in the database.
+        // represents the drugstore district in the database.
 
     String HOSPITAL_GID
-        // Represents the hospital government ID in the database.
+        // represents the drugstore government ID in the database.
 
     String CREATE_DRUGSTORE
         // The SQL command line which is the junction of the strings related to the drugstore.
@@ -99,15 +96,8 @@ Attributes:
         // The SQL command line which is the junction of the strings related to the Hospital.
 
 Methods:
-    DatabaseHelper(Context context)
-        /**
-         * Contructor that uses the the context to instatiated the DatabaseHelper.
-         * @param cantext receive the context from class.
-         */
+    DatabaseHelper(Context ctx)
+        // Contructor that uses the the context to instatiated the DatabaseHelper.
 
-    onCreate(SQLiteDatabase database)
-        /**
-         * Method that runs the SQL code and create the data base.
-         * @param database receive the database
-         */
-
+    onCreate(SQLiteDatabase db)
+        // Method that runs the SQL code and create the data base.

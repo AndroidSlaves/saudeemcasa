@@ -1,5 +1,8 @@
-Class: HttpConnection
-    // Class that connects with the server to get the data necessary for the application.
+/************************
+ * Class name: HttpConnection (.java)
+ *
+ * Purpose: Connects with the server to get the data necessary for the application.
+ ************************/
 
 Attributes:
     String states[]
@@ -10,24 +13,42 @@ Methods:
         // Creates an empty instance of the HttpRequest object.
 
     newRequest(String ipAddress)
-        //Creates new Http request with the given ip address.
-        Variables: String response // Variable that will receive the data from the JSON.
-
-                   HttpGet httpGet /* Variable in the HttpGet format that will create a get request
-                                    with the server in the given IP address. */
-
-                   HttpCliente client /* Variable in the DefaultHttpClient, which will get the data
-                                        in the a String format. */
+        /*
+         * @param ipAddress receive the address's ip.
+         *
+         * Creates new Http request with the given ip address.
+         * Variables:
+         * String response variable that will receive the data from the JSON.
+         * HttpGet httpGet: Variable in the HttpGet format that will create a get request
+         * with the server in the given IP address.
+         * HttpCliente client, Variable in the DefaultHttpClient, which will get the data
+         * in the a String format.
+         */
 
     RequestAllDrugstoresByUF(String ipAdress)
-        // Request the JSON by UF. This was made necessary because of an OutOfMemory error.
-        Variables: String finalJson // String where all the json will come together.
+        /*
+         * @param ipAddress receive the address's ip.
+         *
+         * Request the JSON by UF. This was made necessary because of an OutOfMemory error.
+         * Variables:
+         * String finalJson String where all the json will come together.
+         */
 
     getRating(String id,String ipAddress)
-        /* Request to get ratings of all the chosen stablishment. The ones chosen are the ones from
-        the list created from the adapter */
-        Variables: String json // String that will store response in order to use it.
+        /*
+         * @param ipAddress receive the address's ip.
+         * @param id receive an id from a drugstore or a hospital.
+         *
+         * Request to get ratings of all the chosen stablishment. The ones chosen are the ones from
+         * the list created from the adapter
+         * Variables:
+         * String json String that will store response in order to use it.
+         */
 
     Request(HttpGet httpGet, HttpClient client)
-        /* Method that uses the httpGet and the HttpCliente to create a execution from the client
-        and returns the String treated by the handler. */
+        /*
+         * @param httpget take the http
+         * @param client take the http of the client.
+         * Method that uses the httpGet and the HttpCliente to create a execution from the client
+         * and returns the String treated by the handler.
+         */
