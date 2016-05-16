@@ -51,7 +51,7 @@ public class GoogleMapDrugStore extends FragmentActivity{
             myGoogleMap.setTrafficEnabled(true);
             myGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        } else{
+        } else {
             oneLocationMap();
         }
 

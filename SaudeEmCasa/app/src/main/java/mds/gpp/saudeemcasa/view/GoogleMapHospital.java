@@ -19,8 +19,8 @@ import mds.gpp.saudeemcasa.controller.HospitalController;
  ****************************/
 public class GoogleMapHospital extends FragmentActivity {
 
-    private GoogleMap mMap;
-    HospitalController controller = HospitalController.getInstance(this);
+    private GoogleMap myGoogleMap = null;
+    HospitalController hospitalController = HospitalController.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +42,18 @@ public class GoogleMapHospital extends FragmentActivity {
      *
      */
     private void setUpMap() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap != null) {
+
+        if (myGoogleMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            myGoogleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            myGoogleMap.setTrafficEnabled(true);
+            myGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        } else {
             oneLocationMap();
-            return;
         }
-        // Try to obtain the map from the SupportMapFragment.
-        mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                .getMap();
-        // Check if we were successful in obtaining the map.
-        if (mMap == null) {
-            return;
-        }
-        mMap.setTrafficEnabled(true);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
     }
 
     /**
@@ -64,12 +62,12 @@ public class GoogleMapHospital extends FragmentActivity {
      *
      */
     private void oneLocationMap() {
-        String nome = controller.getHospital().getName();
-        String latitude = controller.getHospital().getLatitude();
-        String longitude = controller.getHospital().getLongitude();
+        String nome = hospitalController.getHospital().getName();
+        String latitude = hospitalController.getHospital().getLatitude();
+        String longitude = hospitalController.getHospital().getLongitude();
         LatLng hospitalLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
-        mMap.addMarker(new MarkerOptions().position(hospitalLocation).title(nome));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 10));
+        myGoogleMap.addMarker(new MarkerOptions().position(hospitalLocation).title(nome));
+        myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 10));
     }
 }
