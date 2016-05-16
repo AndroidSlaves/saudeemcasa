@@ -1,3 +1,10 @@
+/*****************************
+ * Class name: DrugStoreController (.java)
+ *
+ * Purpose: Entity that communicates with the backend functions. Contains the logic steps of the
+ * application.
+ ****************************/
+
 package mds.gpp.saudeemcasa.controller;
 
 import android.content.Context;
@@ -20,12 +27,6 @@ import mds.gpp.saudeemcasa.model.Stablishment;
 
 import static java.util.Collections.sort;
 
-/*****************************
- * Class name: DrugStoreController (.java)
- *
- * Purpose: Entity that communicates with the backend functions. Contains the logic steps of the
- * application.
- ****************************/
 public class DrugStoreController {
 
     private static DrugStoreController instance = null;

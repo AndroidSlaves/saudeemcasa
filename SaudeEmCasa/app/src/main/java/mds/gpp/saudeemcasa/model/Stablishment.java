@@ -1,11 +1,12 @@
-package mds.gpp.saudeemcasa.model;
-
 /*****************************
  * Class name: Stablishment (.java)
  *
  * Purpose: Represents a generic Stablishment entity. Stores the data
  * that characterize the Stablishment organization.
  ****************************/
+
+package mds.gpp.saudeemcasa.model;
+
 public class Stablishment {
     //Attributes of the stablishment.
     protected String latitude = "";
