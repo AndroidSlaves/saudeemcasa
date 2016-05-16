@@ -1,3 +1,9 @@
+/*****************************
+ * Class name: DrugstoreScreen (.java)
+ *
+ * Purpose: Screen that shows the information of the selected drugstore in the previous list screen.
+ ****************************/
+
 package mds.gpp.saudeemcasa.view;
 
 import android.os.Bundle;

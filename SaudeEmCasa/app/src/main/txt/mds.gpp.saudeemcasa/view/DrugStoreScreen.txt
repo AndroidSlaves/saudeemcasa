@@ -4,9 +4,9 @@ VARIABLES
 
 *view: receive the layout from drugstore
 
-*controller: receive the drugstore instaciated in the context
+*controller: receive the drugstore instantiated in the context
 
-*drugStore: access the drugstore informations
+*drugStore: access the drugstore information
 
 *********************************************************************
 

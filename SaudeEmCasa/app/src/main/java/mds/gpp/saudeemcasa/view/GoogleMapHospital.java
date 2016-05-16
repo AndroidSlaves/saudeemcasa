@@ -1,3 +1,9 @@
+/*****************************
+ * Class name: GoogleMap (.java)
+ *
+ * Purpose: This class create the view with google maps to show hospital location
+ ****************************/
+
 package mds.gpp.saudeemcasa.view;
 
 import android.os.Bundle;
@@ -12,11 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 
-/*****************************
- * Class name: GoogleMap (.java)
- *
- * Purpose: This class create the view with google maps to show hospital location
- ****************************/
 public class GoogleMapHospital extends FragmentActivity {
 
     private GoogleMap myGoogleMap = null;
