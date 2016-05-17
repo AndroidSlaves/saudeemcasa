@@ -41,8 +41,8 @@ public class ChooseScreen extends Activity {
         gps = new GPSTracker(this);
 
         // Setting event click for hospital list.
-        final int hospitalButtonId = R.id.melhor_em_casa_button;
-        Button hospitalButton = (Button) findViewById(hospitalButtonId);
+        final int HOSPITAL_BUTTON_ID = R.id.melhor_em_casa_button;
+        Button hospitalButton = (Button) findViewById(HOSPITAL_BUTTON_ID);
         hospitalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +51,8 @@ public class ChooseScreen extends Activity {
         });
 
         // Setting event click for drugstore list.
-        final int popularDrugstoreButtonId =  R.id.farm_popular_button;
-        Button drugStoreButton = (Button) findViewById(popularDrugstoreButtonId);
+        final int POPULAR_DRUGSTORE_BUTTON_ID =  R.id.farm_popular_button;
+        Button drugStoreButton = (Button) findViewById(POPULAR_DRUGSTORE_BUTTON_ID);
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +61,8 @@ public class ChooseScreen extends Activity {
         });
 
         // Setting event click on information about app button.
-        final int appInfoButtonId = R.id.infoButton;
-        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(appInfoButtonId);
+        final int APP_INFO_BUTTON_ID = R.id.infoButton;
+        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(APP_INFO_BUTTON_ID);
         infoSaudeEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +72,8 @@ public class ChooseScreen extends Activity {
         });
 
         // Setting event click on information about hospital button.
-        final int hospitalInfoButtonId = R.id.melhorEmCasaInfoButton;
-        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(hospitalButtonId);
+        final int HOSPITAL_INFO_BUTTON_ID = R.id.melhorEmCasaInfoButton;
+        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(HOSPITAL_INFO_BUTTON_ID);
         infoMelhorEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,8 +83,8 @@ public class ChooseScreen extends Activity {
         });
 
         // Setting event click on information about drugstore button.
-        final int drugstoreInfoButtonId = R.id.farmPopularInfoButton;
-        ImageButton infoDrugStoreButton = (ImageButton) findViewById(drugstoreInfoButtonId);
+        final int DRUGSTORE_INFO_BUTTON_ID = R.id.farmPopularInfoButton;
+        ImageButton infoDrugStoreButton = (ImageButton) findViewById(DRUGSTORE_INFO_BUTTON_ID );
         infoDrugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +99,8 @@ public class ChooseScreen extends Activity {
      * This thread is used to get the ratings of each hospital from several.
      * */
     public void hospitalListThread() {
-        final ProgressDialog progress = new ProgressDialog(this);
-        showProgress(progress, FETCH_RATE_TEXT);
+        final ProgressDialog PROGRESS_DIALOG = new ProgressDialog(this);
+        showProgress(PROGRESS_DIALOG, FETCH_RATE_TEXT);
 
         new Thread() {
             public void run() {
@@ -117,7 +117,7 @@ public class ChooseScreen extends Activity {
                             Toast.LENGTH_LONG).show();
                 }
 
-                progress.dismiss();
+                PROGRESS_DIALOG.dismiss();
                 Looper.loop();
             }
         }.start();
@@ -127,8 +127,8 @@ public class ChooseScreen extends Activity {
      * This thread is used to get the ratings of each drugstore from server.
      * */
     public void drugstoreListThread() {
-        final ProgressDialog progress = new ProgressDialog(this);
-        showProgress(progress, FETCH_RATE_TEXT);
+        final ProgressDialog PROGRESS_DIALOG = new ProgressDialog(this);
+        showProgress(PROGRESS_DIALOG, FETCH_RATE_TEXT);
 
         new Thread() {
             public void run() {
@@ -145,7 +145,7 @@ public class ChooseScreen extends Activity {
                             Toast.LENGTH_LONG).show();
                 }
 
-                progress.dismiss();
+                PROGRESS_DIALOG.dismiss();
                 Looper.loop();
             }
         }.start();
@@ -154,21 +154,21 @@ public class ChooseScreen extends Activity {
     /**
      * Show dialog box with progress and message.
      *
-     * @param progress
+     * @param PROGRESS_DIALOG
      *              Dialog box that will show the specified message.
-     * @param message
+     * @param MESSAGE
      *              Text message to be shown in the dialog box.
      *
      * @returns
      *              progress in order to test it.
      */
-    private ProgressDialog showProgress(ProgressDialog progress, String message){
-        assert (message != null): "Message must never be null";
-        assert (progress !=null): "Progress must never be null";
+    private ProgressDialog showProgress(final ProgressDialog PROGRESS_DIALOG, final String MESSAGE){
+        assert (MESSAGE != null): "Message must never be null";
+        assert (PROGRESS_DIALOG !=null): "Progress must never be null";
 
-        progress.setMessage(message);
-        progress.show();
+        PROGRESS_DIALOG.setMessage(MESSAGE);
+        PROGRESS_DIALOG.show();
 
-        return progress;
+        return PROGRESS_DIALOG;
     }
 }
