@@ -25,7 +25,7 @@ public class GoogleMapHospital extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        assert (savedInstanceState != null) : "Receive a null tratment";
+        assert (savedInstanceState != null) : "Receive a null treatment";
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_google_maps_hospital);

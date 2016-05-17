@@ -27,9 +27,9 @@ import mds.gpp.saudeemcasa.helper.GPSTracker;
 public class ChooseScreen extends Activity {
 
     public GPSTracker gps;
-    public final String connectionErrorText = "Houve um erro de conexão.\nVerifique " +
+    public final String CONNECTION_ERROR_TEXT = "Houve um erro de conexão.\nVerifique " +
             "sua conexão com a internet.";
-    public final String rateFetchText = "Requerindo avaliações...";
+    public final String FETCH_RATE_TEXT = "Requerindo avaliações...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,10 @@ public class ChooseScreen extends Activity {
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         gps = new GPSTracker(this);
-        Button hospitalButton = (Button) findViewById(R.id.melhor_em_casa_button);
+
+        // Setting event click for hospital list.
+        final int hospitalButtonId = R.id.melhor_em_casa_button;
+        Button hospitalButton = (Button) findViewById(hospitalButtonId);
         hospitalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +50,9 @@ public class ChooseScreen extends Activity {
             }
         });
 
-        Button drugStoreButton = (Button) findViewById(R.id.farm_popular_button);
+        // Setting event click for drugstore list.
+        final int popularDrugstoreButtonId =  R.id.farm_popular_button;
+        Button drugStoreButton = (Button) findViewById(popularDrugstoreButtonId);
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +60,9 @@ public class ChooseScreen extends Activity {
             }
         });
 
-        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(R.id.infoButton);
+        // Setting event click on information about app button.
+        final int appInfoButtonId = R.id.infoButton;
+        ImageButton infoSaudeEmCasaButton = (ImageButton) findViewById(appInfoButtonId);
         infoSaudeEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +71,9 @@ public class ChooseScreen extends Activity {
             }
         });
 
-        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(R.id.melhorEmCasaInfoButton);
+        // Setting event click on information about hospital button.
+        final int hospitalInfoButtonId = R.id.melhorEmCasaInfoButton;
+        ImageButton infoMelhorEmCasaButton = (ImageButton) findViewById(hospitalButtonId);
         infoMelhorEmCasaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +82,9 @@ public class ChooseScreen extends Activity {
             }
         });
 
-        ImageButton infoDrugStoreButton = (ImageButton) findViewById(R.id.farmPopularInfoButton);
+        // Setting event click on information about drugstore button.
+        final int drugstoreInfoButtonId = R.id.farmPopularInfoButton;
+        ImageButton infoDrugStoreButton = (ImageButton) findViewById(drugstoreInfoButtonId);
         infoDrugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,21 +100,23 @@ public class ChooseScreen extends Activity {
      * */
     public void hospitalListThread() {
         final ProgressDialog progress = new ProgressDialog(this);
-        showProgress(progress, rateFetchText);
+        showProgress(progress, FETCH_RATE_TEXT);
 
         new Thread() {
             public void run() {
                 Looper.prepare();
 
+                // Request ratings for hospital and go to hospital list.
                 try {
                     HospitalController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), HospitalList.class);
                     startActivity(nextScreen);
 
                 } catch (ConnectionErrorException e) {
-                    Toast.makeText(getApplicationContext(), connectionErrorText,
+                    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
                             Toast.LENGTH_LONG).show();
                 }
+
                 progress.dismiss();
                 Looper.loop();
             }
@@ -115,19 +128,20 @@ public class ChooseScreen extends Activity {
      * */
     public void drugstoreListThread() {
         final ProgressDialog progress = new ProgressDialog(this);
-        showProgress(progress,rateFetchText);
+        showProgress(progress, FETCH_RATE_TEXT);
 
         new Thread() {
             public void run() {
                 Looper.prepare();
 
+                // Request ratings for drugstore and go to drugstore list.
                 try {
                     DrugStoreController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class);
                     startActivity(nextScreen);
 
                 } catch (ConnectionErrorException connectionError) {
-                    Toast.makeText(getApplicationContext(),connectionErrorText,
+                    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
                             Toast.LENGTH_LONG).show();
                 }
 
@@ -137,16 +151,17 @@ public class ChooseScreen extends Activity {
         }.start();
     }
 
-    /*
-    * Show dialog box with progress and message.
-    *
-    * @param progress
-    *           Dialog box that will show the specified message.
-    * @param message
-    *           Text message to be shown in the dialog box.
-    *
-    * @returns progress in order to test it.
-    * */
+    /**
+     * Show dialog box with progress and message.
+     *
+     * @param progress
+     *              Dialog box that will show the specified message.
+     * @param message
+     *              Text message to be shown in the dialog box.
+     *
+     * @returns
+     *              progress in order to test it.
+     */
     private ProgressDialog showProgress(ProgressDialog progress, String message){
         assert (message != null): "Message must never be null";
         assert (progress !=null): "Progress must never be null";
