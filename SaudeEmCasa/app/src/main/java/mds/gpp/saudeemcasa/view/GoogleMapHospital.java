@@ -40,7 +40,6 @@ public class GoogleMapHospital extends FragmentActivity {
     /**
      * Do a null check to confirm that we have not already instantiated the map. Try to obtain the
      * map from the SupportMapFragment. Check if we were successful in obtaining the map.
-     *
      */
     private void setUpMap() {
 
@@ -60,7 +59,6 @@ public class GoogleMapHospital extends FragmentActivity {
     /**
      * This functions get the latitude and longitude from the drugstore in the context and put a
      * marker point there with zoom 10 (10 shows elegance).
-     *
      */
     private void oneLocationMap() {
         String nome = hospitalController.getHospital().getName();

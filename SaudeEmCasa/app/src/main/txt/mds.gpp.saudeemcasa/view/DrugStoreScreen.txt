@@ -1,5 +1,5 @@
 Classe: DrugstoreScreen
-
+*Screen that shows the information of the selected drugstore in the previous list screen.
 VARIABLES
 
 *view: receive the layout from drugstore
