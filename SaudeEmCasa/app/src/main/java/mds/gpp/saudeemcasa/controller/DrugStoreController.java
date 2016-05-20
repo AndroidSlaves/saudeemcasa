@@ -261,11 +261,11 @@ public class DrugStoreController {
      */
     public String updateRate(int rate,String androidId,String drugstoreId )
             throws ConnectionErrorException {
-        assert (rate >= 0) : "Receive a negative tratment";
-        assert (androidId != null) : "Receive a null tratment";
-        assert (androidId != "") : "Receive a empty tratment";
-        assert (drugstoreId != null) : "Receive a null tratment";
-        assert (drugstoreId != "") : "Receive a empty tratment";
+        assert (rate >= 0) : "Receive a negative treatment";
+        assert (androidId != null) : "Receive a null treatment";
+        assert (androidId != "") : "Receive a empty treatment";
+        assert (drugstoreId != null) : "Receive a null treatment";
+        assert (drugstoreId != "") : "Receive a empty treatment";
 
         HttpConnection connection = new HttpConnection();
         String response = "";

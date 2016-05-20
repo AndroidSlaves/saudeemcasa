@@ -30,17 +30,27 @@ import static java.util.Collections.sort;
 
 public class HospitalController {
 
+
     private static HospitalController instance = null;
+    // Selected hospital from the list presented to the user.
     private static Hospital hospital;
+    // Creates an arraylist to populate this list with a collection of hospitals
     private static List<Hospital> hospitalList = new ArrayList<Hospital>();
+    // Attribute hospitalDao used to get hospitals objects in database
     private static HospitalDao hospitalDao;
+    // Attribute context is related to the screen that user should be.
     private static Context context;
+    /*
+     * androidId is an string information unique for each mobile phone. We get this information
+     * directly from mobile phone.
+     */
     private String androidId;
 
     /**
-     * Constructor of hospital controller
+     * Constructor of hospital controller.
      *
-     * @param context:Context
+     * @param context
+     *              The screen where this is being called.
      */
     private HospitalController(Context context) {
         this.context = context;
@@ -48,10 +58,10 @@ public class HospitalController {
     }
 
     /**
-     * Return the unique instance of DrugstoreController active in the
-     * project.
+     * Return the unique instance of DrugstoreController active in the project.
      *
-     * @return The unique instance of DrugstoreController.
+     * @return
+     *              The unique instance of DrugstoreController.
      */
     public static HospitalController getInstance(Context context) {
         if (instance == null) {
@@ -63,11 +73,11 @@ public class HospitalController {
     }
 
     /**
-     * Set the selected hospital
+     * Set the selected hospital.
      *
      * @param hospital
-     *          the selected hospital
-     * */
+     *              the selected hospital.
+     */
     public void setHospital( Hospital hospital ) {
         assert (hospital != null) : "Null object treatment";
 
@@ -75,10 +85,11 @@ public class HospitalController {
     }
 
     /**
-     * Get the selected hospital
+     * Get the selected hospital.
      *
-     * @return the class hospital
-     * */
+     * @return
+     *              the selected hospital from previous HospitalList click.
+     */
     public Hospital getHospital() {
         return hospital;
     }
@@ -86,25 +97,34 @@ public class HospitalController {
     /**
      * Get hospital list
      *
-     * @return the hospitalList
-     * */
+     * @return
+     *              All the hospitals stored in this instance.
+     */
     public static List<Hospital> getAllHospitals(){
         return hospitalList;
     }
 
-    /*
-    * Starts the application being inside the if for the first usage and the else for the times
-    * after that. Receives the response from server, take objects out of json and add to database.
-    * */
+    /**
+     * Starts the application being inside the if for the first usage and the else for the times
+     * after that. Receives the response from server, take objects out of json and add to database.
+     *
+     * @throws IOException
+     *              there maybe a failure in the conversion on the treatment of the response
+     * from the server.
+     * @throws JSONHelper
+     *              there maybe a failure in the JSON access.
+     * @throws ConnectionErrorException
+     *              there maybe a failure communicating with the server.
+     */
     public void initControllerHospital() throws IOException, JSONException,
             ConnectionErrorException {
-        String ipAddress = "http://159.203.95.153:3000/habilitados";
+        final String IP_ADDRESS = "http://159.203.95.153:3000/habilitados";
         Boolean dbEmpty = hospitalDao.isDbEmpty();
 
         if(dbEmpty) {
 
             HttpConnection httpConnection = new HttpConnection();
-            String jsonHospital = httpConnection.newRequest(ipAddress);
+            String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
             JSONHelper jsonParser = new JSONHelper(context);
 
             if(jsonHospital !=null){
@@ -129,14 +149,14 @@ public class HospitalController {
      * Set distance based on the coordenates for each hospitals and then sort the list.
      *
      * @param context
-     *           The activity where this is being executed.
-     *
+     *              The activity where this is being executed.
      * @param list
-     *           The list of hospitals.
+     *              The list of hospitals.
      *
-     * @return a boolean indicator for testing
+     * @return
+     *              a boolean indicator for testing
      *
-     * */
+     */
     public boolean setDistance(Context context, ArrayList<Hospital> list) {
         assert (list.isEmpty() == true) : "Empty list treatment";
         assert (list != null) : "Null list treatment";
@@ -172,7 +192,8 @@ public class HospitalController {
      * Request the rating for the 15 first hospitals so that it can be show at the HospitalList.
      *
      * @throws ConnectionErrorException
-     * */
+     *              there maybe a failure communicating with the server.
+     */
     public void requestRating() throws ConnectionErrorException {
         HttpConnection httpConnection = new HttpConnection();
 
@@ -182,7 +203,7 @@ public class HospitalController {
         for(int i = 0;i < NUMBER_OF_ITEMS_ON_THE_LIST; i++) {
             String hospitalId = hospitalList.get(i).getId();
 
-            // Get rate from
+            // Get rate from server
             try {
                 float rate = httpConnection.getRating(hospitalId,IP_ADDRESS);
                 hospitalList.get(i).setRate(rate);
@@ -191,41 +212,50 @@ public class HospitalController {
             }
         }
     }
+    /**
+     * Saves the unique identifier of the android user.
+     *
+     * @param ANDROID_ID
+     *              Identifier of the android user of this session.
+     */
+    public void setAndroidId(final String ANDROID_ID) {
+        assert (ANDROID_ID != null) : "Null androidId treatment.";
+        assert (ANDROID_ID.length() > 2) : "Minor character androidId treatment.";
 
-    public void setAndroidId(String androidId) {
-        assert (androidId != null) : "Null androidId treatment.";
-        assert (androidId.length() > 2) : "Minor character androidId treatment.";
-
-        this.androidId = androidId;
+        this.androidId = ANDROID_ID;
     }
-
+    /**
+     * Gets the unique identifier of the android user.
+     *
+     * @returns
+     *              the Identifier of the android user of this session.
+     */
     public String getAndroidId() {
         return androidId;
     }
 
-    /*
-    * Creates object that will determine how the comparation is done for
-    * setDistante function sort.
-    * */
+    /**
+     * Creates object that will determine how the comparation is done for setDistante function sort.
+     */
     public static class DistanceComparator implements Comparator<Stablishment> {
 
         /**
          * Use responseHandler created to request the requested through a URL.
          *
-         * @param stablishment1
+         * @param STABLISHMENT_1
          *          A stablishment to be compared.
          *
-         * @param stablishment2
+         * @param STABLISHMENT_2
          *          A stablishment to be compared.
          *
          * @return which stablishment has the gratter distance.
          */
-        public int compare(Stablishment stablishment1, Stablishment stablishment2) {
-            assert (stablishment1 != null) : "stablishment1 null object treatment.";
-            assert (stablishment2 != null) : "stablishment2 null object treatment.";
+        public int compare(final Stablishment STABLISHMENT_1, final Stablishment STABLISHMENT_2) {
+            assert (STABLISHMENT_1 != null) : "stablishment1 null object treatment.";
+            assert (STABLISHMENT_2 != null) : "stablishment2 null object treatment.";
 
-            final float DISTANCE1 = stablishment1.getDistance();
-            final float DISTANCE2 = stablishment2.getDistance();
+            final float DISTANCE1 = STABLISHMENT_1.getDistance();
+            final float DISTANCE2 = STABLISHMENT_2.getDistance();
 
             int comparatorResult = 0;
             if(DISTANCE1<DISTANCE2){
@@ -241,32 +271,32 @@ public class HospitalController {
     /**
      * Save or update rate from user on server database.
      *
-     * @param rate
+     * @param RATE
      *           float value received from user input.
-     *
-     * @param androidId
+     * @param ANDROID_ID
      *           string value that represents the unique android id.
-     * @param hospitalId
+     * @param HOSPITAL_ID
      *           int value that represents the stablishment unique id.
      *
      * @return response from http connection.
      *
      * @throws ConnectionErrorException
      */
-    public String updateRate(int rate, String androidId, String hospitalId)
+    public String updateRate(final int RATE, String ANDROID_ID, String HOSPITAL_ID)
             throws ConnectionErrorException {
-        assert (rate >= 0 && rate <= 5) : "Minimum and maximum rate value interval.";
-        assert (androidId != null) : "Null androidId treatment.";
-        assert (androidId.length() > 2) : "Minor character androidId treatment.";
-        assert (hospitalId != null) : "Nothing stored on hospitalId.";
-        assert (hospitalId.length() >= 1) : "Verify hospitalId minor character.";
+        assert (RATE >= 0) : "minimum rate value interval.";
+        assert (RATE <= 5) : "maximum rate value interval.";
+        assert (ANDROID_ID != null) : "Null androidId treatment.";
+        assert (ANDROID_ID.length() > 2) : "Minor character androidId treatment.";
+        assert (HOSPITAL_ID != null) : "Nothing stored on hospitalId.";
+        assert (HOSPITAL_ID.length() >= 1) : "Verify hospitalId minor character.";
 
         // Define ip address string.
         HttpConnection connection = new HttpConnection();
         final String SERVER_IP_ADDRESS = "http://159.203.95.153:3000/rate/gid/";
-        final String IP_ADDRESS_WITH_ANDROID_ID = SERVER_IP_ADDRESS + hospitalId + "/aid/"
-                + androidId;
-        final String IP_ADDRESS_WITH_RATING = IP_ADDRESS_WITH_ANDROID_ID + "/rating/" + rate;
+        final String IP_ADDRESS_WITH_ANDROID_ID = SERVER_IP_ADDRESS + HOSPITAL_ID + "/aid/"
+                + ANDROID_ID;
+        final String IP_ADDRESS_WITH_RATING = IP_ADDRESS_WITH_ANDROID_ID + "/rating/" + RATE;
 
         // Make request.
         final String RESPONSE_WITH_RATES = connection.newRequest(IP_ADDRESS_WITH_RATING);
