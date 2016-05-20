@@ -1,5 +1,5 @@
 Classe: GoogleMapHospital
-
+*This class create the view with google maps to show hospital location
 VARIABLES
 
 *mMap: receive the fragment with the Google map

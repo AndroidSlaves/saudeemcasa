@@ -1,5 +1,5 @@
 Classe: HospitalScreen
-
+*Screen that shows the hospital full information for the user.
 VARIABLES
 
 *view: receive the layout from hospital

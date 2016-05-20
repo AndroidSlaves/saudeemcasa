@@ -27,7 +27,8 @@ public class Dao {
      * @param values:ContentValues
      *
      */
-    protected long insertAndClose(SQLiteDatabase sqLiteDatabase, String table, ContentValues values) {
+    protected long insertAndClose(SQLiteDatabase sqLiteDatabase, String table,
+                                  ContentValues values) {
         assert (table != null) : "Table name never be null.";
         assert (table.length() >= 1) : "Table name must have at least one character.";
 
@@ -52,12 +53,12 @@ public class Dao {
         assert (table != null) : "Table name never be null.";
         assert (table.length() >= 1) : "Table name must have at least one character.";
 
-        int delete;
+        int deleteFromDatabase = 0;
 
-        delete = sqLiteDatabase.delete(table, null, null);
+        deleteFromDatabase = sqLiteDatabase.delete(table, null, null);
 
         sqLiteDatabase.close();
 
-        return delete;
+        return deleteFromDatabase;
     }
 }

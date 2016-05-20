@@ -1,3 +1,9 @@
+/*****************************
+ * Class name: GoogleMap (.java)
+ *
+ * Purpose: This class create the view with google maps to show hospital location
+ ****************************/
+
 package mds.gpp.saudeemcasa.view;
 
 import android.os.Bundle;
@@ -12,19 +18,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 
-/*****************************
- * Class name: GoogleMap (.java)
- *
- * Purpose: This class create the view with google maps to show hospital location
- ****************************/
 public class GoogleMapHospital extends FragmentActivity {
 
-    private GoogleMap mMap;
-    HospitalController controller = HospitalController.getInstance(this);
+    private GoogleMap myGoogleMap = null;
+    HospitalController hospitalController = HospitalController.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        assert (savedInstanceState != null) : "Receive a null tratment";
+        assert (savedInstanceState != null) : "Receive a null treatment";
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_google_maps_hospital);
@@ -39,37 +40,33 @@ public class GoogleMapHospital extends FragmentActivity {
     /**
      * Do a null check to confirm that we have not already instantiated the map. Try to obtain the
      * map from the SupportMapFragment. Check if we were successful in obtaining the map.
-     *
      */
     private void setUpMap() {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap != null) {
+
+        if (myGoogleMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            myGoogleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            myGoogleMap.setTrafficEnabled(true);
+            myGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        } else {
             oneLocationMap();
-            return;
         }
-        // Try to obtain the map from the SupportMapFragment.
-        mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                .getMap();
-        // Check if we were successful in obtaining the map.
-        if (mMap == null) {
-            return;
-        }
-        mMap.setTrafficEnabled(true);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
     }
 
     /**
      * This functions get the latitude and longitude from the drugstore in the context and put a
      * marker point there with zoom 10 (10 shows elegance).
-     *
      */
     private void oneLocationMap() {
-        String nome = controller.getHospital().getName();
-        String latitude = controller.getHospital().getLatitude();
-        String longitude = controller.getHospital().getLongitude();
+        String nome = hospitalController.getHospital().getName();
+        String latitude = hospitalController.getHospital().getLatitude();
+        String longitude = hospitalController.getHospital().getLongitude();
         LatLng hospitalLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
-        mMap.addMarker(new MarkerOptions().position(hospitalLocation).title(nome));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 10));
+        myGoogleMap.addMarker(new MarkerOptions().position(hospitalLocation).title(nome));
+        myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 10));
     }
 }
