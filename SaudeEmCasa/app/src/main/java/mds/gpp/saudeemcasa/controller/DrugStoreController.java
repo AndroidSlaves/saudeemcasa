@@ -117,11 +117,14 @@ public class DrugStoreController {
 
                 HttpConnection httpConnection = new HttpConnection();
 
-                String jsonPublic = httpConnection.newRequest("http://159.203.95.153:3000/farmacia_popular");
+                final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
+                String jsonPublic = httpConnection.newRequest(FARMACIA_POPULAR);
 
                 HttpConnection httpConnectionPrivate = new HttpConnection();
 
-                String jsonPrivate = httpConnectionPrivate.RequestAllDrugstoresByUF("http://159.203.95.153:3000/farmacia_popular_conveniada");
+                final String FARMACIA_CONVENIADA = "http://159.203.95.153:3000/farmacia_popular" +
+                        "_conveniada";
+                String jsonPrivate = httpConnectionPrivate.RequestAllDrugstoresByUF(FARMACIA_CONVENIADA);
                 /*This check happens because there may be failure during the requisition which would
                 continue the steps with information missing. This maybe replaced by and exception.*/
                 if(jsonPublic != null && jsonPrivate != null){
@@ -156,6 +159,7 @@ public class DrugStoreController {
         assert (list.size() > 0) : "Receive a empty treatment";
 
         GPSTracker gps = new GPSTracker(context);
+        boolean canSetDistance = false;
 
         if(gps.canGetLocation()) {
             double userLongitude = gps.getLongitude();
@@ -172,10 +176,12 @@ public class DrugStoreController {
             }
             sort(list, new DistanceComparator());
 
-            return true;
+            canSetDistance = true;
         }else {
-            return false;
+            canSetDistance = false;
         }
+
+        return canSetDistance;
 
     }
 
@@ -187,7 +193,7 @@ public class DrugStoreController {
      */
     public void requestRating() throws ConnectionErrorException {
         HttpConnection httpConnection = new HttpConnection();
-        for(int i = 0;i<15;i++){
+        for(int i = 0;i < 15;i++){
             try {
                 drugStoreList.get(i).setRate(httpConnection.getRating(drugStoreList.get(i).
                         getId(), "http://159.203.95.153:3000/rate/gid/"));
@@ -238,7 +244,14 @@ public class DrugStoreController {
         public int compare(Stablishment stablishment1, Stablishment stablishment2) {
             assert (stablishment1 != null) : "Receive a null treatment";
             assert (stablishment2 != null) : "Receive a null treatment";
-            return stablishment1.getDistance()<(stablishment2.getDistance())? -1 : 1;
+
+            int firstStablishmentIsGreater = -1;
+            if (stablishment1.getDistance()<(stablishment2.getDistance())){
+                firstStablishmentIsGreater = 1;
+            } else {
+                firstStablishmentIsGreater = -1;
+            }
+            return firstStablishmentIsGreater;
         }
 
     }
@@ -270,8 +283,11 @@ public class DrugStoreController {
         HttpConnection connection = new HttpConnection();
         String response = "";
 
-        response = connection.newRequest("http://159.203.95.153:3000" + "/" + "rate" + "/" + "gid" +
-                "/" + drugstoreId + "/" + "aid" + "/" + androidId + "/" + "rating" + "/" + rate);
+        final String IP_DRUGSTORE = "http://159.203.95.153:3000/rate/gid/";
+        final String ANDROID_ID_SERVER = "/aid/";
+        final String RATING_SERVER = "/rating/";
+        response = connection.newRequest(IP_DRUGSTORE + drugstoreId + ANDROID_ID_SERVER + androidId
+                + RATING_SERVER + rate);
 
         return response;
     }
