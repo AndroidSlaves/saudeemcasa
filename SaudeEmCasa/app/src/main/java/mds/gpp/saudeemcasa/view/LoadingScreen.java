@@ -32,11 +32,9 @@ public class LoadingScreen extends Activity {
     private Handler messageHandler = new Handler();
 
     /**
-      *
-      * @param base
-      *             Define the basic context for this Context Wrapper.
-      */
-
+     *  @param base
+     *                  Define the basic context for this Context Wrapper.
+     */
     // (*) To solve ERROR: _non-zero exit value 2_
     @Override
     protected void attachBaseContext(Context base) {
@@ -69,16 +67,22 @@ public class LoadingScreen extends Activity {
 	 */
     public void requestStablishment() {
         final AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
+        final String MESSAGE_CONECTION_FAILURE = "Falha na Conexão";
+        final String MESSAGE_DOWNLOAD_DATA_FAILURE = "Falha ao baixar os dados.";
+        final String MESSAGE_UPLOADING_DATA = "Carregando dados...";
+        final String MESSAGE_UPLOAD_COMPLETED = "Dados carregados";
+        final String MESSAGE_RETRY = "Retry";
+        final String MESSAGE_CANCEL = "Cancel";
 
-        messageNeutralBuilder.setTitle("Falha na Conexão").setMessage("Não foi possível baixar os "
-                                                                      + "dados do servidor.");
-        messageNeutralBuilder.setPositiveButton("Retry", new RetryButtonListener());
-        messageNeutralBuilder.setNegativeButton("Cancel", new CancelButtonListener());
+        messageNeutralBuilder.setTitle(MESSAGE_CONECTION_FAILURE)
+                             .setMessage(MESSAGE_DOWNLOAD_DATA_FAILURE);
+        messageNeutralBuilder.setPositiveButton(MESSAGE_RETRY, new RetryButtonListener());
+        messageNeutralBuilder.setNegativeButton(MESSAGE_CANCEL, new CancelButtonListener());
 
         final AlertDialog messageFailedConnection = messageNeutralBuilder.create();
 
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setMessage("Carregando dados...");
+        progress.setMessage(MESSAGE_UPLOADING_DATA);
         progress.show();
 
         new Thread() {
@@ -120,7 +124,7 @@ public class LoadingScreen extends Activity {
 
                     @Override
                     public void run() {
-                        progress.setMessage("Dados carregados");
+                        progress.setMessage(MESSAGE_UPLOAD_COMPLETED);
 
                         if (drugstoreController.getAllDrugstores().size()>0 &&
                             hospitalController.getAllHospitals().size()>0) {
