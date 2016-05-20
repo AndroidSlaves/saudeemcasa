@@ -32,14 +32,19 @@ public class HospitalController {
 
 
     private static HospitalController instance = null;
+
     // Selected hospital from the list presented to the user.
     private static Hospital hospital;
+
     // Creates an arraylist to populate this list with a collection of hospitals
     private static List<Hospital> hospitalList = new ArrayList<Hospital>();
+
     // Attribute hospitalDao used to get hospitals objects in database
     private static HospitalDao hospitalDao;
+
     // Attribute context is related to the screen that user should be.
     private static Context context;
+
     /*
      * androidId is an string information unique for each mobile phone. We get this information
      * directly from mobile phone.
@@ -69,6 +74,8 @@ public class HospitalController {
         } else {
 			/* ! Nothing To Do. */
         }
+
+        assert (instance != null) : "Receive a null treatment";
         return instance;
     }
 
@@ -91,6 +98,7 @@ public class HospitalController {
      *              the selected hospital from previous HospitalList click.
      */
     public Hospital getHospital() {
+        assert (hospital != null) : "Null object treatment";
         return hospital;
     }
 
@@ -101,6 +109,7 @@ public class HospitalController {
      *              All the hospitals stored in this instance.
      */
     public static List<Hospital> getAllHospitals(){
+        assert (hospitalList != null) :"Receive a null treatment";
         return hospitalList;
     }
 
@@ -110,9 +119,11 @@ public class HospitalController {
      *
      * @throws IOException
      *              there maybe a failure in the conversion on the treatment of the response
-     * from the server.
+     *              from the server.
+     *
      * @throws JSONHelper
      *              there maybe a failure in the JSON access.
+     *
      * @throws ConnectionErrorException
      *              there maybe a failure communicating with the server.
      */
@@ -138,7 +149,6 @@ public class HospitalController {
             } else {
                 /* Do nothing */
             }
-
         } else {
             // Just setting hospitals to local list
             hospitalList = hospitalDao.getAllHospitals();
@@ -212,6 +222,7 @@ public class HospitalController {
             }
         }
     }
+
     /**
      * Saves the unique identifier of the android user.
      *
@@ -231,6 +242,8 @@ public class HospitalController {
      *              the Identifier of the android user of this session.
      */
     public String getAndroidId() {
+        assert (androidId != null) : "Receive a null treatment";
+        assert (androidId != "") : "Receive a empty treatment";
         return androidId;
     }
 
@@ -243,12 +256,13 @@ public class HospitalController {
          * Use responseHandler created to request the requested through a URL.
          *
          * @param STABLISHMENT_1
-         *          A stablishment to be compared.
+         *              A stablishment to be compared.
          *
          * @param STABLISHMENT_2
-         *          A stablishment to be compared.
+         *              A stablishment to be compared.
          *
-         * @return which stablishment has the gratter distance.
+         * @return
+         *              which stablishment has the gratter distance.
          */
         public int compare(final Stablishment STABLISHMENT_1, final Stablishment STABLISHMENT_2) {
             assert (STABLISHMENT_1 != null) : "stablishment1 null object treatment.";
@@ -301,6 +315,7 @@ public class HospitalController {
         // Make request.
         final String RESPONSE_WITH_RATES = connection.newRequest(IP_ADDRESS_WITH_RATING);
 
+        assert (RESPONSE_WITH_RATES != null) : "Receive a null treatment";
         return RESPONSE_WITH_RATES;
     }
 
