@@ -36,7 +36,10 @@ public class ChooseScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_screen);
 
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        // Connect the the scroller the screen.
+        final int LEFT_SLIDE_ID = android.R.anim.slide_in_left;
+        final int RIGHT_SLIDE_ID = android.R.anim.slide_out_right;
+        overridePendingTransition(RIGHT_SLIDE_ID,LEFT_SLIDE_ID);
 
         gps = new GPSTracker(this);
 

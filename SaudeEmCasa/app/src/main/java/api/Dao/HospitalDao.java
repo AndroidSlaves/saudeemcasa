@@ -38,9 +38,9 @@ public class HospitalDao extends Dao {
      * created, then the method create a instance.
      *
      * @param context
-     *          Context application
-     * @return HospitalDao.instance
-     *
+     *              Context application
+     * @return
+     *              HospitalDao.instance
      */
     public static HospitalDao getInstance(Context context) {
         assert (context != null) : "Context must never be null.";
@@ -57,8 +57,8 @@ public class HospitalDao extends Dao {
     /**
      * Method used to verify database is empty.
      *
-     * @return isEmpty:boolean
-     *
+     * @return
+     *              isEmpty:boolean
      */
     public boolean isDbEmpty(){
         sqliteDatabase = database.getReadableDatabase();
@@ -86,10 +86,9 @@ public class HospitalDao extends Dao {
      * Method used to insert an hospital object on database.
      *
      * @param hospital
-     *          Hospital
+     *              Hospital entity
      * @return result
-     *          boolean
-     *
+     *              boolean
      */
     public boolean insertHospital(Hospital hospital) {
         assert (hospital != null) : "hospital can't be null.";
@@ -110,16 +109,15 @@ public class HospitalDao extends Dao {
         values.put(TABLE_COLUMNS[10], hospital.getNumber());
         values.put(TABLE_COLUMNS[11], hospital.getId());
 
-        boolean result = insertAndClose(sqLiteDatabase,tableName, values)>0;
-        return result;
+        boolean resultFromDatabase = insertAndClose(sqLiteDatabase,tableName, values) > 0;
+        return resultFromDatabase;
     }
 
     /**
      * Method to get the list of all hospitals on database organized on array.
      *
-     * @return result
-     *          List of all hospitals
-     *
+     * @return
+     *              List of all hospitals
      */
     public List<Hospital> getAllHospitals() {
 
@@ -147,8 +145,6 @@ public class HospitalDao extends Dao {
             listHospitals.add(hospital);
         }
 
-        //sqliteDatabase.close();
-
         return listHospitals;
     }
 
@@ -156,37 +152,35 @@ public class HospitalDao extends Dao {
      * Method used to insert all hospitals objects on ArrayList.
      *
      * @param hospitalList
-     *          List: list of hospitals
+     *              List: list of hospitals
      * @return result
-     *          Boolean: confirmation include hospitals of list
-     *
+     *              Boolean: confirmation include hospitals of list
      */
     public boolean insertAllHospitals(List<Hospital> hospitalList) {
         assert (hospitalList != null) : "hospitalList can't be null";
         assert (hospitalList.isEmpty() == true) : "hospitalList must have at least one item";
 
         Iterator<Hospital> index = hospitalList.iterator();
-        boolean result = true;
+        boolean resultFromInsert = true;
 
         while(index.hasNext()) {
-            result = insertHospital(index.next());
+            resultFromInsert = insertHospital(index.next());
         }
 
-        return result;
+        return resultFromInsert;
     }
 
     /**
      * Method used to delete hospitals from database.
      *
-     * @return result
-     *          Long
-     *
+     * @return
+     *              result of the deletion.
      */
     public long deleteAllHospitals() {
-        long result;
+        long resultFromDeletion;
 
-        result = deleteAndClose(sqliteDatabase, tableName);
+        resultFromDeletion = deleteAndClose(sqliteDatabase, tableName);
 
-        return result;
+        return resultFromDeletion;
     }
 }

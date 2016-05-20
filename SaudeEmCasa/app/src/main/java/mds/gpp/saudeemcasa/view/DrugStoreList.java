@@ -37,6 +37,7 @@ public class DrugStoreList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drugstore_list_screen);
 
+        // Set important variables for the list.
         gps = new GPSTracker(this);
         final DrugStoreController drugStoreController = DrugStoreController.getInstance(this);
         list = (ArrayList<DrugStore>) drugStoreController.getAllDrugstores();
@@ -48,14 +49,17 @@ public class DrugStoreList extends Activity {
             listView.setAdapter(adapter);
 
         } else {
-            Toast.makeText(getApplicationContext(), "Voce nao esta conectado ao gps ou a internet!\n" +
-                    " Conecte-se para prosseguir.", Toast.LENGTH_LONG).show();
+            final String CONNECT_ERROR_TEXT = "Voce nao esta conectado ao gps ou a internet!\n" +
+                    " Conecte-se para prosseguir.";
+            Toast.makeText(getApplicationContext(),CONNECT_ERROR_TEXT , Toast.LENGTH_LONG).show();
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView adapterView, View view, int position, long id) {
-                drugStoreController.setDrugStore(list.get(position));
+                // Set controller drugstore when clicked then change screen
+                DrugStore drugstoreFromPositionClicked = list.get(position);
+                drugStoreController.setDrugStore(drugstoreFromPositionClicked);
                 Intent intent = new Intent(getBaseContext(), GoogleMapDrugStore.class);
                 startActivity(intent);
             }

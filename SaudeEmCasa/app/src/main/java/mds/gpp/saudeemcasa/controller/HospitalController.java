@@ -96,7 +96,8 @@ public class HospitalController {
     * Starts the application being inside the if for the first usage and the else for the times
     * after that. Receives the response from server, take objects out of json and add to database.
     * */
-    public void initControllerHospital() throws IOException, JSONException, ConnectionErrorException {
+    public void initControllerHospital() throws IOException, JSONException,
+            ConnectionErrorException {
         String ipAddress = "http://159.203.95.153:3000/habilitados";
         Boolean dbEmpty = hospitalDao.isDbEmpty();
 
@@ -168,20 +169,22 @@ public class HospitalController {
     }
 
     /**
-     * Request the rating for the 15 first hospitals so that it can be show at the HospitalList
+     * Request the rating for the 15 first hospitals so that it can be show at the HospitalList.
      *
      * @throws ConnectionErrorException
      * */
     public void requestRating() throws ConnectionErrorException {
         HttpConnection httpConnection = new HttpConnection();
 
-        final int numberOfItemsOnTheList = 15;
-        String ipAddress = "http://159.203.95.153:3000/rate/gid/";
+        final int NUMBER_OF_ITEMS_ON_THE_LIST = 15;
+        final String IP_ADDRESS= "http://159.203.95.153:3000/rate/gid/";
 
-        for(int i = 0;i < numberOfItemsOnTheList; i++) {
+        for(int i = 0;i < NUMBER_OF_ITEMS_ON_THE_LIST; i++) {
             String hospitalId = hospitalList.get(i).getId();
+
+            // Get rate from
             try {
-                float rate = httpConnection.getRating(hospitalId,ipAddress);
+                float rate = httpConnection.getRating(hospitalId,IP_ADDRESS);
                 hospitalList.get(i).setRate(rate);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -220,8 +223,18 @@ public class HospitalController {
         public int compare(Stablishment stablishment1, Stablishment stablishment2) {
             assert (stablishment1 != null) : "stablishment1 null object treatment.";
             assert (stablishment2 != null) : "stablishment2 null object treatment.";
-            // Needs reduce in the complexity
-            return stablishment1.getDistance()<(stablishment2.getDistance())? -1 : 1;
+
+            final float DISTANCE1 = stablishment1.getDistance();
+            final float DISTANCE2 = stablishment2.getDistance();
+
+            int comparatorResult = 0;
+            if(DISTANCE1<DISTANCE2){
+                comparatorResult = -1;
+            }else{
+                comparatorResult = 1;
+            }
+
+            return comparatorResult;
         }
     }
 
@@ -248,12 +261,17 @@ public class HospitalController {
         assert (hospitalId != null) : "Nothing stored on hospitalId.";
         assert (hospitalId.length() >= 1) : "Verify hospitalId minor character.";
 
+        // Define ip address string.
         HttpConnection connection = new HttpConnection();
-        String serverIpAddress = "http://159.203.95.153:3000/rate/gid/";
-        String ipAddress = serverIpAddress+ hospitalId + "/aid/" + androidId + "/rating/" + rate;
-        String response = connection.newRequest(ipAddress);
+        final String SERVER_IP_ADDRESS = "http://159.203.95.153:3000/rate/gid/";
+        final String IP_ADDRESS_WITH_ANDROID_ID = SERVER_IP_ADDRESS + hospitalId + "/aid/"
+                + androidId;
+        final String IP_ADDRESS_WITH_RATING = IP_ADDRESS_WITH_ANDROID_ID + "/rating/" + rate;
 
-        return response;
+        // Make request.
+        final String RESPONSE_WITH_RATES = connection.newRequest(IP_ADDRESS_WITH_RATING);
+
+        return RESPONSE_WITH_RATES;
     }
 
 }
