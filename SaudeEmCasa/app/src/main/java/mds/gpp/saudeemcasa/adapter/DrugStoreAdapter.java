@@ -65,7 +65,11 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     public DrugStore getItem(int position) {
         assert (position >= 0) : "position must never be negative";
 
-        return lista.get(position);
+        DrugStore drugStore = lista.get(position);
+
+        assert (drugStore != null);
+
+        return drugStore;
     }
 
     /**
@@ -85,7 +89,11 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (convertView != null) : "convertView must never be null";
         assert (parent != null) : "parent must never be null";
 
-        return populateAdapter(convertView,position);
+        View populatedListView = populateAdapter(convertView,position);
+
+        assert (populatedListView != null) : "this view shall never be null";
+        //assert (populatedListView.getContext() != null);
+        return populatedListView;
     }
 
     /**
@@ -99,8 +107,13 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     private Float convertToKM(Float distance){
         assert (distance > 0): "distance must never be negative";
 
-        return distance/1000;
+        final float KILO = 1000f;
+        float distanceInKilometer = distance/KILO;
 
+        final float MAXDISTANCE = 13000f;
+        assert (distanceInKilometer < MAXDISTANCE) : "distance should never be bigger than MAXDISTANCE";
+
+        return distanceInKilometer;
     }
 
     /**
@@ -124,8 +137,9 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         TextView textView = (TextView) convertView.findViewById(R.id.textView2_item);
         textView.setText((CharSequence) drugStorePosition.getName());
 
-
         setDistance(convertView, position);
+
+        assert (convertView != null) : "convertView should never be null";
 
         return convertView;
     }

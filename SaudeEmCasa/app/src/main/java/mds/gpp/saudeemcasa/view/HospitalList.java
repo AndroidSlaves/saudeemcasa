@@ -23,37 +23,35 @@ import mds.gpp.saudeemcasa.model.Hospital;
 
 public class HospitalList extends Activity {
 
-    ListView listView;
-    ArrayList<Hospital> list;
-    GPSTracker gps;
-
+    private ListView listView;
+    private ArrayList<Hospital> list;
+    private GPSTracker gps;
+    private final String CONNECTION_ERROR_TEXT = "Voce nao esta conectado ao gps ou a internet!" +
+            "\n Conecte-se para prosseguir.";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hospital_list_screen);
 
-        // Initializing list view
-        listView = (ListView) findViewById(R.id.listView);
+        // Initializing listView
+        final int LIST_VIEW_ID = R.id.listView;
+        listView = (ListView) findViewById(LIST_VIEW_ID);
 
+        // Setting up important components.
         gps = new GPSTracker(this);
-
-        // Instancing controller
-        final HospitalController hospitalController = HospitalController.getInstance(
-                getApplicationContext());
-        // Initialize and fill list of hospital
+        final HospitalController hospitalController = HospitalController.getInstance(getApplicationContext());
         list = (ArrayList<Hospital>) HospitalController.getAllHospitals();
 
+        // Set the distance for hospitals.
         if(gps.canGetLocation()) {
             hospitalController.setDistance(getApplicationContext(), list);
-            // Initializing new HospitalAdapter with list of hospitals
             HospitalAdapter adapter = new HospitalAdapter(getApplicationContext(), list);
-            // Setting adapter to listView
             listView.setAdapter(adapter);
         } else {
-            Toast.makeText(getApplicationContext(), "Voce nao esta conectado ao gps ou a internet!" +
-                    "\n Conecte-se para prosseguir.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),CONNECTION_ERROR_TEXT ,Toast.LENGTH_LONG).show();
         }
 
+        // Set listener for when the user click on a list element.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView adapterView, View view, int position, long id) {

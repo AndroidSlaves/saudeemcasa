@@ -1,3 +1,8 @@
+/*****************************
+ * Class name: HospitalScreen (.java)
+ *
+ * Purpose: Screen that shows the hospital full information for the user.
+ ****************************/
 package mds.gpp.saudeemcasa.view;
 
 import android.os.Bundle;

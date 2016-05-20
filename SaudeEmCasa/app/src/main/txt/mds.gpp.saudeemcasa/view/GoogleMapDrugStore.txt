@@ -1,5 +1,5 @@
 Classe: GoogleMapDrugStore
-
+*This class create the view with google maps to show drugstore location
 VARIABLES
 
 *mMap: receive the fragment with the Google map
