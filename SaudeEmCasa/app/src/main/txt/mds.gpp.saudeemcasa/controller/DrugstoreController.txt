@@ -1,7 +1,7 @@
 /*****************************
  * Class name: DrugstoreController (.java)
  *
- * Purpose: This class control the Drustore's actions.
+ * Purpose: This class control the Drugstore's actions.
  *****************************/
  
 VARIABLES
