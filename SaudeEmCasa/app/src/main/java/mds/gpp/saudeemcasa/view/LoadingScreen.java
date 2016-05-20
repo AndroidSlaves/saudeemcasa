@@ -68,13 +68,14 @@ public class LoadingScreen extends Activity {
 	 * Messages dialogue progress and start communication with the hospital or drugstore controller.
 	 */
     public void requestStablishment() {
-        final AlertDialog.Builder msgNeutralBuilder = new AlertDialog.Builder( this );
+        final AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
 
-        msgNeutralBuilder.setTitle("Falha na Conexão").setMessage("Não foi possível baixar os dados do servidor.");
-        msgNeutralBuilder.setPositiveButton("Retry", new RetryButtonListener());
-        msgNeutralBuilder.setNegativeButton("Cancel", new CancelButtonListener());
+        messageNeutralBuilder.setTitle("Falha na Conexão").setMessage("Não foi possível baixar os "
+                                                                      + "dados do servidor.");
+        messageNeutralBuilder.setPositiveButton("Retry", new RetryButtonListener());
+        messageNeutralBuilder.setNegativeButton("Cancel", new CancelButtonListener());
 
-        final AlertDialog messageFailedConnection = msgNeutralBuilder.create();
+        final AlertDialog messageFailedConnection = messageNeutralBuilder.create();
 
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Carregando dados...");
@@ -85,9 +86,13 @@ public class LoadingScreen extends Activity {
             public void run() {
                 Looper.prepare();
 
-                final HospitalController hospitalController = HospitalController.getInstance(getApplicationContext());
-                final String androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+                final HospitalController hospitalController = HospitalController.getInstance(
+                                                              getApplicationContext());
+                final String androidId = "" + android.provider.Settings.Secure.getString(
+                                         getContentResolver(), android.provider.Settings.Secure
+                                         .ANDROID_ID);
                 hospitalController.setAndroidId(androidId);
+
                 try {
                     hospitalController.initControllerHospital();
                 } catch (IOException e) {
@@ -98,8 +103,10 @@ public class LoadingScreen extends Activity {
                     showMessageOnThread(messageFailedConnection, messageHandler);
                 }
 
-                final DrugStoreController drugstoreController = DrugStoreController.getInstance(getApplicationContext());
+                final DrugStoreController drugstoreController = DrugStoreController.getInstance(
+                                                                getApplicationContext());
                 drugstoreController.setAndroidId(androidId);
+
                 try {
                     drugstoreController.initControllerDrugstore();
                 } catch (IOException e) {
@@ -115,12 +122,10 @@ public class LoadingScreen extends Activity {
                     public void run() {
                         progress.setMessage("Dados carregados");
 
-                        if (drugstoreController.getAllDrugstores().size()>0 && hospitalController.getAllHospitals().size()>0) {
+                        if (drugstoreController.getAllDrugstores().size()>0 &&
+                            hospitalController.getAllHospitals().size()>0) {
                             toListScreen();
-                        } else {
-                            /* ! Nothing To Do. */
-                        }
-
+                        } else {/* Nothing To Do. */}
 
                         progress.dismiss();
                         Looper.loop();
