@@ -9,7 +9,7 @@ package mds.gpp.saudeemcasa.model;
 public class DrugStore extends Stablishment {
 
     // Represents the postal code which complements the adress of a drugstore.
-    protected String postalCode = "";
+    private String postalCode = "";
 
     // Method that creates an empty drugstore (constructor)
     public DrugStore() {

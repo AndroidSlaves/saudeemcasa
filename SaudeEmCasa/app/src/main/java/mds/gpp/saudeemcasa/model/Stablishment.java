@@ -9,24 +9,26 @@ package mds.gpp.saudeemcasa.model;
 
 public class Stablishment {
     //Attributes of the stablishment.
-    protected String latitude = "";
-    protected String longitude = "";
-    protected String type = "";
-    protected String telephone = "";
-    protected String name = "";
-    protected String city = "";
-    protected String address = "";
-    protected String state = "";
-    protected float rate = 0;
-    protected String id;
-    protected float distance = 0;
+    private String latitude = "";
+    private String longitude = "";
+    private String type = "";
+    private String telephone = "";
+    private String name = "";
+    private String city = "";
+    private String address = "";
+    private String state = "";
+    private float rate = 0;
+    private String id;
+    private float distance = 0;
 
     /**
      * Default constructor.
      *
      */
     public Stablishment() {
+
     }
+
     /**
      * Constructor with name and telephone for initialization
      *
@@ -53,6 +55,7 @@ public class Stablishment {
     public String getId() {
         return id;
     }
+
     /**
      * Used to access the variable id and stored given data in this Stablishment
      *
@@ -64,6 +67,7 @@ public class Stablishment {
         assert (id != "") : "Receive a empty tratment";
         this.id = id;
     }
+
     /**
      * Returns the latitude position value stored for stablishment
      *
@@ -72,6 +76,7 @@ public class Stablishment {
     public String getLatitude() {
         return latitude;
     }
+
     /**
      * Used to access the variable latitude and stored given data in this Stablishment
      *
@@ -83,6 +88,7 @@ public class Stablishment {
         assert (latitude != "") : "Receive a empty tratment";
         this.latitude = latitude;
     }
+
     /**
      * Returns the longitude number value stored for stablishment
      *
@@ -91,6 +97,7 @@ public class Stablishment {
     public String getLongitude() {
         return longitude;
     }
+
     /**
      * Used to access the variable longitude address and stored given data in this Stablishment
      *
@@ -110,6 +117,7 @@ public class Stablishment {
     public String getCity() {
         return city;
     }
+
     /**
      * Used to access the variable city address and stored given data in this Stablishment
      *
@@ -121,6 +129,7 @@ public class Stablishment {
         assert (city != "") : "Receive a empty tratment";
         this.city = city;
     }
+
     /**
      * Returns the address that points where the stablishment is located
      *
@@ -129,6 +138,7 @@ public class Stablishment {
     public String getAddress() {
         return address;
     }
+
     /**
      * Used to access the variable address and stored given data in this Stablishment
      *
@@ -138,6 +148,7 @@ public class Stablishment {
     public void setAddress(String address) {
         this.address = address;
     }
+
     /**
      * Returns the state name where the stablishment is located
      *
@@ -146,6 +157,7 @@ public class Stablishment {
     public String getState() {
         return state;
     }
+
     /**
      * Used to access the variable state and stored given data in this Stablishment
      *
@@ -157,6 +169,7 @@ public class Stablishment {
         assert (state != "") : "Receive a empty tratment";
         this.state = state;
     }
+
     /**
      * Returns the rate given to  this stablishment
      *
@@ -165,6 +178,7 @@ public class Stablishment {
     public float getRate() {
         return rate;
     }
+
     /**
      * Used to access the variable rate and stored given data in this Stablishment
      *
@@ -175,6 +189,7 @@ public class Stablishment {
         assert (rate >= 0) : "Receive a negative tratment";
         this.rate = rate;
     }
+
     /**
      * Returns the stablishment telephone
      *
@@ -183,6 +198,7 @@ public class Stablishment {
     public String getTelephone() {
         return telephone;
     }
+
     /**
      * Used to access the variable telephone and stored given data in this Stablishment
      *
@@ -195,14 +211,17 @@ public class Stablishment {
         assert (telephone.length() >= 10) : "Tratment to minor of character in telephone";
         this.telephone = telephone;
     }
+
     /**
      * Returns The stablishment market name.
      *
      * @return The stablishment market name.
      */
+
     public String getName() {
         return name;
     }
+
     /**
      * Used to access the variable name and stored given data in this Stablishment
      *
@@ -214,6 +233,7 @@ public class Stablishment {
         assert (name != "") : "Receive a empty tratment";
         this.name = name;
     }
+
     /**
      * Returns The type of stablishment this is.
      *
@@ -222,6 +242,7 @@ public class Stablishment {
     public String getType() {
         return type;
     }
+
     /**
      * Used to access the variable type and stored given data in this Stablishment
      *
@@ -233,6 +254,7 @@ public class Stablishment {
         assert (type != "") : "Receive a empty tratment";
         this.type = type;
     }
+
     /**
      * Returns the distance between this stablishment and the user's location.
      *
@@ -241,6 +263,7 @@ public class Stablishment {
     public float getDistance() {
         return distance;
     }
+
     /**
      * Used to access the variable distance and stored given data in this Stablishment
      *

@@ -29,8 +29,8 @@ public class Hospital extends Stablishment {
 
     }
 
-    protected String number = "";
-    protected String district = "";
+    private String number = "";
+    private String district = "";
 
     /**
      * Get the value of attribute number.
