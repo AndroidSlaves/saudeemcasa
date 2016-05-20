@@ -291,7 +291,7 @@ public class HospitalController {
      *
      * @throws ConnectionErrorException
      */
-    public String updateRate(final int RATE, String ANDROID_ID, String HOSPITAL_ID)
+    public String updateRate(final int RATE,final String ANDROID_ID,final String HOSPITAL_ID)
             throws ConnectionErrorException {
         assert (RATE >= 0) : "minimum rate value interval.";
         assert (RATE <= 5) : "maximum rate value interval.";

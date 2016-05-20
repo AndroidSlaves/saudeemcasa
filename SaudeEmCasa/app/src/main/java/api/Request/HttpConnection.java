@@ -43,11 +43,13 @@ public class HttpConnection {
      * Create the connection with some url and return the response in string format.
      *
      * @param ipAddress
-     *           address to be accessed.
+     *              address to be accessed.
      *
-     * @return response from http connection.
+     * @return
+     *              response from http connection.
      *
      * @throws ConnectionErrorException
+     *              there maybe a error connecting to server
      */
     public String newRequest(String ipAddress) throws ConnectionErrorException {
         assert (ipAddress != null) : "ipAddress must never be null";
@@ -86,10 +88,12 @@ public class HttpConnection {
      * Save or update rate from user on server database.
      *
      * @param ipAddress
-     *          address to be accessed.
-     * @return response from http connection.
+     *              address to be accessed.
+     * @return
+     *              response from http connection.
      *
      * @throws ConnectionErrorException
+     *              there maybe a error connecting to server
      */
     public String RequestAllDrugstoresByUF(String ipAddress) throws ConnectionErrorException {
         assert (ipAddress != null) : "ipAddress must never be null";
@@ -113,15 +117,18 @@ public class HttpConnection {
      * the list created from the adapter
      *
      * @param id
-     *        receive an id from a drugstore or a hospital.
+     *              receive an id from a drugstore or a hospital.
      * @param ipAddress
-     *        receive the address's ip.
+     *              receive the address's ip.
      *
-     * @return rate evaluation.
+     * @return
+     *              rate evaluation.
      *
      * @throws ConnectionErrorException
+     *              there maybe a error connecting to server.
      *
      * @throws JSONException
+     *              there maybe a error treating jason object.
      */
     public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
         assert (ipAddress != null) : "ipAddress must never be null";
