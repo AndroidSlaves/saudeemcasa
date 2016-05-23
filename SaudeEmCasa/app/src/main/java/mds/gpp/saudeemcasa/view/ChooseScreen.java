@@ -28,7 +28,7 @@ public class ChooseScreen extends Activity {
 
     public GPSTracker gps;
     public final String CONNECTION_ERROR_TEXT = "Houve um erro de conexão.\nVerifique " +
-            "sua conexão com a internet.";
+                                                "sua conexão com a internet.";
     public final String FETCH_RATE_TEXT = "Requerindo avaliações...";
 
     @Override

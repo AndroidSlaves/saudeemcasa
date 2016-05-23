@@ -2,7 +2,8 @@
  * Class name: HospitalController (.java)
  *
  * Purpose: Creates hospital, list of hospitals, arrange these hospitals into a list, and organize
- * this list by distance between user, hospital localization, provided by latitude and longitude.
+ *          this list by distance between user, hospital localization, provided by latitude and
+ *          longitude.
  ****************************/
 
 package mds.gpp.saudeemcasa.controller;
@@ -71,9 +72,7 @@ public class HospitalController {
     public static HospitalController getInstance(Context context) {
         if (instance == null) {
             instance = new HospitalController(context);
-        } else {
-			/* ! Nothing To Do. */
-        }
+        } else {/* ! Nothing To Do. */}
 
         assert (instance != null) : "Receive a null treatment";
         return instance;
@@ -138,17 +137,13 @@ public class HospitalController {
             String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
             JSONHelper jsonParser = new JSONHelper(context);
 
-            if(jsonHospital !=null){
+            if(jsonHospital != null){
                 Boolean jsonResult = jsonParser.hospitalListFromJSON(jsonHospital);
 
                 if(jsonResult) {
                     hospitalList = hospitalDao.getAllHospitals();
-                } else {
-                    /* Do nothing */
-                }
-            } else {
-                /* Do nothing */
-            }
+                } else {/* Do nothing */}
+            } else {/* Do nothing */}
         } else {
             // Just setting hospitals to local list
             hospitalList = hospitalDao.getAllHospitals();
