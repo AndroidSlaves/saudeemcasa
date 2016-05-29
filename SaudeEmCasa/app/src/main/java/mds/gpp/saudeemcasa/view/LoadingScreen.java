@@ -69,7 +69,7 @@ public class LoadingScreen extends Activity {
 	 * Messages dialogue progress and start communication with the hospital or drugstore controller.
 	 */
     public void requestStablishment() {
-        final AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
+        AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
         final String MESSAGE_CONECTION_FAILURE = "Falha na Conexão";
         final String MESSAGE_DOWNLOAD_DATA_FAILURE = "Falha ao baixar os dados.";
         final String MESSAGE_UPLOADING_DATA = "Carregando dados...";
@@ -83,6 +83,7 @@ public class LoadingScreen extends Activity {
         messageNeutralBuilder.setNegativeButton(MESSAGE_CANCEL, new CancelButtonListener());
 
         final AlertDialog messageFailedConnection = messageNeutralBuilder.create();
+        assert(messageFailedConnection != null) : "message to not be shown must be null";
 
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage(MESSAGE_UPLOADING_DATA);
@@ -95,16 +96,21 @@ public class LoadingScreen extends Activity {
 
                 final HospitalController hospitalController = HospitalController.getInstance(
                                                               getApplicationContext());
+                assert(hospitalController != null) : "controller must not be null";
+
                 final String androidId = "" + android.provider.Settings.Secure.getString(
                                          getContentResolver(), android.provider.Settings.Secure
                                          .ANDROID_ID);
+                assert(androidId != null) : "id must not be null";
                 hospitalController.setAndroidId(androidId);
 
                 try {
                     hospitalController.initControllerHospital();
                 } catch (IOException e) {
+                    showMessageOnThread(messageFailedConnection, messageHandler);
                     e.printStackTrace();
                 } catch (JSONException e) {
+                    showMessageOnThread(messageFailedConnection, messageHandler);
                     e.printStackTrace();
                 } catch (ConnectionErrorException cee) {
                     showMessageOnThread(messageFailedConnection, messageHandler);
