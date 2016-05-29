@@ -60,22 +60,22 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     public int getCount() { return COUNT; }
 
     /**
-     * @param position
+     * @param POSITION
      *        used to take the item position.
      *
      * @return the object hospital in the position specified in the parameter.
      */
     @Override
-    public Hospital getItem(int position) {
+    public Hospital getItem(final int POSITION) {
         
-        assert (position >= 0) : "position must never be null";
+        assert (POSITION >= 0) : "position must never be null";
         
-        return list.get(position);
+        return list.get(POSITION);
     }
     //fix this function
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(final int POSITION) {
+        return POSITION;
     }
 
     /**
@@ -101,15 +101,21 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     /**
      * convert the distance value from meters to kilometers.
      *
-     * @param distance
-     *        float value to be converted.
+     * @param DISTANCE
+     *           float value to be converted.
      *
      * @return distance value in km.
      */
-    private Float convertToKM(Float distance){
-        assert (distance > 0) : "distance must never be negative";
+    private Float convertToKM(final Float DISTANCE){
+        assert (DISTANCE > 0): "distance must never be negative";
 
-        return distance/1000;
+        final float KILO = 1000f;
+        float distanceInKilometer = DISTANCE/KILO;
+
+        final float MAXDISTANCE = 13000f;
+        assert (distanceInKilometer < MAXDISTANCE) : "distance should never be bigger than MAXDISTANCE";
+
+        return distanceInKilometer;
     }
 
     /**
@@ -142,21 +148,23 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *
      * @param convertView
      *        view to be accessed.
-     * @param position
+     * @param POSITION
      *        position of the item layout to be accessed.
      */
-    public void setDistance(View convertView, int position) {
-        assert (position >= 0) : "position must never be negative";
+    public void setDistance(View convertView, final int POSITION) {
+        assert (POSITION >= 0) : "position must never be negative";
         assert (convertView != null) : "convertView must never be null";
         
-        if (this.list.get(position).getDistance() < 1f) {
+        if (this.list.get(POSITION).getDistance() < 1f) {
             // Setting distance of drugstore on list item
+            final String METERS_POS_FIX = " m";
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(this.list.get(position).getDistance() + " m");
+            textViewDistance.setText(this.list.get(POSITION).getDistance() + METERS_POS_FIX);
         } else {
             // Setting distance of drugstore on list item
+            final String KM_POS_FIX = " km";
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(convertToKM(this.list.get(position).getDistance()).toString() + " Km");
+            textViewDistance.setText(convertToKM(this.list.get(POSITION).getDistance()).toString() + KM_POS_FIX);
         }
     }
 

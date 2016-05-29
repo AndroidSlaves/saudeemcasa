@@ -46,7 +46,7 @@ public class HospitalDao extends Dao {
         assert (context != null) : "Context must never be null.";
 
         if(HospitalDao.instance != null) {
-			/* !Nothing To Do. */
+			/* Nothing To Do. */
         } else {
             HospitalDao.instance = new HospitalDao(context);
         }
@@ -67,14 +67,12 @@ public class HospitalDao extends Dao {
         boolean isEmpty = false;
 
         if(cursor != null) {
-
             if(cursor.getCount() <= 0) {
                 cursor.moveToFirst();
                 isEmpty = true;
             } else {
-                // Nothing to do.
+                /* Nothing to do.*/
             }
-
         } else {
             isEmpty = true;
         }
@@ -120,7 +118,6 @@ public class HospitalDao extends Dao {
      *              List of all hospitals
      */
     public List<Hospital> getAllHospitals() {
-
         sqliteDatabase = database.getReadableDatabase();
         String query = "SELECT * FROM " + tableName;
         Cursor cursor = sqliteDatabase.rawQuery( query, null );
@@ -145,6 +142,7 @@ public class HospitalDao extends Dao {
             listHospitals.add(hospital);
         }
 
+        assert (listHospitals != null) : "Receive a null treatment";
         return listHospitals;
     }
 

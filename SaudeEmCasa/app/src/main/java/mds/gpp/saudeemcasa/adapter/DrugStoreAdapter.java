@@ -23,25 +23,25 @@ import mds.gpp.saudeemcasa.model.Hospital;
 
 public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     private Context context;
-    private ArrayList<DrugStore> lista;
+    private ArrayList<DrugStore> list;
     public static final int COUNT = 15;
 
     /**
      *
      * @param context
      *              Defines the context where Adapter is instantiated.
-     * @param lista
+     * @param list
      *              List of DrugStores to populate adapter view.
      */
-    public DrugStoreAdapter(Context context, ArrayList<DrugStore> lista){
-        super(context,0,lista);
+    public DrugStoreAdapter(Context context, ArrayList<DrugStore> list){
+        super(context,0,list);
 
         assert (context != null) : "context must never be null";
-        assert (lista != null) : "lista must never be null";
-        assert (lista.size() > 0) : "lista must never be empty";
+        assert (list != null) : "lista must never be null";
+        assert (list.size() > 0) : "lista must never be empty";
 
         this.context = context;
-        this.lista = lista;
+        this.list = list;
     }
 
     /**
@@ -65,7 +65,7 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     public DrugStore getItem(int position) {
         assert (position >= 0) : "position must never be negative";
 
-        DrugStore drugStore = lista.get(position);
+        DrugStore drugStore = list.get(position);
 
         assert (drugStore != null);
 
@@ -130,7 +130,7 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (convertView != null) : "convertView must never be null";
         assert (position >= 0) : "position must never be null";
         // Override method to get view
-        DrugStore drugStorePosition = this.lista.get(position);
+        DrugStore drugStorePosition = this.list.get(position);
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
 
         // Setting name of drugstore on list item
@@ -157,14 +157,14 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (position >= 0) : "position must never be null";
         assert (convertView != null) : "convertView must never be null";
 
-        if (this.lista.get(position).getDistance() < 1f) {
+        if (this.list.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(this.lista.get(position).getDistance() + " m");
+            textViewDistance.setText(this.list.get(position).getDistance() + " m");
         }else {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(convertToKM(this.lista.get(position).getDistance()).toString() + " Km");
+            textViewDistance.setText(convertToKM(this.list.get(position).getDistance()).toString() + " Km");
         }
 
     }

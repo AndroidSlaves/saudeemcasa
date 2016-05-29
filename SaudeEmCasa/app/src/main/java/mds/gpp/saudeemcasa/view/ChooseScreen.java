@@ -27,21 +27,22 @@ import mds.gpp.saudeemcasa.helper.GPSTracker;
 public class ChooseScreen extends Activity {
 
     public GPSTracker gps;
-    public final String CONNECTION_ERROR_TEXT = "Houve um erro de conexão.\nVerifique " +
-            "sua conexão com a internet.";
+    public final String CONNECTION_ERROR_TEXT = "Houve um erro de conexão.\nVerifique sua " +
+                                                "conexão com a internet.";
     public final String FETCH_RATE_TEXT = "Requerindo avaliações...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_screen);
+        assert (savedInstanceState != null) : "Receive a null treatment";
 
         // Connect the the scroller the screen.
         final int LEFT_SLIDE_ID = android.R.anim.slide_in_left;
         final int RIGHT_SLIDE_ID = android.R.anim.slide_out_right;
         overridePendingTransition(RIGHT_SLIDE_ID,LEFT_SLIDE_ID);
 
-        gps = new GPSTracker(this);
+        GPSTracker gps = new GPSTracker(this);
 
         // Setting event click for hospital list.
         final int HOSPITAL_BUTTON_ID = R.id.melhor_em_casa_button;
@@ -50,6 +51,7 @@ public class ChooseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 hospitalListThread();
+                assert (v != null) : "Receive a null treatment";
             }
         });
 
@@ -60,6 +62,7 @@ public class ChooseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 drugstoreListThread();
+                assert (v != null) : "Receive a null treatment";
             }
         });
 
@@ -70,7 +73,9 @@ public class ChooseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 Intent nextScreen = new Intent(getBaseContext(), InfoScreenSaudeEmCasa.class);
+                assert (nextScreen != null) : "Receive a null treatment";
                 startActivity(nextScreen);
+                assert (v != null) : "Receive a null treatment";
             }
         });
 
@@ -81,7 +86,9 @@ public class ChooseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 Intent nextScreen = new Intent(getBaseContext(), InfoScreenMelhorEmCasa.class);
+                assert (nextScreen != null) : "Receive a null treatment";
                 startActivity(nextScreen);
+                assert (v != null) : "Receive a null treatment";
             }
         });
 
@@ -92,15 +99,16 @@ public class ChooseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 Intent nextScreen = new Intent(getBaseContext(), InfoScreenDrugStore.class);
+                assert (nextScreen != null) : "Receive a null treatment";
                 startActivity(nextScreen);
+                assert (v != null) : "Receive a null treatment";
             }
         });
-
     }
 
     /**
      * This thread is used to get the ratings of each hospital from several.
-     * */
+     */
     public void hospitalListThread() {
         final ProgressDialog PROGRESS_DIALOG = new ProgressDialog(this);
         showProgress(PROGRESS_DIALOG, FETCH_RATE_TEXT);
@@ -113,6 +121,7 @@ public class ChooseScreen extends Activity {
                 try {
                     HospitalController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), HospitalList.class);
+                    assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
                 } catch (ConnectionErrorException e) {
@@ -141,6 +150,7 @@ public class ChooseScreen extends Activity {
                 try {
                     DrugStoreController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class);
+                    assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
                 } catch (ConnectionErrorException connectionError) {

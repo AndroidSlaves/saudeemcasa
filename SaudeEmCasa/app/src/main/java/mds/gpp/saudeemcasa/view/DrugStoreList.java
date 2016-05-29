@@ -37,20 +37,25 @@ public class DrugStoreList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drugstore_list_screen);
 
+
         // Set important variables for the list.
         gps = new GPSTracker(this);
         final DrugStoreController drugStoreController = DrugStoreController.getInstance(this);
         list = (ArrayList<DrugStore>) drugStoreController.getAllDrugstores();
+        assert (drugStoreController != null) : "Receive a null treatment";
+
         listView = (ListView) findViewById(R.id.listView);
 
         if(gps.canGetLocation() == true) {
             drugStoreController.setDistance(getApplicationContext(), list);
+            assert (drugStoreController != null) : "Receive a null treatment";
+
             final DrugStoreAdapter adapter = new DrugStoreAdapter(getApplicationContext(), list);
             listView.setAdapter(adapter);
 
         } else {
-            final String CONNECT_ERROR_TEXT = "Voce nao esta conectado ao gps ou a internet!\n" +
-                    " Conecte-se para prosseguir.";
+            final String CONNECT_ERROR_TEXT = "Voce nao esta conectado ao gps ou a internet! \n" +
+                                              "Conecte-se para prosseguir.";
             Toast.makeText(getApplicationContext(),CONNECT_ERROR_TEXT , Toast.LENGTH_LONG).show();
         }
 
@@ -60,11 +65,13 @@ public class DrugStoreList extends Activity {
                 // Set controller drugstore when clicked then change screen
                 DrugStore drugstoreFromPositionClicked = list.get(position);
                 drugStoreController.setDrugStore(drugstoreFromPositionClicked);
+                assert (drugStoreController != null) : "Receive a null treatment";
+
                 Intent intent = new Intent(getBaseContext(), GoogleMapDrugStore.class);
                 startActivity(intent);
+                assert (intent != null) : "Receive a null treatment";
             }
         });
-
     }
 }
 

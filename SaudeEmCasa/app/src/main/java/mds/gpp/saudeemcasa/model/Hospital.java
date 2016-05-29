@@ -39,6 +39,7 @@ public class Hospital extends Stablishment {
      *
      */
     public String getNumber() {
+        assert (number != null) : "Null attribute treatment.";
         return number;
     }
 
@@ -61,6 +62,9 @@ public class Hospital extends Stablishment {
      *
      */
     public String getDistrict() {
+        assert (district != null) : "Null attribute treatment.";
+        assert (district != "") : "Empty district treatment.";
+        assert (district.length() > 2) : "Minor character treatment.";
         return district;
     }
 
