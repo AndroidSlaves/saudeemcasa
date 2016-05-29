@@ -34,7 +34,6 @@ public class Dao {
 
         sqLiteDatabase.insert(table, null, values);
         long resultInsert = 1;
-
         sqLiteDatabase.close();
 
         return resultInsert;
@@ -54,9 +53,7 @@ public class Dao {
         assert (table.length() >= 1) : "Table name must have at least one character.";
 
         int deleteFromDatabase = 0;
-
         deleteFromDatabase = sqLiteDatabase.delete(table, null, null);
-
         sqLiteDatabase.close();
 
         return deleteFromDatabase;
