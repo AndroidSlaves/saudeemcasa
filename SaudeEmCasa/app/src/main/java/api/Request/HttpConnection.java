@@ -56,7 +56,7 @@ public class HttpConnection {
         assert (ipAddress.length() >= 8) : "ipAddress must never be smaller then 8 characters";
 
         // variable that will receive the data from the JSON.
-        String response;
+        String response = "";
         try {
             System.out.println("Starting connection with " + ipAddress);
 
@@ -103,13 +103,14 @@ public class HttpConnection {
         String finalJson = "";
 
         for (int i = 0; i < states.length; i++) {
-            String tmp;
-            tmp = newRequest(ipAddress + "/uf/" + states[i]);
+            String request = newRequest(ipAddress + "/uf/" + states[i]);
 
-            finalJson = finalJson + "," + tmp.substring(1, tmp.length() - 1);
+            finalJson = finalJson + "," + request.substring(1, request.length() - 1);
         }
         finalJson = finalJson.substring(1, finalJson.length());
-        return "[" + finalJson + "]";
+        String drugStoresByUf = "[" + finalJson + "]";
+
+        return drugStoresByUf;
     }
 
     /**
@@ -138,11 +139,16 @@ public class HttpConnection {
         // String that will store response in order to use it.
         String json = newRequest(ipAddress+id);
         JSONArray jsonArray = new JSONArray(json);
-        if(jsonArray.length() == 0){
-            return 0;
+        float rating = 0.0f;
+
+        if (jsonArray.length() == 0){
+            rating = 0;
+
         }else {
-            return (float) jsonArray.getJSONObject(0).getDouble("rate");
+            rating = (float) jsonArray.getJSONObject(0).getDouble("rate");
+
         }
+        return rating;
     }
 
     /**
@@ -163,7 +169,9 @@ public class HttpConnection {
 
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
-        return client.execute(httpGet, responseHandler);
+        String requestResponse = client.execute(httpGet, responseHandler);;
+
+        return requestResponse;
     }
 
 }
