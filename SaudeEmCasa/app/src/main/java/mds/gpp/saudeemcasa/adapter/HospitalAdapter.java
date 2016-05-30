@@ -95,6 +95,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
         assert (parent != null) : "parent must never be null";
 
         View view = populateAdapter(convertView,position);
+        assert (view != null) : "view context must never be null";
 
         return view;
     }

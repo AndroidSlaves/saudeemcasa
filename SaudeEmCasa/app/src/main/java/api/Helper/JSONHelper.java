@@ -28,7 +28,10 @@ public class JSONHelper {
         assert (context != null) : "context must never be null";
 
         drugStoreDao = DrugStoreDao.getInstance(context);
+        assert (drugStoreDao != null) : "drugStoreDao must never be null.";
+
         hospitalDao = HospitalDao.getInstance(context);
+        assert (hospitalDao != null) : "hospitalDao must never be null";
     }
 
     /**

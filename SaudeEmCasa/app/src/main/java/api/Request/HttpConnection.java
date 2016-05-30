@@ -70,6 +70,7 @@ public class HttpConnection {
             HttpClient client = new DefaultHttpClient();
 
             response = Request(httpGet, client);
+            assert (response != null) : "response must never be null";
 
             System.out.println("Resquest complete " + ipAddress);
 
@@ -137,7 +138,9 @@ public class HttpConnection {
         assert (id != null) : "id must never be negative";
 
         // String that will store response in order to use it.
-        String json = newRequest(ipAddress+id);
+        String json = newRequest(ipAddress + id);
+        assert (json !=  null) : "json String must never be null";
+
         JSONArray jsonArray = new JSONArray(json);
         float rating = 0.0f;
 
@@ -169,7 +172,8 @@ public class HttpConnection {
 
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
-        String requestResponse = client.execute(httpGet, responseHandler);;
+        String requestResponse = client.execute(httpGet, responseHandler);
+        assert (requestResponse != null) : "requestResponse String must never be null";
 
         return requestResponse;
     }
