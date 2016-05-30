@@ -90,12 +90,13 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        
         assert (position >= 0) : "position must never be negative";
         assert (convertView != null) : "convertView must never be null";
         assert (parent != null) : "parent must never be null";
 
-        return populateAdapter(convertView,position);
+        View view = populateAdapter(convertView,position);
+
+        return view;
     }
 
     /**

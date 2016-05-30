@@ -44,33 +44,35 @@ public class JSONHelper {
         assert (hospitalJsonList != "") : "hospitalJsonList must never be empty";
 
         // jArray Structure from the JSON received ready to extract data.
-        JSONArray jArray = new JSONArray(hospitalJsonList);
+        JSONArray jsonArray = new JSONArray(hospitalJsonList);
+        boolean canSetHospital = false;
 
         try {
             Hospital hospital = new Hospital();
 
-            for(int index = 0; index < jArray.length(); index++) {
-                hospital.setLatitude(Double.toString(jArray.getJSONObject(index).getDouble("lon")));
-                hospital.setLongitude(Double.toString(jArray.getJSONObject(index)
-                                      .getDouble("lat")));
-                hospital.setType(jArray.getJSONObject(index).getString("tipo_sus"));
-                hospital.setState(jArray.getJSONObject(index).getString("uf"));
-                hospital.setCity(jArray.getJSONObject(index).getString("cidade"));
-                hospital.setAddress(jArray.getJSONObject(index).getString("no_logradouro"));
-                hospital.setNumber(jArray.getJSONObject(index).getString("nu_endereco"));
-                hospital.setDistrict(jArray.getJSONObject(index).getString("no_bairro"));
-                hospital.setTelephone(jArray.getJSONObject(index).getString("nu_telefone"));
-                hospital.setName(jArray.getJSONObject(index).getString("no_fantasia"));
-                hospital.setId(jArray.getJSONObject(index).getJSONObject("_id").getString("_str"));
+            for(int index = 0; index < jsonArray.length(); index++) {
+                hospital.setLatitude(Double.toString(jsonArray.getJSONObject(index).getDouble("lon")));
+                hospital.setLongitude(Double.toString(jsonArray.getJSONObject(index)
+                        .getDouble("lat")));
+                hospital.setType(jsonArray.getJSONObject(index).getString("tipo_sus"));
+                hospital.setState(jsonArray.getJSONObject(index).getString("uf"));
+                hospital.setCity(jsonArray.getJSONObject(index).getString("cidade"));
+                hospital.setAddress(jsonArray.getJSONObject(index).getString("no_logradouro"));
+                hospital.setNumber(jsonArray.getJSONObject(index).getString("nu_endereco"));
+                hospital.setDistrict(jsonArray.getJSONObject(index).getString("no_bairro"));
+                hospital.setTelephone(jsonArray.getJSONObject(index).getString("nu_telefone"));
+                hospital.setName(jsonArray.getJSONObject(index).getString("no_fantasia"));
+                hospital.setId(jsonArray.getJSONObject(index).getJSONObject("_id").getString("_str"));
 
                 hospitalDao.insertHospital(hospital);
+                canSetHospital = true;
             }
 
         } catch(NullPointerException failedHospitalNull) {
-            return false;
+            canSetHospital = false;
         }
 
-        return true;
+        return canSetHospital;
     }
 
     /**
@@ -88,32 +90,34 @@ public class JSONHelper {
         assert (drugstoreJsonList != null) : "drugstoreJsonList must never be null";
         assert (drugstoreJsonList!= "") : "drugstoreJsonList must never be empty";
 
-        // jArray Structure from the JSON received ready to extract data.
-        JSONArray jArray = new JSONArray(drugstoreJsonList);
+        // jsonArray Structure from the JSON received ready to extract data.
+        JSONArray jsonArray = new JSONArray(drugstoreJsonList);
+        boolean canSetDrugStore = false;
 
         try {
             DrugStore drugStore = new DrugStore();;
 
-            for(int index = 0; index < jArray.length(); index++) {
-                drugStore.setLongitude(jArray.getJSONObject(index).getString("long"));
-                drugStore.setLatitude(jArray.getJSONObject(index).getString("lat"));
-                drugStore.setAddress(jArray.getJSONObject(index).getString("ds_endereco_farmacia"));
-                drugStore.setPostalCode(jArray.getJSONObject(index).getString("nu_cep_farmacia"));
-                drugStore.setState(jArray.getJSONObject(index).getString("uf"));
-                drugStore.setCity(jArray.getJSONObject(index).getString("cidade"));
+            for(int index = 0; index < jsonArray.length(); index++) {
+                drugStore.setLongitude(jsonArray.getJSONObject(index).getString("long"));
+                drugStore.setLatitude(jsonArray.getJSONObject(index).getString("lat"));
+                drugStore.setAddress(jsonArray.getJSONObject(index).getString("ds_endereco_farmacia"));
+                drugStore.setPostalCode(jsonArray.getJSONObject(index).getString("nu_cep_farmacia"));
+                drugStore.setState(jsonArray.getJSONObject(index).getString("uf"));
+                drugStore.setCity(jsonArray.getJSONObject(index).getString("cidade"));
                 drugStore.setTelephone("");
                 drugStore.setName("Farmácia popular do Brasil");
                 drugStore.setType("FARMACIAPOPULAR");
-                drugStore.setId(jArray.getJSONObject(index).getJSONObject("_id").getString("_str"));
+                drugStore.setId(jsonArray.getJSONObject(index).getJSONObject("_id").getString("_str"));
 
                 drugStoreDao.insertDrugstore(drugStore);
+                canSetDrugStore = true;
             }
 
         } catch(NullPointerException failedDrugstorePublicNull) {
-            return false;
+            canSetDrugStore = false;
         }
 
-        return true;
+        return canSetDrugStore;
     }
 
     /**
@@ -131,34 +135,36 @@ public class JSONHelper {
         assert (drugstoreJsonList != null) : "drugstoreJsonList must never be null";
         assert (drugstoreJsonList!= "") : "drugstoreJsonList must never be empty";
 
-        // jArray Structure from the JSON received ready to extract data.
-        JSONArray jArray = new JSONArray(drugstoreJsonList);
+        // jsonArray Structure from the JSON received ready to extract data.
+        JSONArray jsonArray = new JSONArray(drugstoreJsonList);
+        boolean canSetDrugStore = false;
 
         try {
             DrugStore drugStore = new DrugStore();
 
-            for(int index = 0; index < jArray.length(); index++) {
-                drugStore.setLongitude(jArray.getJSONObject(index).getString("long"));
-                drugStore.setLatitude(jArray.getJSONObject(index).getString("lat"));
-                drugStore.setTelephone("(" + jArray.getJSONObject(index)
-                                       .getString("nu_ddd_farmacia")
-                                       + ")" + jArray.getJSONObject(index)
-                                       .getString("nu_telefone_farmacia"));
-                drugStore.setPostalCode(jArray.getJSONObject(index).getString("nu_cep_farmacia"));
-                drugStore.setAddress(jArray.getJSONObject(index).getString("ds_endereco_farmacia"));
-                drugStore.setName(jArray.getJSONObject(index).getString("no_farmacia"));
-                drugStore.setCity(jArray.getJSONObject(index).getString("no_cidade"));
-                drugStore.setState(jArray.getJSONObject(index).getString("uf"));
+            for(int index = 0; index < jsonArray.length(); index++) {
+                drugStore.setLongitude(jsonArray.getJSONObject(index).getString("long"));
+                drugStore.setLatitude(jsonArray.getJSONObject(index).getString("lat"));
+                drugStore.setTelephone("(" + jsonArray.getJSONObject(index)
+                        .getString("nu_ddd_farmacia")
+                        + ")" + jsonArray.getJSONObject(index)
+                        .getString("nu_telefone_farmacia"));
+                drugStore.setPostalCode(jsonArray.getJSONObject(index).getString("nu_cep_farmacia"));
+                drugStore.setAddress(jsonArray.getJSONObject(index).getString("ds_endereco_farmacia"));
+                drugStore.setName(jsonArray.getJSONObject(index).getString("no_farmacia"));
+                drugStore.setCity(jsonArray.getJSONObject(index).getString("no_cidade"));
+                drugStore.setState(jsonArray.getJSONObject(index).getString("uf"));
                 drugStore.setType("AQUITEMFARMACIAPOPULAR");
-                drugStore.setId(jArray.getJSONObject(index).getJSONObject("_id").getString("_str"));
+                drugStore.setId(jsonArray.getJSONObject(index).getJSONObject("_id").getString("_str"));
 
                 drugStoreDao.insertDrugstore(drugStore);
+                canSetDrugStore = true;
             }
 
         } catch (NullPointerException failedDrugstorePrivateNull) {
-            return false;
+            canSetDrugStore = false;
         }
 
-        return true;
+        return canSetDrugStore;
     }
 }
