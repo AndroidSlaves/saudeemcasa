@@ -19,10 +19,13 @@ import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 
 public class GoogleMapDrugStore extends FragmentActivity{
-
+    // Google map object that contains everything to be show to the user.
     private GoogleMap myGoogleMap = null;
+    // Controller that contains the data for proper functioning.
     DrugStoreController drugStoreController = DrugStoreController.getInstance(this);
-
+    /**
+     * Method that is called when screen is created.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,9 @@ public class GoogleMapDrugStore extends FragmentActivity{
         setUpMap();
     }
 
+    /**
+     * Resume map when it is stopped by the user getting off the screen.
+     */
     @Override
     protected void onResume() {
         super.onResume();

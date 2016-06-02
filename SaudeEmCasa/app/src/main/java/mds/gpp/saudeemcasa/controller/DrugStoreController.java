@@ -29,11 +29,18 @@ import static java.util.Collections.sort;
 
 public class DrugStoreController {
 
+    /* A unique instance of the DrugstoreController running on the software. There must not be more
+    than one instance running. */
     private static DrugStoreController instance = null;
+    // A selected drugstore on the list of drugstores by the user.
     private static DrugStore drugStore;
+    // The list of drugstores to be shown to the user.
     private static List<DrugStore> drugStoreList = new ArrayList<DrugStore>();
+    // Context of the screen where the user is.
     private static Context context;
+    // Object that makes connection with the database.
     private static DrugStoreDao drugStoreDao;
+    // Unique identification number of the user android.
     private String androidId;
 
     /**

@@ -8,18 +8,28 @@
 package mds.gpp.saudeemcasa.model;
 
 public class Stablishment {
-    //Attributes of the stablishment.
+    // Receive the latitude from a Hospital or a Drugstore.
     private String latitude = "";
+    // Represents the latitude from a Hospital or a Drugstore.
     private String longitude = "";
-    private String type = "";
+    // Represents the phone number of a Hospital or a Drugstore.
     private String telephone = "";
+    // The commercial name of the stabilishment.
     private String name = "";
+    // The city where a Hospital or a Drugstore is located.
     private String city = "";
+    // The address where a Hospital or a Drugstore is located.
     private String address = "";
+    // The state that compose the stablishment address.
     private String state = "";
-    private float rate = 0;
+    // The medium of the rates given to a stablishment.
     private String id;
+    // The unique identification number given to a stablishment.
     private float distance = 0;
+    // The distance from the user to this stablishment.
+    private String type = "";
+    // The type of the stablishment. (public or private).
+    private float rate = 0;
 
     /**
      * Default constructor.
