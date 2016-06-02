@@ -104,7 +104,7 @@ public class GPSTracker extends Service implements LocationListener{
             e.printStackTrace();
         }
 
-        assert (location !=null) : "location must never be null.";
+
         return location;
     }
 
@@ -125,8 +125,6 @@ public class GPSTracker extends Service implements LocationListener{
             latitude = location.getLatitude();
         }
 
-        assert (latitude < 90) : "the valid value for latitude must be smaller than 91 degress";
-        assert (latitude > -90) : "the valid value for latitude must be bigger than negative 91 degress";
         return latitude;
     }
 
@@ -138,8 +136,6 @@ public class GPSTracker extends Service implements LocationListener{
             longitude = location.getLongitude();
         }
 
-        assert (latitude < 90) : "the valid value for longitude must be smaller than 181 degress";
-        assert (latitude > -90) : "the valid value for longitude must be bigger than negative 181 degress";
         return longitude;
     }
 

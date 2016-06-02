@@ -35,6 +35,7 @@ public class InfoScreenSaudeEmCasa extends FragmentActivity{
                                                "tratamentos de saude.\n";
 
         TextView nameTextView = (TextView)findViewById(R.id.text_info_saude_em_casa);
+        assert (!(nameTextView == null)) : "text view should not bee null";
         nameTextView.setText(INFO_TEXT_SAUDE_EM_CASA);
 
     }

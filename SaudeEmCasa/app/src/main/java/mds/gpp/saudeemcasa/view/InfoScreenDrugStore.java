@@ -42,6 +42,8 @@ public class InfoScreenDrugStore extends FragmentActivity {
                                            "por dentistas.\n";
 
         TextView nameTextView = (TextView) findViewById(R.id.text_info_drugstore);
+        assert (!(nameTextView == null)) : "text view should not bee null";
+
         nameTextView.setText(INFO_TEXT_DRUGSTORE);
     }
 }

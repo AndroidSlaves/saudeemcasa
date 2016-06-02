@@ -40,6 +40,8 @@ public class InfoScreenMelhorEmCasa extends FragmentActivity {
 
 
         TextView nameTextView = (TextView) findViewById(R.id.text_info_melhor_em_casa);
+        assert (!(nameTextView == null)) : "text view should not bee null";
+
         nameTextView.setText(INFO_TEXT_MELHOR_EM_CASA);
     }
 }

@@ -66,7 +66,6 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (position >= 0) : "position must never be negative";
 
         DrugStore drugStore = list.get(position);
-
         assert (drugStore != null);
 
         return drugStore;
@@ -90,9 +89,8 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (parent != null) : "parent must never be null";
 
         View populatedListView = populateAdapter(convertView,position);
-
         assert (populatedListView != null) : "this view shall never be null";
-        //assert (populatedListView.getContext() != null);
+
         return populatedListView;
     }
 
@@ -110,7 +108,7 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         final float KILO = 1000f;
         float distanceInKilometer = distance/KILO;
 
-        final float MAXDISTANCE = 13000f;
+        final float MAXDISTANCE = 30000f;
         assert (distanceInKilometer < MAXDISTANCE) : "distance should never be bigger than MAXDISTANCE";
 
         return distanceInKilometer;
@@ -130,16 +128,17 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (convertView != null) : "convertView must never be null";
         assert (position >= 0) : "position must never be null";
         // Override method to get view
-        DrugStore drugStorePosition = this.list.get(position);
+        DrugStore drugStoreByPosition = this.list.get(position);
+        assert (!(drugStoreByPosition == null)) : "text view should not bee null";
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
+        assert (!(convertView == null)) : "text view should not bee null";
 
         // Setting name of drugstore on list item
         TextView textView = (TextView) convertView.findViewById(R.id.textView2_item);
-        textView.setText((CharSequence) drugStorePosition.getName());
+        assert (!(textView == null)) : "text view should not bee null";
+        textView.setText((CharSequence) drugStoreByPosition.getName());
 
         setDistance(convertView, position);
-
-        assert (convertView != null) : "convertView should never be null";
 
         return convertView;
     }
@@ -160,11 +159,16 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         if (this.list.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
+            assert (!(textViewDistance == null)) : "text view should not bee null";
+
             textViewDistance.setText(this.list.get(position).getDistance() + " m");
         }else {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(convertToKM(this.list.get(position).getDistance()).toString() + " Km");
+            assert (!(textViewDistance == null)) : "text view should not bee null";
+
+            String distanceInKm = convertToKM(this.list.get(position).getDistance()).toString();
+            textViewDistance.setText(distanceInKm + " Km");
         }
 
     }
