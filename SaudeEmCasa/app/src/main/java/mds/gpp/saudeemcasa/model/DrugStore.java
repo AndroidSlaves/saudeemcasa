@@ -16,6 +16,12 @@ public class DrugStore extends Stablishment {
 
     }
 
+    public DrugStore(String latitude, String longitude, String telephone, String name, String city, String address,
+                     String state, String id, float distance, String type, String postalCode) {
+        super(latitude, longitude, telephone, name, city, address, state, id, distance, type);
+        this.postalCode = postalCode;
+    }
+
     /**
      * Method that creates a constructor with the drugstore basic information, name and telephone.
      *

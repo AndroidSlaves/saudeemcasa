@@ -39,6 +39,20 @@ public class Stablishment {
 
     }
 
+    public Stablishment(String latitude, String longitude, String telephone, String name, String
+            city, String address, String state, String id, float distance, String type) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.telephone = telephone;
+        this.name = name;
+        this.city = city;
+        this.address = address;
+        this.state = state;
+        this.id = id;
+        this.distance = distance;
+        this.type = type;
+    }
+
     /**
      * Constructor with name and telephone for initialization
      *

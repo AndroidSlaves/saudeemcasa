@@ -20,6 +20,8 @@ import android.os.Handler;
 
 //import com.firebase.client.Firebase;
 
+import com.firebase.client.Firebase;
+
 import org.json.JSONException;
 import java.io.IOException;
 import api.Exception.ConnectionErrorException;
@@ -54,7 +56,7 @@ public class LoadingScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Firebase.setAndroidContext(this);
+        Firebase.setAndroidContext(this);
 
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
