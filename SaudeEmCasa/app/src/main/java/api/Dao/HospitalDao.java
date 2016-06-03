@@ -24,7 +24,7 @@ public class HospitalDao extends Dao {
     private static HospitalDao instance;
     private static String tableName = "Hospital";
     private static final String TABLE_COLUMNS[] = {"latitude", "longitude", "city", "address",
-                                                   "state", "district", "telephone", "name", "type",
+                                                   "state","rate", "district", "telephone", "name", "type",
                                                    "number"," hospitalGid"};
 
     private HospitalDao(Context context) {
@@ -137,7 +137,7 @@ public class HospitalDao extends Dao {
             hospital.setName(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[8])));
             hospital.setType(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[9])));
             hospital.setNumber(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[10])));
-            hospital.setId(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[11])));
+            //hospital.setId(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[11])));
 
             listHospitals.add(hospital);
         }

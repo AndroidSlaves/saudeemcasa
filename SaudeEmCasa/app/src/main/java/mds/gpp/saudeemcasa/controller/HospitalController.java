@@ -14,6 +14,7 @@ import android.location.Location;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -126,7 +127,7 @@ public class HospitalController {
      * @throws ConnectionErrorException
      *              there maybe a failure communicating with the server.
      */
-    public void initControllerHospital() throws IOException, JSONException,
+    public void initControllerHospital(InputStream inputStream) throws IOException, JSONException,
             ConnectionErrorException {
         final String IP_ADDRESS = "http://159.203.95.153:3000/habilitados";
         Boolean dbEmpty = hospitalDao.isDbEmpty();
@@ -134,7 +135,8 @@ public class HospitalController {
         if(dbEmpty) {
 
             HttpConnection httpConnection = new HttpConnection();
-            String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
+            //String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
+            String jsonHospital = httpConnection.loadJSONFromAsset(inputStream);
             JSONHelper jsonParser = new JSONHelper(context);
 
             if(jsonHospital != null){

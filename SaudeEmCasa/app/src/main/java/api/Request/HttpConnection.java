@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import api.Exception.ConnectionErrorException;
 
@@ -176,6 +177,21 @@ public class HttpConnection {
         assert (requestResponse != null) : "requestResponse String must never be null";
 
         return requestResponse;
+    }
+    public String loadJSONFromAsset(InputStream is) {
+        String json = null;
+        try {
+            //InputStream is = getActivity().getAssets().open("yourfilename.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
 }

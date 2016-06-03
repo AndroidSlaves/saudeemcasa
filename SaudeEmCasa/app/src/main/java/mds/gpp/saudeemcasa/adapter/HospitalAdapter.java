@@ -28,7 +28,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     private ArrayList<Hospital> list;
 
     // represent the number of items that the list will have.
-    public static final int COUNT = 15;
+    public static final int COUNT = 5;
 
     /**
      * Create a hospitalAdapter with the context where it will be used and the list of

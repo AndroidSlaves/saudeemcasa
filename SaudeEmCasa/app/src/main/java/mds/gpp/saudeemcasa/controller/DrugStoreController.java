@@ -13,6 +13,7 @@ import org.json.JSONException;
 
 import android.location.Location;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -118,22 +119,22 @@ public class DrugStoreController {
      * @throws ConnectionErrorException
      *              there maybe a failure communicating with the server.
      */
-    public void initControllerDrugstore() throws IOException, JSONException,ConnectionErrorException {
+    public void initControllerDrugstore(InputStream inputStream) throws IOException, JSONException,ConnectionErrorException {
 
             if (drugStoreDao.isDatabaseEmpty()) {
 
                 HttpConnection httpConnection = new HttpConnection();
 
-                final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
+                /*final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
                 String jsonPublic = httpConnection.newRequest(FARMACIA_POPULAR);
-
                 HttpConnection httpConnectionPrivate = new HttpConnection();
 
                 final String FARMACIA_CONVENIADA = "http://159.203.95.153:3000/farmacia_popular" +
                         "_conveniada";
                 String jsonPrivate = httpConnectionPrivate.RequestAllDrugstoresByUF(FARMACIA_CONVENIADA);
+
                 /*This check happens because there may be failure during the requisition which would
-                continue the steps with information missing. This maybe replaced by and exception.*/
+                continue the steps with information missing. This maybe replaced by and exception.
                 if(jsonPublic != null && jsonPrivate != null){
 
                     JSONHelper jsonParser = new JSONHelper(context);
@@ -141,8 +142,17 @@ public class DrugStoreController {
                     if(jsonParser.drugstorePublicListFromJSON(jsonPublic) &&
                             jsonParser.drugstorePrivateListFromJSON(jsonPrivate)){
                         drugStoreList = drugStoreDao.getAllDrugStores();
-                    }else{/*Nothing to do*/}
-                }else {/*Nothing to do*/}
+                    }else{/*Nothing to do}
+                }else {/*Nothing to do}
+                */
+                String jsonPublic = httpConnection.loadJSONFromAsset(inputStream);
+
+                JSONHelper jsonParser = new JSONHelper(context);
+
+                jsonParser.drugstorePublicListFromJSON(jsonPublic);
+
+                drugStoreList = drugStoreDao.getAllDrugStores();
+
 
             } else {
                 drugStoreList = drugStoreDao.getAllDrugStores();

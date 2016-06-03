@@ -20,8 +20,12 @@ import android.os.Handler;
 
 //import com.firebase.client.Firebase;
 
+import com.firebase.client.Firebase;
+
 import org.json.JSONException;
 import java.io.IOException;
+import java.io.InputStream;
+
 import api.Exception.ConnectionErrorException;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
@@ -54,7 +58,7 @@ public class LoadingScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Firebase.setAndroidContext(this);
+        Firebase.setAndroidContext(this);
 
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
@@ -103,9 +107,15 @@ public class LoadingScreen extends Activity {
                                          .ANDROID_ID);
                 assert(androidId != null) : "id must not be null";
                 hospitalController.setAndroidId(androidId);
+                InputStream is = null;
+                try {
+                    is = getBaseContext().getAssets().open("json_test_data.json");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 try {
-                    hospitalController.initControllerHospital();
+                    hospitalController.initControllerHospital(is);
                 } catch (IOException e) {
                     showMessageOnThread(messageFailedConnection, messageHandler);
                     e.printStackTrace();
@@ -119,9 +129,14 @@ public class LoadingScreen extends Activity {
                 final DrugStoreController drugstoreController = DrugStoreController.getInstance(
                                                                 getApplicationContext());
                 drugstoreController.setAndroidId(androidId);
+                try {
+                    is = getBaseContext().getAssets().open("json_drugstore_test_data.json");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 try {
-                    drugstoreController.initControllerDrugstore();
+                    drugstoreController.initControllerDrugstore(is);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -135,12 +150,12 @@ public class LoadingScreen extends Activity {
                     public void run() {
                         progress.setMessage(MESSAGE_UPLOAD_COMPLETED);
 
-                        if (drugstoreController.getAllDrugstores().size()>0 &&
-                            hospitalController.getAllHospitals().size()>0) {
-                            toListScreen();
-                        } else {/* Nothing To Do. */}
-
                         progress.dismiss();
+                        //if (drugstoreController.getAllDrugstores().size()>0 &&
+                          //  hospitalController.getAllHospitals().size()>0) {
+                            toListScreen();
+                        //} else {/* Nothing To Do. */}
+
                         Looper.loop();
                     }
                 });
