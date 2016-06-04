@@ -9,6 +9,7 @@ package mds.gpp.saudeemcasa.controller;
 
 import android.content.Context;
 
+import api.Helper.FirebaseHelper;
 import org.json.JSONException;
 
 import android.location.Location;
@@ -121,8 +122,14 @@ public class DrugStoreController {
     public void initControllerDrugstore() throws IOException, JSONException,ConnectionErrorException {
 
             if (drugStoreDao.isDatabaseEmpty()) {
+                System.out.println("ESTOU NA CONTROLLER");
 
-                HttpConnection httpConnection = new HttpConnection();
+                FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+                firebaseHelper.getAllDrugstore(context);
+
+                drugStoreList = drugStoreDao.getAllDrugStores();
+                /*HttpConnection httpConnection = new HttpConnection();
 
                 final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
                 String jsonPublic = httpConnection.newRequest(FARMACIA_POPULAR);
@@ -132,17 +139,17 @@ public class DrugStoreController {
                 final String FARMACIA_CONVENIADA = "http://159.203.95.153:3000/farmacia_popular" +
                         "_conveniada";
                 String jsonPrivate = httpConnectionPrivate.RequestAllDrugstoresByUF(FARMACIA_CONVENIADA);
-                /*This check happens because there may be failure during the requisition which would
-                continue the steps with information missing. This maybe replaced by and exception.*/
-                if(jsonPublic != null && jsonPrivate != null){
+                ///*This check happens because there may be failure during the requisition which would
+                //continue the steps with information missing. This maybe replaced by and exception.*/
+                /*if(jsonPublic != null && jsonPrivate != null){
 
                     JSONHelper jsonParser = new JSONHelper(context);
 
                     if(jsonParser.drugstorePublicListFromJSON(jsonPublic) &&
                             jsonParser.drugstorePrivateListFromJSON(jsonPrivate)){
                         drugStoreList = drugStoreDao.getAllDrugStores();
-                    }else{/*Nothing to do*/}
-                }else {/*Nothing to do*/}
+                    }else{/*Nothing to do}
+                }else {/*Nothing to do}*/
 
             } else {
                 drugStoreList = drugStoreDao.getAllDrugStores();

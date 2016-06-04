@@ -29,13 +29,13 @@ public class Hospital extends Stablishment {
 
     }
 
-    public Hospital(String latitude, String longitude, String telephone, String name, String city,
+    /*public Hospital(String latitude, String longitude, String telephone, String name, String city,
                     String address, String state, String id, float distance, String type,
                     String number, String district) {
         super(latitude, longitude, telephone, name, city, address, state, id, distance, type);
         this.number = number;
         this.district = district;
-    }
+    }*/
 
     private String number = "";
     private String district = "";

@@ -1,14 +1,24 @@
 package api.Helper;
 
+import android.content.Context;
+import api.Dao.DrugStoreDao;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
+
 import mds.gpp.saudeemcasa.model.DrugStore;
 
 public class FirebaseHelper {
-    public void  getAllDrugstore(){
-        final Firebase drugstoreFirebase = new Firebase("https://saudeemcasa.firebaseio.com/");
+    public void  getAllDrugstore(Context context){
+        System.out.println("ESTOU NO FIREBASE");
+
+        final Firebase drugstoreFirebase = new Firebase("https://farmpopularconv.firebaseio.com/");
+        System.out.println("CONSEGUI CONECTAR");
+
+        final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(context);
 
         drugstoreFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -20,12 +30,14 @@ public class FirebaseHelper {
                 String city = "";
                 String address = "";
                 String state = "";
-                String postalcode;
-                int id;
+                String postalcode = "";
+                String id = "";
                 String type = "AQUITEMFARMACIAPOPULAR";
+                System.out.println(dataSnapshot.toString());
 
+                int count = 0;
                 for (DataSnapshot alldrugstore : dataSnapshot.getChildren()) {
-                    id = alldrugstore.getValue(Integer.class);
+                    id = alldrugstore.getValue().toString();
                     for (DataSnapshot drugstoreValues : alldrugstore.getChildren()) {
                         if (drugstoreValues.getKey().equalsIgnoreCase("lat")) {
                             latitude = drugstoreValues.getValue().toString();
@@ -51,10 +63,14 @@ public class FirebaseHelper {
                         if (drugstoreValues.getKey().equalsIgnoreCase("nu_cep_farmacia")) {
                             postalcode = drugstoreValues.getValue().toString();
                         }
-                        //DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type);
+                        DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type,postalcode);
+                        count++;
+                        drugStoreDao.insertDrugstore(newDrugstore);
+
                     }
 
                 }
+                System.out.println("Percorri "+count+" farmacias.");
             }
 
             @Override

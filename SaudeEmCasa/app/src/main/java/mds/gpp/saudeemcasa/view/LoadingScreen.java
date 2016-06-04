@@ -104,7 +104,7 @@ public class LoadingScreen extends Activity {
                                          getContentResolver(), android.provider.Settings.Secure
                                          .ANDROID_ID);
                 assert(androidId != null) : "id must not be null";
-                hospitalController.setAndroidId(androidId);
+                /*hospitalController.setAndroidId(androidId);
 
                 try {
                     hospitalController.initControllerHospital();
@@ -117,7 +117,8 @@ public class LoadingScreen extends Activity {
                 } catch (ConnectionErrorException cee) {
                     showMessageOnThread(messageFailedConnection, messageHandler);
                 }
-
+                */
+                System.out.println("ESTOU NA LOADING SCREEN");
                 final DrugStoreController drugstoreController = DrugStoreController.getInstance(
                                                                 getApplicationContext());
                 drugstoreController.setAndroidId(androidId);
@@ -131,16 +132,17 @@ public class LoadingScreen extends Activity {
                 }catch (ConnectionErrorException cee){
                     showMessageOnThread(messageFailedConnection, messageHandler);
                 }
+                System.out.println("ESTOU NA LOADING SCREEN");
                 runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
                         progress.setMessage(MESSAGE_UPLOAD_COMPLETED);
-
-                        if (drugstoreController.getAllDrugstores().size()>0 &&
-                            hospitalController.getAllHospitals().size()>0) {
+                        System.out.println("TO NA THREAD");
+                        //if (drugstoreController.getAllDrugstores().size()>0 &&
+                        //    hospitalController.getAllHospitals().size()>0) {
                             toListScreen();
-                        } else {/* Nothing To Do. */}
+                        //} else {/* Nothing To Do. */}
 
                         progress.dismiss();
                         Looper.loop();
