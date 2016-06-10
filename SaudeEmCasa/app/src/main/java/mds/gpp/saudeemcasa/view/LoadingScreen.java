@@ -20,14 +20,21 @@ import android.os.Handler;
 
 //import com.firebase.client.Firebase;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import org.json.JSONException;
 import java.io.IOException;
+
+import api.Dao.DrugStoreDao;
 import api.Exception.ConnectionErrorException;
+import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 import mds.gpp.saudeemcasa.controller.HospitalController;
+import mds.gpp.saudeemcasa.model.DrugStore;
 
 
 public class LoadingScreen extends Activity {
@@ -57,13 +64,91 @@ public class LoadingScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-
+        final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
         final ImageView logoSaudeEmCasa = (ImageView) findViewById(R.id.saude_em_casa_logo);
 
-        requestStablishment();
+        final Firebase drugstoreFirebase = new Firebase("https://farmpopularconv.firebaseio.com/");
+        drugstoreFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String latitude = "";
+                String longitude = "";
+                String telephone = "";
+                String name = "";
+                String city = "";
+                String address = "";
+                String state = "";
+                String postalcode = "";
+                String id = "";
+                String type = "AQUITEMFARMACIAPOPULAR";
+                int count = 0;
+                System.out.println(dataSnapshot.toString());
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    for (DataSnapshot alldrugstore : snapshot.getChildren()) {
+
+                        id = alldrugstore.getValue().toString();
+                        for (DataSnapshot drugstoreValues : alldrugstore.getChildren()) {
+                            //System.out.println(drugstoreValues.toString());
+
+                            if (drugstoreValues.getKey().equalsIgnoreCase("lat")) {
+                                latitude = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("long")) {
+                                longitude = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("nu_telefone_farmacia")) {
+                                telephone = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("no_farmacia")) {
+                                name = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("no_cidade")) {
+                                city = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("ds_endereco_farmacia")) {
+                                address = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("uf")) {
+                                state = drugstoreValues.getValue().toString();
+                            }
+                            if (drugstoreValues.getKey().equalsIgnoreCase("nu_cep_farmacia")) {
+                                postalcode = drugstoreValues.getValue().toString();
+                            }
+                        }
+                        System.out.println("TESTE "+latitude +","+ longitude);
+                        DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type,postalcode);
+                        System.out.println(drugStoreDao.insertDrugstore(newDrugstore));
+
+                        count++;
+
+                    }
+                    System.out.println("Percorri "+count+" farmacias.");
+                }
+                DrugStoreController drugStoreController = DrugStoreController.getInstance(getApplicationContext());
+                try {
+                    drugStoreController.initControllerDrugstore();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ConnectionErrorException e) {
+                    e.printStackTrace();
+                }
+                toListScreen();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
     }
+
+    //requestStablishment();
+
 
     /*
      * Responsible for requesting communication with the Stabliment. Building alert dialogs,
@@ -71,7 +156,10 @@ public class LoadingScreen extends Activity {
 	 * Messages dialogue progress and start communication with the hospital or drugstore controller.
 	 */
     public void requestStablishment() {
-        AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
+        DrugStoreController drugStoreController = DrugStoreController.getInstance(this);
+
+
+        /*AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
         final String MESSAGE_CONECTION_FAILURE = "Falha na Conexão";
         final String MESSAGE_DOWNLOAD_DATA_FAILURE = "Falha ao baixar os dados.";
         final String MESSAGE_UPLOADING_DATA = "Carregando dados...";
@@ -104,7 +192,7 @@ public class LoadingScreen extends Activity {
                                          getContentResolver(), android.provider.Settings.Secure
                                          .ANDROID_ID);
                 assert(androidId != null) : "id must not be null";
-                /*hospitalController.setAndroidId(androidId);
+                hospitalController.setAndroidId(androidId);
 
                 try {
                     hospitalController.initControllerHospital();
@@ -117,7 +205,7 @@ public class LoadingScreen extends Activity {
                 } catch (ConnectionErrorException cee) {
                     showMessageOnThread(messageFailedConnection, messageHandler);
                 }
-                */
+
                 System.out.println("ESTOU NA LOADING SCREEN");
                 final DrugStoreController drugstoreController = DrugStoreController.getInstance(
                                                                 getApplicationContext());
@@ -144,14 +232,14 @@ public class LoadingScreen extends Activity {
                             System.out.println(drugstoreController.getAllDrugstores().size());
                             System.out.println("NOME: "+drugstoreController.getAllDrugstores().get(0).getName());
                             toListScreen();
-                        } else {/* Nothing To Do. */}
+                        } else {/* Nothing To Do. }
 
                         progress.dismiss();
                         Looper.loop();
                     }
                 });
             }
-        }.start();
+        }.start();*/
     }
 
 

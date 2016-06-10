@@ -124,10 +124,10 @@ public class DrugStoreController {
             if (drugStoreDao.isDatabaseEmpty()) {
                 System.out.println("ESTOU NA CONTROLLER");
 
-                FirebaseHelper firebaseHelper = new FirebaseHelper();
+               // FirebaseHelper firebaseHelper = new FirebaseHelper();
 
-                firebaseHelper.getAllDrugstore(context);
-                
+                //firebaseHelper.getAllDrugstore(context);
+
                 drugStoreList = drugStoreDao.getAllDrugStores();
                 /*HttpConnection httpConnection = new HttpConnection();
 
