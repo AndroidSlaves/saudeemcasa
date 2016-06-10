@@ -139,10 +139,12 @@ public class LoadingScreen extends Activity {
                     public void run() {
                         progress.setMessage(MESSAGE_UPLOAD_COMPLETED);
                         System.out.println("TO NA THREAD");
-                        //if (drugstoreController.getAllDrugstores().size()>0 &&
+                        if (drugstoreController.getAllDrugstores().size()>0){// &&
                         //    hospitalController.getAllHospitals().size()>0) {
+                            System.out.println(drugstoreController.getAllDrugstores().size());
+                            System.out.println("NOME: "+drugstoreController.getAllDrugstores().get(0).getName());
                             toListScreen();
-                        //} else {/* Nothing To Do. */}
+                        } else {/* Nothing To Do. */}
 
                         progress.dismiss();
                         Looper.loop();

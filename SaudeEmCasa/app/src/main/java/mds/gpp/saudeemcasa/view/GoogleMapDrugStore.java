@@ -31,7 +31,7 @@ public class GoogleMapDrugStore extends FragmentActivity{
         super.onCreate(savedInstanceState);
         assert (savedInstanceState != null) : "Receive a null tratment";
 
-        setContentView(R.layout.activity_google_maps_hospital);
+        setContentView(R.layout.activity_google_map_drugstore);
         setUpMap();
     }
 

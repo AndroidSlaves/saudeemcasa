@@ -127,11 +127,7 @@ public class DrugStoreController {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
 
                 firebaseHelper.getAllDrugstore(context);
-                try {
-                    wait(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                
                 drugStoreList = drugStoreDao.getAllDrugStores();
                 /*HttpConnection httpConnection = new HttpConnection();
 

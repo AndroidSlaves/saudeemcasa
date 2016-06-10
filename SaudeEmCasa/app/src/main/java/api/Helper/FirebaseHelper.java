@@ -35,16 +35,15 @@ public class FirebaseHelper {
                 System.out.println(dataSnapshot.toString());
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     for (DataSnapshot alldrugstore : snapshot.getChildren()) {
-                        System.out.println(alldrugstore.toString());
 
                         id = alldrugstore.getValue().toString();
                         for (DataSnapshot drugstoreValues : alldrugstore.getChildren()) {
-                            System.out.println(drugstoreValues.toString());
+                            //System.out.println(drugstoreValues.toString());
 
                             if (drugstoreValues.getKey().equalsIgnoreCase("lat")) {
                                 latitude = drugstoreValues.getValue().toString();
                             }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("lon")) {
+                            if (drugstoreValues.getKey().equalsIgnoreCase("long")) {
                                 longitude = drugstoreValues.getValue().toString();
                             }
                             if (drugstoreValues.getKey().equalsIgnoreCase("nu_telefone_farmacia")) {
@@ -65,11 +64,12 @@ public class FirebaseHelper {
                             if (drugstoreValues.getKey().equalsIgnoreCase("nu_cep_farmacia")) {
                                 postalcode = drugstoreValues.getValue().toString();
                             }
-                            DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type,postalcode);
-                            count++;
-                            System.out.println(drugStoreDao.insertDrugstore(newDrugstore));
-
                         }
+                        System.out.println("TESTE "+latitude +","+ longitude);
+                        DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type,postalcode);
+                        System.out.println(drugStoreDao.insertDrugstore(newDrugstore));
+
+                        count++;
 
                     }
                     System.out.println("Percorri "+count+" farmacias.");
