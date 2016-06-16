@@ -52,11 +52,11 @@ public class DrugStore extends Stablishment {
      *              Set the code used as guidance location.
      */
     public void setPostalCode(String postalCode) {
-        assert (postalCode.length() == 8): "postalCode must never be smaller then 0 characters";
-        assert (postalCode != "") : "postalCode must never be empty";
+        assert (postalCode.length() >= 8) : "postalCode must never be smaller then 0 characters";
+        assert (postalCode.length() <= 10) : "postalCode must never be bigger than 10 characters";
         assert (postalCode != null) : "postalCode must never be null";
 
         this.postalCode = postalCode;
     }
-       
+
 }

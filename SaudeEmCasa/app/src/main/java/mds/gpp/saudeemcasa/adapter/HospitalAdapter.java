@@ -7,6 +7,7 @@
 
 package mds.gpp.saudeemcasa.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *        list of hospitals that will inflate the visual list for the user.
      *
      */
+    @SuppressLint("Assert")
     public HospitalAdapter(Context context, ArrayList<Hospital> list){
         super(context, 0, list);
         assert (context != null) : "context must never be null";
@@ -76,8 +78,8 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      */
     @Override
     public Hospital getItem(final int POSITION) {
-        
         assert (POSITION >= 0) : "position must never be null";
+
         Hospital item = list.get(POSITION);
 
         return item;
@@ -116,7 +118,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
         assert (parent != null) : "parent must never be null";
 
         View view = populateAdapter(convertView, position);
-        assert (view != null) : "view context must never be null";
+        Log.i(TAG," Adapter has been populated");
 
         return view;
     }
@@ -132,13 +134,14 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      */
     private Float convertToKM(final Float DISTANCE){
         assert (DISTANCE > 0): "distance must never be negative";
-
+        // Convert to kilometer
         final float KILO = 1000f;
         float distanceInKilometer = DISTANCE/KILO;
-
+        // Make sure value is not something crazy
         final float MAXDISTANCE = 13000f;
         assert (distanceInKilometer < MAXDISTANCE) : "distance should never be bigger than " +
                 "MAXDISTANCE";
+        assert (distanceInKilometer >= 0) : "distance cannot be negative";
 
         return distanceInKilometer;
     }
