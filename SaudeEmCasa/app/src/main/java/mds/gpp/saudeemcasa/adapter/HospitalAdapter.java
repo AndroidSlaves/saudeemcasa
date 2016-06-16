@@ -8,6 +8,7 @@
 package mds.gpp.saudeemcasa.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,9 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
 
     // represent the number of items that the list will have.
     public static final int COUNT = 5;
+
+    // Name of the class used for logs
+    public static final String TAG = "HospitalAdapter";
 
     /**
      * Create a hospitalAdapter with the context where it will be used and the list of
@@ -152,14 +156,18 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     public View populateAdapter(View convertView, int position){
         assert (convertView != null) : "convertView must never be null";
         assert (position >= 0) : "position must never be negative";
-
+        // Get hospital from the sorted list
         Hospital hospitalPosition = getItem(position);
+        assert (hospitalPosition != null) : "hospital should not be null";
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
-
+        // Getting item text view to set distance
         TextView textView = (TextView) convertView.findViewById(R.id.textView2_item);
+        assert (textView != null) : "item text view should not be null";
         textView.setText(hospitalPosition.getName());
 
         setDistance(convertView, position);
+
+        Log.v(TAG, " End of populate adapter for item "+position);
 
         return convertView;
     }
@@ -177,19 +185,28 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
         assert (convertView != null) : "convertView must never be null";
         
         if(getItem(POSITION).getDistance() < 1f) {
+            // Turn Distance into String
+            final String DISTANCE =""+list.get(POSITION).getDistance();
+            assert (DISTANCE != null) : "String distance should never be null";
 
             // Setting distance of drugstore on list item
-            final String METERS_POS_FIX = " m";
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(this.list.get(POSITION).getDistance() + METERS_POS_FIX);
+            assert(textViewDistance != null) : "text view should never be null";
+            textViewDistance.setText(DISTANCE+R.string .meters);
 
+            Log.i(TAG,"distance equals to " + DISTANCE + " sucessfuly set");
         } else {
+            // Convert the given distance from meter to km and turn it to String.
+            final String DISTANCE = convertToKM(list.get(POSITION).getDistance()).toString();
+            assert (DISTANCE != null) : "String distance should never be null";
 
-            // Setting distance of drugstore on list item
-            final String KM_POS_FIX = " km";
+            // Setting distance of drugstore on list item.
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
-            textViewDistance.setText(convertToKM(this.list.get(POSITION).getDistance()).toString()
-                    + KM_POS_FIX);
+            assert (textViewDistance != null) : "text view should never be null";
+            textViewDistance.setText(DISTANCE + R.string.km);
+
+            Log.i(TAG, "distance equals to " + DISTANCE + " sucessfuly set");
+
         }
     }
 
