@@ -29,6 +29,11 @@ import mds.gpp.saudeemcasa.model.Hospital;
 
 public class HospitalScreen extends Fragment {
 
+    final String MESSAGE_FAIL_CONETCTION = "Houve um erro de conexão.\n verifique se está " +
+                                           "conectado a internet.";
+    final String MESSAGE_SAVE = "Sua avaliação foi salva!";
+    final String TELEPHONE = "Tel: ";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstaceState) {
@@ -74,13 +79,12 @@ public class HospitalScreen extends Fragment {
                         try {
                             hospitalController.updateRate((int) hospitalStars.getRating(),
                                     hospitalController.getAndroidId(), hospital.getId());
-                            Toast.makeText(getContext(), "Sua avaliação foi salva!",
+                                    Toast.makeText(getContext(),MESSAGE_SAVE ,
                                     Toast.LENGTH_LONG).show();
 
                         } catch (ConnectionErrorException e) {
 
-                            Toast.makeText(getContext(),"Houve um erro de conexão.\nverifique" +
-                                    "se está conectado a internet.",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),MESSAGE_FAIL_CONETCTION ,Toast.LENGTH_LONG).show();
 
                         }
 
@@ -98,7 +102,8 @@ public class HospitalScreen extends Fragment {
             @Override
             public void onClick(View v) throws SecurityException {
 
-                Intent phoneCall = new Intent(Intent.ACTION_CALL, Uri.parse("Tel: " + hospital.getTelephone()));
+                Intent phoneCall = new Intent(Intent.ACTION_CALL, Uri.parse(TELEPHONE
+                                   + hospital.getTelephone()));
                 startActivity(phoneCall);
 
             }

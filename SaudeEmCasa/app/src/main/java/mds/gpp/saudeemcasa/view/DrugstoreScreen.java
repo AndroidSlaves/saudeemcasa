@@ -29,6 +29,14 @@ import mds.gpp.saudeemcasa.model.DrugStore;
 
 public class DrugstoreScreen extends Fragment {
 
+    final String DRUSTORE_TYPE = "FARMACIAPOPULAR";
+    final String MESSAGE_SAVE = "Sua avaliação foi salva!";
+    final String MESSAGE_FAIL_CONECTION = "Houve um erro de conexão.\nverifique se  está " +
+                                          "conectado a internet.";
+    final String CEP = "CEP: ";
+    final String TELEPHONE = "Tel: ";
+    final String ONE_SPACE = " - ";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstaceState) {
@@ -44,33 +52,33 @@ public class DrugstoreScreen extends Fragment {
         nameTextView.setText(drugStore.getName());
 
         TextView addressTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewAddress);
-        addressTextView.setText(Html.fromHtml(drugStore.getAddress() + " - " + drugStore.getCity() +
-                " - " + drugStore.getState()));
+        addressTextView.setText(Html.fromHtml(drugStore.getAddress() + ONE_SPACE +
+                        drugStore.getCity() + ONE_SPACE + drugStore.getState()));
 
         TextView cepTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewCep);
-        cepTextView.setText("Cep: " + drugStore.getPostalCode());
+        cepTextView.setText(CEP + drugStore.getPostalCode());
 
-        if (drugStore.getType().equals("FARMACIAPOPULAR")) {
+        if (drugStore.getType().equals(DRUSTORE_TYPE)) {
             TextView telephoneTextView = (TextView) drugStoreScreen.
-                    findViewById(R.id.textViewDrugTel);
+                                         findViewById(R.id.textViewDrugTel);
             telephoneTextView.setText("");
         } else {
             TextView telephoneTextView = (TextView) drugStoreScreen
-                    .findViewById(R.id.textViewDrugTel);
-            telephoneTextView.setText("Tel: " + drugStore.getTelephone());
+                                         .findViewById(R.id.textViewDrugTel);
+            telephoneTextView.setText(TELEPHONE + drugStore.getTelephone());
 
         }
 
         RatingBar ratingBarFinal = (RatingBar) drugStoreScreen.
-                findViewById(R.id.ratingBarFinalDrugstore);
+                                   findViewById(R.id.ratingBarFinalDrugstore);
         ratingBarFinal.setRating(drugStore.getRate());
         TextView textViewRate = (TextView) drugStoreScreen.
-                findViewById(R.id.textViewRatingDrugstore);
+                                findViewById(R.id.textViewRatingDrugstore);
         textViewRate.setText("" + drugStore.getRate());
 
-        Button drugStoreButton = (Button) drugStoreScreen.findViewById(R.id.buttonSaveRateDrugstore);
+        Button drugStoreButton = (Button)drugStoreScreen.findViewById(R.id.buttonSaveRateDrugstore);
         final RatingBar drugstoreStars = (RatingBar) drugStoreScreen.
-                findViewById(R.id.ratingBarUserDrugstore);
+                                         findViewById(R.id.ratingBarUserDrugstore);
 
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,13 +91,14 @@ public class DrugstoreScreen extends Fragment {
                         try {
 
                             drugStoreController.updateRate((int) drugstoreStars.getRating(),
-                                    drugStoreController.getAndroidId(), drugStore.getId());
-                            Toast.makeText(getContext(), "Sua avaliação foi salva!",
-                                    Toast.LENGTH_LONG).show();
+                            drugStoreController.getAndroidId(), drugStore.getId());
+                            Toast.makeText(getContext(),MESSAGE_SAVE ,
+                            Toast.LENGTH_LONG).show();
+
                         } catch (ConnectionErrorException e) {
 
-                            Toast.makeText(getContext(), "Houve um erro de conexão.\nverifique" +
-                                    "se  está conectado a internet.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),MESSAGE_FAIL_CONECTION ,
+                            Toast.LENGTH_LONG).show();
 
                         }
                         Looper.loop();
@@ -100,17 +109,18 @@ public class DrugstoreScreen extends Fragment {
         });
 
         //Phone call button
-            ImageButton phoneCallButton = (ImageButton) drugStoreScreen.findViewById(R.id.
-                    phonecallButtonDrugstore);
-            phoneCallButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton phoneCallButton = (ImageButton) drugStoreScreen.findViewById(R.id.
+                                          phonecallButtonDrugstore);
+
+        phoneCallButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) throws SecurityException{
 
                     Intent phoneCall = new Intent(Intent.ACTION_CALL);
-                    phoneCall.setData(Uri.parse("Tel: " + drugStore.getTelephone()));
+                    phoneCall.setData(Uri.parse(TELEPHONE + drugStore.getTelephone()));
                     startActivity(phoneCall);
-                }
-            });
+        }
+        });
 
         return drugStoreScreen;
 
