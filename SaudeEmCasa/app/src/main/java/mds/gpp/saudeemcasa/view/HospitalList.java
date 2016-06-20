@@ -10,6 +10,7 @@ package mds.gpp.saudeemcasa.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -22,12 +23,18 @@ import mds.gpp.saudeemcasa.helper.GPSTracker;
 import mds.gpp.saudeemcasa.model.Hospital;
 
 public class HospitalList extends Activity {
-
+    //listView is a layout that show objects organized in a list.
     private ListView listView;
+    //setup hospital list to populate adapter view.
     private ArrayList<Hospital> list;
+    //gps to evaluate distance between user and hospital.
     private GPSTracker gps;
+    //message shwo to user if gps is not enabled
     private final String CONNECTION_ERROR_TEXT = "Voce nao esta conectado ao gps ou a internet!" +
             "\n Conecte-se para prosseguir.";
+    //Name of class, used to Log system.
+    private final String TAG = HospitalList.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +49,17 @@ public class HospitalList extends Activity {
         final HospitalController hospitalController = HospitalController.getInstance(getApplicationContext());
         list = (ArrayList<Hospital>) HospitalController.getAllHospitals();
 
+        Log.d(TAG, "Number of hospitals stored on list: " + list.size());
+
         // Set the distance for hospitals.
         if(gps.canGetLocation()) {
+            Log.i(TAG, "GPS is enabled. Setting up adapter list.");
+
             hospitalController.setDistance(getApplicationContext(), list);
             HospitalAdapter adapter = new HospitalAdapter(getApplicationContext(), list);
             listView.setAdapter(adapter);
         } else {
+            Log.d(TAG, "GPS not enabled. Asking user to turn it on.");
             Toast.makeText(getApplicationContext(),CONNECTION_ERROR_TEXT ,Toast.LENGTH_LONG).show();
         }
 
