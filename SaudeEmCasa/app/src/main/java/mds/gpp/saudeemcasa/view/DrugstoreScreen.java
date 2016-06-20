@@ -22,6 +22,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import junit.framework.Assert;
+
 import api.Exception.ConnectionErrorException;
 
 import mds.gpp.saudeemcasa.R;
@@ -31,11 +33,11 @@ import mds.gpp.saudeemcasa.model.DrugStore;
 public class DrugstoreScreen extends Fragment {
 
     // Government drugstore type.
-    final String DRUSTORE_TYPE = "FARMACIAPOPULAR";
+    final String DRUGSTORE_TYPE = "FARMACIAPOPULAR";
     // Message showed to user if is defined some rate.
     final String MESSAGE_SAVE = "Sua avaliação foi salva!";
     // Connection error message.
-    final String MESSAGE_FAIL_CONECTION = "Houve um erro de conexão.\nverifique se  está " +
+    final String MESSAGE_FAIL_CONNECTION = "Houve um erro de conexão.\nverifique se  está " +
             "conectado a internet.";
     // Postal code info.
     final String CEP = "CEP: ";
@@ -52,21 +54,23 @@ public class DrugstoreScreen extends Fragment {
      *              Which layout will be inflated.
      * @param container
      *              The type of view group.
-     * @param savedInstaceState
+     * @param savedInstanceState
      *              Get the instances of screen saved previously.
      * @return
      *              The layout of Drugstore Screen.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstaceState) {
+                             Bundle savedInstanceState) {
+
         // Defining the XML (design) of the screen.
         View drugStoreScreen = inflater.inflate(R.layout.drugstore_screen, null);
-        // Used to controll the rates stored by user.
+        // Used to control the rates stored by user.
         final DrugStoreController drugStoreController = DrugStoreController.
                 getInstance(this.getContext());
         // Used to get information about drugstore.
         final DrugStore drugStore = drugStoreController.getDrugstore();
+
 
         TextView nameTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewDrugName);
         nameTextView.setText(drugStore.getName());
@@ -78,29 +82,35 @@ public class DrugstoreScreen extends Fragment {
         TextView cepTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewCep);
         cepTextView.setText(CEP + drugStore.getPostalCode());
 
-        if (drugStore.getType().equals(DRUSTORE_TYPE)) {
+        Assert.assertEquals(nameTextView.getText(), drugStore.getName());
+        Assert.assertEquals(cepTextView.getText(), CEP + drugStore.getPostalCode());
+
+        if(drugStore.getType().equals(DRUGSTORE_TYPE)) {
             Log.i(TAG, "This type of drugstore dont have phone number.");
-            TextView telephoneTextView = (TextView) drugStoreScreen.
-                                         findViewById(R.id.textViewDrugTel);
+
+            TextView telephoneTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewDrugTel);
             telephoneTextView.setText("");
+
+            Assert.assertEquals(telephoneTextView.getText(), "");
         } else {
             Log.i(TAG, "This type of drugstore have phone number, setting it to layout.");
-            TextView telephoneTextView = (TextView) drugStoreScreen
-                                         .findViewById(R.id.textViewDrugTel);
+
+            TextView telephoneTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewDrugTel);
             telephoneTextView.setText(TELEPHONE + drugStore.getTelephone());
 
+            Assert.assertEquals(telephoneTextView.getText(), TELEPHONE + drugStore.getTelephone());
         }
 
-        RatingBar ratingBarFinal = (RatingBar) drugStoreScreen.
-                                   findViewById(R.id.ratingBarFinalDrugstore);
+        RatingBar ratingBarFinal = (RatingBar) drugStoreScreen.findViewById(R.id.ratingBarFinalDrugstore);
         ratingBarFinal.setRating(drugStore.getRate());
-        TextView textViewRate = (TextView) drugStoreScreen.
-                                findViewById(R.id.textViewRatingDrugstore);
+        Assert.assertEquals(ratingBarFinal.getRating(), drugStore.getRate());
+
+        TextView textViewRate = (TextView) drugStoreScreen.findViewById(R.id.textViewRatingDrugstore);
         textViewRate.setText("" + drugStore.getRate());
+        Assert.assertEquals(textViewRate.getText(), "" + drugStore.getRate());
 
         Button drugStoreButton = (Button)drugStoreScreen.findViewById(R.id.buttonSaveRateDrugstore);
-        final RatingBar drugstoreStars = (RatingBar) drugStoreScreen.
-                                         findViewById(R.id.ratingBarUserDrugstore);
+        final RatingBar drugstoreStars = (RatingBar) drugStoreScreen.findViewById(R.id.ratingBarUserDrugstore);
 
         drugStoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,16 +124,18 @@ public class DrugstoreScreen extends Fragment {
                             Log.d(TAG, "Trying to set rate...");
                             drugStoreController.updateRate((int) drugstoreStars.getRating(),
                                 drugStoreController.getAndroidId(), drugStore.getId());
-                            Toast.makeText(getContext(),MESSAGE_SAVE ,
+
+                            Toast.makeText(getContext(),MESSAGE_SAVE,
                             Toast.LENGTH_LONG).show();
                             Log.d(TAG, "Rate Updated! New rate value = " +
                                     drugstoreStars.getRating());
 
-                        } catch (ConnectionErrorException e) {
+                        } catch (ConnectionErrorException exceptionConnectionError){
                             Log.e(TAG, "Connection Error! Warning user that phone don't have" +
                                     " internet connection");
                             Log.e(TAG, "Can't update drugstore rating!!!");
-                            Toast.makeText(getContext(),MESSAGE_FAIL_CONECTION ,
+
+                            Toast.makeText(getContext(), MESSAGE_FAIL_CONNECTION,
                             Toast.LENGTH_LONG).show();
 
                         }
@@ -145,7 +157,7 @@ public class DrugstoreScreen extends Fragment {
                     Intent phoneCall = new Intent(Intent.ACTION_CALL);
                     phoneCall.setData(Uri.parse(TELEPHONE + drugStore.getTelephone()));
                     startActivity(phoneCall);
-        }
+                }
         });
 
         return drugStoreScreen;
