@@ -126,7 +126,7 @@ public class DrugStoreController {
      * @throws ConnectionErrorException
      *              There maybe a failure communicating with the server.
      */
-    public void initControllerDrugstore(InputStream inputStream) throws IOException, JSONException,
+    public void initControllerDrugstore() throws IOException, JSONException,
             ConnectionErrorException {
 
             if (drugStoreDao.isDatabaseEmpty()) {
@@ -159,7 +159,7 @@ public class DrugStoreController {
                     }else{/*Nothing to do}
 
                 }else {/*Nothing to do}
-                */
+
                 String jsonPublic = httpConnection.loadJSONFromAsset(inputStream);
 
                 JSONHelper jsonParser = new JSONHelper(context);
@@ -168,7 +168,7 @@ public class DrugStoreController {
                 assertTrue("Return error json parser", drugstorePublicJson);
 
                 drugStoreList = drugStoreDao.getAllDrugStores();
-                assertNotNull("Null treatment drugstoreList", drugStoreList);
+                assertNotNull("Null treatment drugstoreList", drugStoreList); */
             } else {
                 drugStoreList = drugStoreDao.getAllDrugStores();
                 assertNotNull("Received null treatment drugstoreList", drugStoreList);

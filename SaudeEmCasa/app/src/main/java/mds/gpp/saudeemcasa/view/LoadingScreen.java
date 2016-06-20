@@ -20,7 +20,6 @@ import android.os.Handler;
 
 //import com.firebase.client.Firebase;
 
-<<<<<<< HEAD
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -30,14 +29,7 @@ import org.json.JSONException;
 import java.io.IOException;
 
 import api.Dao.DrugStoreDao;
-=======
-import com.firebase.client.Firebase;
 
-import org.json.JSONException;
-import java.io.IOException;
-import java.io.InputStream;
-
->>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
 import api.Exception.ConnectionErrorException;
 import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
@@ -73,11 +65,9 @@ public class LoadingScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-<<<<<<< HEAD
-        final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
-=======
 
->>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
+        final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
+
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
         final ImageView logoSaudeEmCasa = (ImageView) findViewById(R.id.saude_em_casa_logo);
@@ -250,7 +240,6 @@ public class LoadingScreen extends Activity {
                     @Override
                     public void run() {
                         progress.setMessage(MESSAGE_UPLOAD_COMPLETED);
-<<<<<<< HEAD
                         System.out.println("TO NA THREAD");
                         if (drugstoreController.getAllDrugstores().size()>0){// &&
                         //    hospitalController.getAllHospitals().size()>0) {
@@ -258,14 +247,7 @@ public class LoadingScreen extends Activity {
                             System.out.println("NOME: "+drugstoreController.getAllDrugstores().get(0).getName());
                             toListScreen();
                         } else {/* Nothing To Do. }
-=======
 
-                        progress.dismiss();
-                        //if (drugstoreController.getAllDrugstores().size()>0 &&
-                          //  hospitalController.getAllHospitals().size()>0) {
-                            toListScreen();
-                        //} else {/* Nothing To Do. */}
->>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
 
                         Looper.loop();
                     }
