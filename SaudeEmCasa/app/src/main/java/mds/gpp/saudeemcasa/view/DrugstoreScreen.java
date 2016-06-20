@@ -9,6 +9,7 @@ package mds.gpp.saudeemcasa.view;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class DrugstoreScreen extends Fragment {
     final String TELEPHONE = "Tel: ";
     // String separator.
     final String ONE_SPACE = " - ";
+    // Used to Log system.
+    final String TAG = DrugstoreScreen.class.getSimpleName();
 
     /**
      * Defines the layout of Drugstore fragment.
@@ -76,10 +79,12 @@ public class DrugstoreScreen extends Fragment {
         cepTextView.setText(CEP + drugStore.getPostalCode());
 
         if (drugStore.getType().equals(DRUSTORE_TYPE)) {
+            Log.i(TAG, "This type of drugstore dont have phone number.");
             TextView telephoneTextView = (TextView) drugStoreScreen.
                                          findViewById(R.id.textViewDrugTel);
             telephoneTextView.setText("");
         } else {
+            Log.i(TAG, "This type of drugstore have phone number, setting it to layout.");
             TextView telephoneTextView = (TextView) drugStoreScreen
                                          .findViewById(R.id.textViewDrugTel);
             telephoneTextView.setText(TELEPHONE + drugStore.getTelephone());
@@ -106,14 +111,18 @@ public class DrugstoreScreen extends Fragment {
                         Looper.prepare();
 
                         try {
-
+                            Log.d(TAG, "Trying to set rate...");
                             drugStoreController.updateRate((int) drugstoreStars.getRating(),
-                            drugStoreController.getAndroidId(), drugStore.getId());
+                                drugStoreController.getAndroidId(), drugStore.getId());
                             Toast.makeText(getContext(),MESSAGE_SAVE ,
                             Toast.LENGTH_LONG).show();
+                            Log.d(TAG, "Rate Updated! New rate value = " +
+                                    drugstoreStars.getRating());
 
                         } catch (ConnectionErrorException e) {
-
+                            Log.e(TAG, "Connection Error! Warning user that phone don't have" +
+                                    " internet connection");
+                            Log.e(TAG, "Can't update drugstore rating!!!");
                             Toast.makeText(getContext(),MESSAGE_FAIL_CONECTION ,
                             Toast.LENGTH_LONG).show();
 
