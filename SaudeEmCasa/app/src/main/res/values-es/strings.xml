@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<string name="app_name">SaudeEmCasa</string>
+<string name="title_activity_main">MainActivity</string>
+<string name="km">km</string>
+<string name="meters">m</string>
+
+<string name="program_drug">Farmácia Popular</string>
+<string name="program_hospital">Mejor en Casa</string>
+<string name="title_activity_hospital_maps">Mapa</string>
+
+<string name="hospital_address">Dirección:</string>
+<string name="hospital_telephone">Phone:</string>
+<string name="hospital_nota">Evaluación:</string>
+<string name="hospital_salvar">Guardar</string>
+
+<string name="drugstore_CEP">Código Postal</string>
+<string name="drugstore_name">drugstoreName</string>
+<string name="drugstore_address">Dirección:</string>
+<string name="drugstore_telephone">Teléfono:</string>
+<string name="drugstore_nota">Evaluación:</string>
+<string name="drugstore_salvar">Guardar</string>
+
+<resources></resources>
