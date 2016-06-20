@@ -77,10 +77,14 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *              The object hospital in the position specified in the parameter.
      */
     @Override
-    public Hospital getItem(final int POSITION) {
-        assert (POSITION >= 0) : "position must never be null";
-
-        Hospital item = list.get(POSITION);
+    public Hospital getItem(final int POSITION) throws ArrayIndexOutOfBoundsException{
+        Hospital item = new Hospital();
+        if (POSITION >= 0 && POSITION < list.size()) {
+            item = list.get(POSITION);
+        } else {
+            throw new ArrayIndexOutOfBoundsException("Cannot access postition = "+POSITION+" of " +
+                    "list");
+        }
 
         return item;
     }
