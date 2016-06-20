@@ -30,7 +30,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
     private ArrayList<Hospital> list;
 
     // represent the number of items that the list will have.
-    public static final int COUNT = 5;
+    public int numberOfHospitals = 5;
 
     // Name of the class used for logs
     public static final String TAG = "HospitalAdapter";
@@ -64,7 +64,7 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      */
     @Override
     public int getCount() {
-        return COUNT;
+        return numberOfHospitals;
     }
 
     /**
@@ -77,25 +77,16 @@ public class HospitalAdapter extends ArrayAdapter<Hospital>   {
      *              The object hospital in the position specified in the parameter.
      */
     @Override
-    public Hospital getItem(final int POSITION) {
-        assert (POSITION >= 0) : "position must never be null";
-
-        Hospital item = list.get(POSITION);
+    public Hospital getItem(final int POSITION) throws ArrayIndexOutOfBoundsException{
+        Hospital item = new Hospital();
+        if (POSITION >= 0 && POSITION < list.size()) {
+            item = list.get(POSITION);
+        } else {
+            throw new ArrayIndexOutOfBoundsException("Cannot access postition = "+POSITION+" of " +
+                    "list");
+        }
 
         return item;
-    }
-
-    /**
-     * Method that returns the identification number of the element specified in the parameter.
-     *
-     * @param POSITION
-     *              Used to take the item position.
-     * @return POSITION
-     *              Used to take the item position.
-     */
-    @Override
-    public long getItemId(final int POSITION) {
-        return POSITION;
     }
 
     /**

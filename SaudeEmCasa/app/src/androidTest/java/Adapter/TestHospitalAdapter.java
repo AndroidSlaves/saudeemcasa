@@ -5,6 +5,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 
 import mds.gpp.saudeemcasa.R;
@@ -12,16 +14,12 @@ import mds.gpp.saudeemcasa.adapter.HospitalAdapter;
 import mds.gpp.saudeemcasa.model.Hospital;
 import mds.gpp.saudeemcasa.view.LoadingScreen;
 
-/**
- * Created by vinisilvacar on 12/11/15.
- */
 public class TestHospitalAdapter extends ActivityInstrumentationTestCase2<LoadingScreen> {
     private LoadingScreen myActivity;
-    private ArrayList<Hospital> lista;
+    private ArrayList<Hospital> list;
 
     private HospitalAdapter hospitalAdapter;
     private Context context;
-    Hospital hospital1, hospital2;
 
     //List position used for testing
     static final int POSITION = 0;
@@ -36,41 +34,72 @@ public class TestHospitalAdapter extends ActivityInstrumentationTestCase2<Loadin
         this.myActivity = getActivity();
         context = myActivity.getApplicationContext();
 
-        lista = new ArrayList<Hospital>();
+        Hospital hospital1, hospital2;
+
+        list = new ArrayList<Hospital>();
         hospital1 = new Hospital("Universitary Hospital", "3385-9790");
         hospital2 = new Hospital("Sarah Kubitschek Hospital ", "3556-9480");
-        lista.add(hospital1);
-        lista.add(hospital2);
+        list.add(hospital1);
+        list.add(hospital2);
 
-        hospitalAdapter = new HospitalAdapter(context,lista);
+        hospitalAdapter = new HospitalAdapter(context, list);
     }
 
-    public void testGetCount() {
-        assertNotNull(hospitalAdapter);
-        assertEquals(hospitalAdapter.getCount(), hospitalAdapter.COUNT);
+    public void testHospitalNotNull() {
+        Hospital hospital = new Hospital();
+        assertNotNull(hospital);
     }
 
-    public void testGetItem() {
-        assertEquals(hospitalAdapter.getItem(POSITION), lista.get(POSITION));
+    public void testGetNumberOfHospitals() {
+        final int NUMBER_OF_HOSPITALS = 2;
+        assertEquals(hospitalAdapter.getCount(), NUMBER_OF_HOSPITALS);
     }
 
-    public void testGetItemId() {
+    public void testGetItemValidOne() {
+        final int POSITION = 1;
 
-        assertEquals(hospitalAdapter.getItemId(POSITION), POSITION);
+        Hospital hospital = hospitalAdapter.getItem(POSITION);
+        Hospital expected = list.get(POSITION);
+
+        assertEquals(hospital, expected);
     }
 
-    //Testing method that populates the layout
+    public void testGetItemValidZero() {
+        final int POSITION = 0;
+
+        Hospital hospital = hospitalAdapter.getItem(POSITION);
+        Hospital expected = list.get(POSITION);
+
+        assertEquals(hospital, expected);
+    }
+
+    @Test( expected = ArrayIndexOutOfBoundsException.class)
+    public void testGetItemInvalidNegative() {
+        final int POSITION = -1;
+
+        hospitalAdapter.getItem(POSITION);
+    }
+
+    @Test( expected = ArrayIndexOutOfBoundsException.class)
+    public void testGetItemInvalidTooBig() {
+        final int POSITION = 10;
+
+        hospitalAdapter.getItem(POSITION);
+    }
+
     public void testPopulateAdapter() throws Exception {
         View view =  hospitalAdapter.populateAdapter(myActivity.findViewById(R.id.listView), 0);
         View  convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
         assertTrue(view.isEnabled());
-
-        lista.get(POSITION).setDistance(3);
+    }
+    public void testPopulateSetDistance() throws Exception {
+        hospitalAdapter.populateAdapter(myActivity.findViewById(R.id.listView), 0);
+        list.get(POSITION).setDistance(3);
+        View  convertView = LayoutInflater.from(this.context).inflate(R.layout.item, null);
         hospitalAdapter.setDistance(convertView, POSITION);
     }
 
-    //Test method that transforms a View in the xml containing the list item layout
-    public void testGetView() throws Exception {
+    public void testGetView() {
         View view =  hospitalAdapter.getView(POSITION, myActivity.findViewById(R.id.listView), null);
         assertNotNull(view);
     }
