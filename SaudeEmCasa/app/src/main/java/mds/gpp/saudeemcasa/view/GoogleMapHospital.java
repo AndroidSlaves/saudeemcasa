@@ -15,6 +15,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import junit.framework.Assert;
+
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.HospitalController;
 
@@ -57,6 +59,7 @@ public class GoogleMapHospital extends FragmentActivity {
                     .getMap();
             myGoogleMap.setTrafficEnabled(true);
             myGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            Assert.assertNotNull(myGoogleMap);
 
         } else {
             oneLocationMap();
@@ -69,12 +72,21 @@ public class GoogleMapHospital extends FragmentActivity {
      * marker point there with zoom 10 (10 shows elegance).
      */
     private void oneLocationMap() {
-        String nome = hospitalController.getHospital().getName();
+        Assert.assertNotNull(hospitalController);
+
+        String name = hospitalController.getHospital().getName();
         String latitude = hospitalController.getHospital().getLatitude();
         String longitude = hospitalController.getHospital().getLongitude();
         LatLng hospitalLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
-        myGoogleMap.addMarker(new MarkerOptions().position(hospitalLocation).title(nome));
+        Assert.assertNotNull(name);
+        Assert.assertNotNull(latitude);
+        Assert.assertNotNull(longitude);
+        Assert.assertNotNull(hospitalLocation);
+
+        myGoogleMap.addMarker(new MarkerOptions().position(hospitalLocation).title(name));
         myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalLocation, 10));
+
+        Assert.assertNotNull(myGoogleMap);
     }
 }
