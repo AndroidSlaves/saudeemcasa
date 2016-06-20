@@ -1,13 +1,9 @@
 package Model;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
 import mds.gpp.saudeemcasa.model.Stablishment;
-/**
- * Created by freemanpivo on 10/16/15.
- */
+
 public class TestModelStablishment extends TestCase{
 
     @Test
