@@ -29,23 +29,40 @@ import mds.gpp.saudeemcasa.model.DrugStore;
 
 public class DrugstoreScreen extends Fragment {
 
+    // Government drugstore type.
     final String DRUSTORE_TYPE = "FARMACIAPOPULAR";
+    // Message showed to user if is defined some rate.
     final String MESSAGE_SAVE = "Sua avaliação foi salva!";
+    // Connection error message.
     final String MESSAGE_FAIL_CONECTION = "Houve um erro de conexão.\nverifique se  está " +
-                                          "conectado a internet.";
+            "conectado a internet.";
+    // Postal code info.
     final String CEP = "CEP: ";
+    // Telephone info.
     final String TELEPHONE = "Tel: ";
+    // String separator.
     final String ONE_SPACE = " - ";
 
+    /**
+     * Defines the layout of Drugstore fragment.
+     * @param inflater
+     *              Which layout will be inflated.
+     * @param container
+     *              The type of view group.
+     * @param savedInstaceState
+     *              Get the instances of screen saved previously.
+     * @return
+     *              The layout of Drugstore Screen.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstaceState) {
-
+        // Defining the XML (design) of the screen.
         View drugStoreScreen = inflater.inflate(R.layout.drugstore_screen, null);
-
+        // Used to controll the rates stored by user.
         final DrugStoreController drugStoreController = DrugStoreController.
                 getInstance(this.getContext());
-
+        // Used to get information about drugstore.
         final DrugStore drugStore = drugStoreController.getDrugstore();
 
         TextView nameTextView = (TextView) drugStoreScreen.findViewById(R.id.textViewDrugName);
