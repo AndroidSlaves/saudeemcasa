@@ -24,7 +24,7 @@ import mds.gpp.saudeemcasa.model.Hospital;
 public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     private Context context;
     private ArrayList<DrugStore> list;
-    public static final int COUNT = 15;
+    public static final int COUNT = 7;
 
     /**
      *

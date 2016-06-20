@@ -118,12 +118,18 @@ public class ChooseScreen extends Activity {
                 Looper.prepare();
 
                 // Request ratings for hospital and go to hospital list.
+<<<<<<< HEAD
                 //try {*/
                     //HospitalController.getInstance(getApplicationContext()).requestRating();
+=======
+                try {
+                    HospitalController.getInstance(getApplicationContext()).requestRating();*/
+>>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
                     Intent nextScreen = new Intent(getBaseContext(), HospitalList.class);
                     assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
+<<<<<<< HEAD
                 //} catch (ConnectionErrorException e) {
                 //    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
                 //            Toast.LENGTH_LONG).show();
@@ -133,6 +139,18 @@ public class ChooseScreen extends Activity {
                 Looper.loop();
             }
         }.start();*/
+=======
+                /*} catch (ConnectionErrorException e) {
+                    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
+                            Toast.LENGTH_LONG).show();
+                }
+
+                PROGRESS_DIALOG.dismiss();
+                Looper.loop();
+            }
+        }.start();
+        */
+>>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
     }
 
     /**
@@ -147,17 +165,30 @@ public class ChooseScreen extends Activity {
                 Looper.prepare();
 */
                 // Request ratings for drugstore and go to drugstore list.
+<<<<<<< HEAD
                 //try {
                     //DrugStoreController.getInstance(getApplicationContext()).requestRating();
+=======
+                try {
+                    DrugStoreController.getInstance(getApplicationContext()).requestRating();*/
+>>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
                     Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class);
                     assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
+<<<<<<< HEAD
                 //} catch (ConnectionErrorException connectionError) {
                 //    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
                  //           Toast.LENGTH_LONG).show();
                 //}
 /*
+=======
+                /*} catch (ConnectionErrorException connectionError) {
+                    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
+                            Toast.LENGTH_LONG).show();
+                }
+
+>>>>>>> 45bb9473b92202dc352ece0ce6cff56cad771997
                 PROGRESS_DIALOG.dismiss();
                 Looper.loop();
             }
