@@ -8,12 +8,15 @@
 
 package mds.gpp.saudeemcasa.controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +48,9 @@ public class HospitalController {
 
     // Attribute context is related to the screen that user should be.
     private static Context context;
+
+    // Attribute for logging class name.
+    final String TAG = HospitalController.class.getSimpleName();
 
     /*
      * androidId is an string information unique for each mobile phone. We get this information
@@ -126,15 +132,19 @@ public class HospitalController {
      * @throws ConnectionErrorException
      *              there maybe a failure communicating with the server.
      */
-    public void initControllerHospital() throws IOException, JSONException,
+    public void initControllerHospital(InputStream inputStream) throws IOException, JSONException,
             ConnectionErrorException {
         final String IP_ADDRESS = "http://159.203.95.153:3000/habilitados";
-        Boolean dbEmpty = hospitalDao.isDbEmpty();
 
-        if(dbEmpty) {
+        Boolean databaseIsEmpty = hospitalDao.isDbEmpty();
+
+        if(databaseIsEmpty) {
+
+            Log.i(TAG,"Database empty, requesting hospitals from server.");
 
             HttpConnection httpConnection = new HttpConnection();
-            String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
+            //String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
+            String jsonHospital = httpConnection.loadJSONFromAsset(inputStream);
             JSONHelper jsonParser = new JSONHelper(context);
 
             if(jsonHospital != null){
@@ -143,8 +153,12 @@ public class HospitalController {
                 if(jsonResult) {
                     hospitalList = hospitalDao.getAllHospitals();
                 } else {/* Do nothing */}
-            } else {/* Do nothing */}
+            } else {
+                Log.d(TAG,"JSON hospital is null!");
+                /* Do nothing */}
         } else {
+            Log.i(TAG,"Database is not empty! Populating hospital list from database.");
+
             // Just setting hospitals to local list
             hospitalList = hospitalDao.getAllHospitals();
         }
@@ -174,6 +188,8 @@ public class HospitalController {
             double userLongitude = gps.getLongitude();
             double userLatitude = gps.getLatitude();
 
+            Log.i(TAG, "Phone can get user location! Evaluating distance...");
+
             for (int i = 0; i < list.size(); i++) {
                 float resultsAdapter[] = new float[1];
                 // REVIEW FUNCTION
@@ -187,6 +203,7 @@ public class HospitalController {
             savedDistance = true;
 
         } else {
+            Log.d(TAG, "Can't get user location, verify if GPS is enabled.");
             savedDistance = canGetLocation;
         }
 
@@ -212,7 +229,9 @@ public class HospitalController {
             try {
                 float rate = httpConnection.getRating(hospitalId,IP_ADDRESS);
                 hospitalList.get(i).setRate(rate);
+                Log.i(TAG, "All rating requests where succesfully stored.");
             } catch (JSONException e) {
+                Log.e(TAG, "Can't load JSON file. Request rating failed!");
                 e.printStackTrace();
             }
         }
@@ -230,6 +249,7 @@ public class HospitalController {
 
         this.androidId = ANDROID_ID;
     }
+
     /**
      * Gets the unique identifier of the android user.
      *

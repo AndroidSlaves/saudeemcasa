@@ -193,9 +193,15 @@ public class LoadingScreen extends Activity {
                                          .ANDROID_ID);
                 assert(androidId != null) : "id must not be null";
                 hospitalController.setAndroidId(androidId);
+                InputStream is = null;
+                try {
+                    is = getBaseContext().getAssets().open("json_test_data.json");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 try {
-                    hospitalController.initControllerHospital();
+                    hospitalController.initControllerHospital(is);
                 } catch (IOException e) {
                     showMessageOnThread(messageFailedConnection, messageHandler);
                     e.printStackTrace();
@@ -210,9 +216,14 @@ public class LoadingScreen extends Activity {
                 final DrugStoreController drugstoreController = DrugStoreController.getInstance(
                                                                 getApplicationContext());
                 drugstoreController.setAndroidId(androidId);
+                try {
+                    is = getBaseContext().getAssets().open("json_drugstore_test_data.json");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 try {
-                    drugstoreController.initControllerDrugstore();
+                    drugstoreController.initControllerDrugstore(is);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -234,7 +245,6 @@ public class LoadingScreen extends Activity {
                             toListScreen();
                         } else {/* Nothing To Do. }
 
-                        progress.dismiss();
                         Looper.loop();
                     }
                 });

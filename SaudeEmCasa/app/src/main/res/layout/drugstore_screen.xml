@@ -16,12 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="CEP"
+        android:text="@string/drugstore_CEP"
         android:id="@+id/textViewCep"
         android:layout_gravity="center_vertical"
 
         android:layout_marginTop="19dp"
-
 
         android:layout_below="@+id/textViewAddress"
         android:layout_alignParentStart="true" />
@@ -30,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="drugstoreName"
+        android:text="@string/drugstore_name"
         android:id="@+id/textViewDrugName"
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@+id/buttonSaveRateDrugstore" />
@@ -39,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Address"
+        android:text="@string/drugstore_address"
         android:id="@+id/textViewAddress"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="33dp"
@@ -50,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Telephone"
+        android:text="@string/drugstore_telephone"
         android:id="@+id/textViewDrugTel"
         android:layout_marginTop="53dp"
         android:layout_below="@+id/textViewCep"
@@ -82,14 +81,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nota"
+        android:text="@string/drugstore_nota"
 
 
         android:id="@+id/textViewRatingDrugstore"
         android:layout_above="@+id/ratingBarFinalDrugstore"
         android:layout_toEndOf="@+id/textViewCep" />
-
-
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -105,10 +102,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salvar"
+        android:text="@string/drugstore_salvar"
         android:id="@+id/buttonSaveRateDrugstore"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/ratingBarUserDrugstore" />
-
 
 </RelativeLayout>

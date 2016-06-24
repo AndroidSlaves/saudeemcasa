@@ -124,6 +124,7 @@ public class ChooseScreen extends Activity {
                     assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
+
                 //} catch (ConnectionErrorException e) {
                 //    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
                 //            Toast.LENGTH_LONG).show();
@@ -153,11 +154,11 @@ public class ChooseScreen extends Activity {
                     assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
-                //} catch (ConnectionErrorException connectionError) {
-                //    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
-                 //           Toast.LENGTH_LONG).show();
-                //}
-/*
+                /*} catch (ConnectionErrorException connectionError) {
+                    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
+                            Toast.LENGTH_LONG).show();
+                }
+
                 PROGRESS_DIALOG.dismiss();
                 Looper.loop();
             }

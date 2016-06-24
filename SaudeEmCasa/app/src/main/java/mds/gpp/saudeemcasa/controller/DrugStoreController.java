@@ -13,7 +13,9 @@ import api.Helper.FirebaseHelper;
 import org.json.JSONException;
 
 import android.location.Location;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -22,11 +24,16 @@ import api.Dao.DrugStoreDao;
 import api.Exception.ConnectionErrorException;
 import api.Helper.JSONHelper;
 import api.Request.HttpConnection;
+
 import mds.gpp.saudeemcasa.helper.GPSTracker;
 import mds.gpp.saudeemcasa.model.DrugStore;
 import mds.gpp.saudeemcasa.model.Stablishment;
 
 import static java.util.Collections.sort;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 public class DrugStoreController {
 
@@ -67,7 +74,7 @@ public class DrugStoreController {
      */
     public static DrugStoreController getInstance(Context context) {
         assert (context != null) : "Receive a null treatment";
-        if (instance == null) {
+        if(instance == null) {
             instance = new DrugStoreController(context);
         } else {
 			/* ! Nothing To Do. */
@@ -81,15 +88,15 @@ public class DrugStoreController {
      * @param drugStore
      *              the selected drugstore on the list of drugstores.
      */
-    public void setDrugStore( DrugStore drugStore ) {
+    public void setDrugStore(DrugStore drugStore) {
         assert (drugStore != null) : "Receive a null treatment";
         DrugStoreController.drugStore = drugStore;
     }
 
     /**
-     * Get store  drugstore
+     * Get store drugstore
      *
-     * @return
+     * @return drugStore
      *              the previously selected and stored drugstore.
      **/
     public DrugStore getDrugstore() {
@@ -99,7 +106,7 @@ public class DrugStoreController {
     /**
      * Give the list of the nearest drugstores to be show to the user in a list.
      *
-     * @return
+     * @return drugStoreList
      *              the list of the nearest drugstores.
      *
      */
@@ -112,17 +119,20 @@ public class DrugStoreController {
      * the database on first use or just get the data from the database for usage.
      *
      * @throws IOException
-     *              there maybe a failure in the conversion on the treatment of the response
+     *              There maybe a failure in the conversion on the treatment of the response
      * from the server.
      * @throws JSONHelper
-     *              there maybe a failure in the JSON access.
+     *              There maybe a failure in the JSON access.
      * @throws ConnectionErrorException
-     *              there maybe a failure communicating with the server.
+     *              There maybe a failure communicating with the server.
      */
-    public void initControllerDrugstore() throws IOException, JSONException,ConnectionErrorException {
+    public void initControllerDrugstore() throws IOException, JSONException,
+            ConnectionErrorException {
 
-            if (drugStoreDao.isDatabaseEmpty()) {
-                System.out.println("ESTOU NA CONTROLLER");
+
+        boolean databaseEmpty = drugStoreDao.isDatabaseEmpty();
+            if(databaseEmpty) {
+                assertTrue("database empty return error", databaseEmpty);
 
                // FirebaseHelper firebaseHelper = new FirebaseHelper();
 
@@ -131,9 +141,8 @@ public class DrugStoreController {
                 drugStoreList = drugStoreDao.getAllDrugStores();
                 /*HttpConnection httpConnection = new HttpConnection();
 
-                final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
+                /*final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
                 String jsonPublic = httpConnection.newRequest(FARMACIA_POPULAR);
-
                 HttpConnection httpConnectionPrivate = new HttpConnection();
 
                 final String FARMACIA_CONVENIADA = "http://159.203.95.153:3000/farmacia_popular" +
@@ -149,10 +158,19 @@ public class DrugStoreController {
                             jsonParser.drugstorePrivateListFromJSON(jsonPrivate)){
                         drugStoreList = drugStoreDao.getAllDrugStores();
                     }else{/*Nothing to do}
-                }else {/*Nothing to do}*/
 
+                }else {/*Nothing to do}
+
+                JSONHelper jsonParser = new JSONHelper(context);
+
+                boolean drugstorePublicJson = jsonParser.drugstorePublicListFromJSON(jsonPublic);
+                assertTrue("Return error json parser", drugstorePublicJson);
+                */
+                drugStoreList = drugStoreDao.getAllDrugStores();
+                assertNotNull("Null treatment drugstoreList", drugStoreList);
             } else {
                 drugStoreList = drugStoreDao.getAllDrugStores();
+                assertNotNull("Received null treatment drugstoreList", drugStoreList);
             }
     }
 
@@ -164,10 +182,10 @@ public class DrugStoreController {
      * @param list
      *              the list of drugstores that need the distance to be set.
      *
-     * @return
+     * @return canSetDistance
      *              a boolean indicator for testing
      */
-    public static boolean setDistance(Context context,ArrayList<DrugStore> list) {
+    public static boolean setDistance(Context context, ArrayList<DrugStore> list) {
         assert (context != null) : "Receive a null treatment";
         assert (list != null) : "Receive a null treatment";
         assert (list.size() > 0) : "Receive a empty treatment";
@@ -207,12 +225,14 @@ public class DrugStoreController {
      */
     public void requestRating() throws ConnectionErrorException {
         HttpConnection httpConnection = new HttpConnection();
-        for(int i = 0;i < 15;i++){
+        String address = "http://159.203.95.153:3000/rate/gid/";
+
+        for(int i = 0; i < 15; i++){
             try {
                 drugStoreList.get(i).setRate(httpConnection.getRating(drugStoreList.get(i).
-                        getId(), "http://159.203.95.153:3000/rate/gid/"));
-            } catch (JSONException e) {
-                e.printStackTrace();
+                        getId(), address));
+            } catch(JSONException exceptionJsonRating) {
+                exceptionJsonRating.printStackTrace();
             }
         }
     }
@@ -260,7 +280,7 @@ public class DrugStoreController {
             assert (stablishment2 != null) : "Receive a null treatment";
 
             int firstStablishmentIsGreater = -1;
-            if (stablishment1.getDistance()<(stablishment2.getDistance())){
+            if(stablishment1.getDistance() < (stablishment2.getDistance())){
                 firstStablishmentIsGreater = 1;
             } else {
                 firstStablishmentIsGreater = -1;
@@ -302,6 +322,7 @@ public class DrugStoreController {
         final String RATING_SERVER = "/rating/";
         response = connection.newRequest(IP_DRUGSTORE + drugstoreId + ANDROID_ID_SERVER + androidId
                 + RATING_SERVER + rate);
+        assertNotNull("Response received a null treatment", response);
 
         return response;
     }

@@ -6,15 +6,6 @@
 
 package api.Request;
 
-import android.content.Entity;
-import android.util.Log;
-
-import org.apache.http.HttpResponse;
-import android.util.Log;
-
-
-import android.util.Log;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -25,13 +16,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import api.Exception.ConnectionErrorException;
 
 public class HttpConnection {
 
     // List of states to be used in the requestAllDrugstoresByUF.
-    private static String states[] = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+    private final static String states[] = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
                                       "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
                                       "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
 
@@ -43,19 +35,19 @@ public class HttpConnection {
      * Create the connection with some url and return the response in string format.
      *
      * @param ipAddress
-     *              address to be accessed.
+     *              Address to be accessed.
      *
-     * @return
-     *              response from http connection.
+     * @return response
+     *              Response from http connection.
      *
      * @throws ConnectionErrorException
-     *              there maybe a error connecting to server
+     *              There maybe a error connecting to server
      */
     public String newRequest(String ipAddress) throws ConnectionErrorException {
         assert (ipAddress != null) : "ipAddress must never be null";
         assert (ipAddress.length() >= 8) : "ipAddress must never be smaller then 8 characters";
 
-        // variable that will receive the data from the JSON.
+        // Variable that will receive the data from the JSON.
         String response = "";
         try {
             System.out.println("Starting connection with " + ipAddress);
@@ -72,13 +64,13 @@ public class HttpConnection {
             response = Request(httpGet, client);
             assert (response != null) : "response must never be null";
 
-            System.out.println("Resquest complete " + ipAddress);
+            System.out.println("Request complete " + ipAddress);
 
-        } catch (ClientProtocolException e) {
+        } catch(ClientProtocolException e) {
             System.out.println("Request failed " + ipAddress);
             throw new ConnectionErrorException();
 
-        } catch (IOException e) {
+        } catch(IOException e) {
             System.out.println("Request failed " + ipAddress);
             throw new ConnectionErrorException();
         }
@@ -89,12 +81,13 @@ public class HttpConnection {
      * Save or update rate from user on server database.
      *
      * @param ipAddress
-     *              address to be accessed.
+     *              Address to be accessed.
+     *
      * @return
-     *              response from http connection.
+     *              Response from http connection.
      *
      * @throws ConnectionErrorException
-     *              there maybe a error connecting to server
+     *              There maybe a error connecting to server
      */
     public String RequestAllDrugstoresByUF(String ipAddress) throws ConnectionErrorException {
         assert (ipAddress != null) : "ipAddress must never be null";
@@ -119,20 +112,21 @@ public class HttpConnection {
      * the list created from the adapter
      *
      * @param id
-     *              receive an id from a drugstore or a hospital.
-     * @param ipAddress
-     *              receive the address's ip.
+     *              Receive an id from a drugstore or a hospital.
      *
-     * @return
-     *              rate evaluation.
+     * @param ipAddress
+     *              Receive the address's ip.
+     *
+     * @return rating
+     *              Rate evaluation.
      *
      * @throws ConnectionErrorException
-     *              there maybe a error connecting to server.
-     *
+     *              There maybe a error connecting to server.
      * @throws JSONException
-     *              there maybe a error treating jason object.
+     *              There maybe a error treating jason object.
      */
-    public float getRating(String id,String ipAddress) throws ConnectionErrorException, JSONException {
+    public float getRating(String id,String ipAddress) throws ConnectionErrorException,
+            JSONException {
         assert (ipAddress != null) : "ipAddress must never be null";
         assert (ipAddress.length() >= 8) : "ipAddress must never be smaller than 8 characters";
         assert (id != null) : "id must never be negative";
@@ -147,7 +141,7 @@ public class HttpConnection {
         if (jsonArray.length() == 0){
             rating = 0;
 
-        }else {
+        } else {
             rating = (float) jsonArray.getJSONObject(0).getDouble("rate");
 
         }
@@ -158,11 +152,12 @@ public class HttpConnection {
      * Method that uses the httpGet and the HttpCliente to create a execution from the client.
      *
      * @param httpGet
-     *        take the http
+     *              Take the http
      * @param client
-     *        take the http of the client.
+     *              Take the http of the client.
      *
-     * @return the string treated by the handler.
+     * @return requestResponse
+     *              The string treated by the handler.
      *
      * @throws IOException
      */
@@ -176,6 +171,28 @@ public class HttpConnection {
         assert (requestResponse != null) : "requestResponse String must never be null";
 
         return requestResponse;
+    }
+
+    /**
+     * @param inputStream
+     *              It allows you to read JSON data one byte at a time.
+     *
+     * @return json
+     *              Files loaded from json.
+     */
+    public String loadJSONFromAsset(InputStream inputStream) {
+        String json = null;
+        try {
+            //InputStream is = getActivity().getAssets().open("yourfilename.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            json = new String(buffer, "UTF-8");
+        } catch(IOException ioExceptionJson) {
+            ioExceptionJson.printStackTrace();
+        }
+        return json;
     }
 
 }
