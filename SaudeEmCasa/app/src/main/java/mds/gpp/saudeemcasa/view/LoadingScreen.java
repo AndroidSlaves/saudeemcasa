@@ -64,10 +64,15 @@ public class LoadingScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
         final ImageView logoSaudeEmCasa = (ImageView) findViewById(R.id.saude_em_casa_logo);
+
+
+        getDrugstoreInfo();
+    }
+    private void getDrugstoreInfo(){
+        final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
 
         final Firebase drugstoreFirebase = new Firebase("https://farmpopularconv.firebaseio.com/");
         drugstoreFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,8 +150,8 @@ public class LoadingScreen extends Activity {
             }
         });
 
-    }
 
+    }
     //requestStablishment();
 
 
