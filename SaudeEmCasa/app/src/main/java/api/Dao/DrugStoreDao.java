@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,9 +23,9 @@ import mds.gpp.saudeemcasa.model.DrugStore;
 public class DrugStoreDao extends Dao {
 
     // Static string that have all the database columns names.
-    private static String tableColumns[] = {"latitude", "longitude", "city", "address", "state",
-                                            "rate", "postalCode", "telephone", "name", "type",
-                                            "drugstoreGid"};
+    private static final String TABLE_COLUMNS[] = {"latitude", "longitude", "city", "address",
+                                                  "state", "rate", "postalCode", "telephone", "name",
+                                                  "type", "drugstoreGid"};
 
     /*
      * Instance of DrugstoreDao store whenever it is created so when instantiated again it cannot
@@ -33,7 +34,10 @@ public class DrugStoreDao extends Dao {
     private static DrugStoreDao instance = null;
 
     // Used to access the table of Drugstore's name.
-    private static String tableName = "Drugstore";
+    private static String TABLE_NAME = "Drugstore";
+
+    // Tag used for logs
+    private static String TAG = "DrugstoreDao";
 
     /**
      * Creates an instace of DrugstoreDao in the context. It's called only by getInstance().
@@ -60,6 +64,7 @@ public class DrugStoreDao extends Dao {
 			// Nothing to do.
         } else {
             DrugStoreDao.instance = new DrugStoreDao(context);
+            Log.i(TAG,"Creating new drugstore instance");
         }
 
         return DrugStoreDao.instance;
@@ -71,15 +76,16 @@ public class DrugStoreDao extends Dao {
      * @return cursor, it's a object returned from the database after executing the query command.
      */
     public boolean isDatabaseEmpty() {
+        sqliteDatabase = database.getReadableDatabase();
 
         // Contains the a database command: SELECT.
-        String query = "SELECT 1 FROM " + tableName;
-        sqliteDatabase = database.getReadableDatabase();
+        String query = "SELECT 1 FROM " + TABLE_NAME;
 
         // Object returned from the database after executing the query command.
         Cursor cursor = sqliteDatabase.rawQuery(query, null);
         boolean isEmpty = false;
 
+        // Verify if cursor is null.
         if(cursor != null) {
             if(cursor.getCount() <= 0) {
                 cursor.moveToFirst();
@@ -91,6 +97,7 @@ public class DrugStoreDao extends Dao {
             isEmpty = true;
         }
 
+        Log.i(TAG,"Is database empty?"+isEmpty);
         return isEmpty;
     }
 
@@ -102,7 +109,7 @@ public class DrugStoreDao extends Dao {
      *
      * @return outcome of the operation.
      */
-    public boolean insertDrugstore(DrugStore drugStore) {
+    public long insertDrugstore(DrugStore drugStore) {
 
         assert (drugStore != null) : "drugStore object must never be null";
         assert (drugStore.getLatitude() != null) : "latitude field must never be null";
@@ -110,7 +117,8 @@ public class DrugStoreDao extends Dao {
         assert (drugStore.getCity() != null) : "city field must never be null";
         assert (drugStore.getAddress() != null) : "address field must never be null";
         assert (drugStore.getState() != null) : "state field must never be null";
-        assert (drugStore.getRate() > 0f) : "rate field must never be null";
+        assert (drugStore.getRate() >= 0f) : "rate field must never be null";
+        assert (drugStore.getRate() <= 5f) : "rate field must be smaller than or equals to five";
         assert (drugStore.getPostalCode() != null) : "postalCode field must never be null";
         assert (drugStore.getTelephone() != null) : "telephone field must never be null";
         assert (drugStore.getName() != null) : "name field must never be null";
@@ -123,20 +131,22 @@ public class DrugStoreDao extends Dao {
         // Table of values that is used to insert the element into the database.
         ContentValues values = new ContentValues();
 
-        values.put(tableColumns[0], drugStore.getLatitude());
-        values.put(tableColumns[1], drugStore.getLongitude());
-        values.put(tableColumns[2], drugStore.getCity());
-        values.put(tableColumns[3], drugStore.getAddress());
-        values.put(tableColumns[4], drugStore.getState());
-        values.put(tableColumns[5], drugStore.getRate());
-        values.put(tableColumns[6], drugStore.getPostalCode());
-        values.put(tableColumns[7], drugStore.getTelephone());
-        values.put(tableColumns[8], drugStore.getName());
-        values.put(tableColumns[9], drugStore.getType());
-        values.put(tableColumns[10], drugStore.getId());
+        values.put(TABLE_COLUMNS[0], drugStore.getLatitude());
+        values.put(TABLE_COLUMNS[1], drugStore.getLongitude());
+        values.put(TABLE_COLUMNS[2], drugStore.getCity());
+        values.put(TABLE_COLUMNS[3], drugStore.getAddress());
+        values.put(TABLE_COLUMNS[4], drugStore.getState());
+        values.put(TABLE_COLUMNS[5], drugStore.getRate());
+        values.put(TABLE_COLUMNS[6], drugStore.getPostalCode());
+        values.put(TABLE_COLUMNS[7], drugStore.getTelephone());
+        values.put(TABLE_COLUMNS[8], drugStore.getName());
+        values.put(TABLE_COLUMNS[9], drugStore.getType());
+        values.put(TABLE_COLUMNS[10], drugStore.getId());
 
         // Verify if the table is null
-        boolean result = insertAndClose(sqLiteDatabase,tableName, values) > 0;
+        long result = insertAndClose(sqLiteDatabase, TABLE_NAME, values);
+
+        Log.v(TAG, "Insert drugstore returned "+result);
         return result;
     }
 
@@ -148,7 +158,7 @@ public class DrugStoreDao extends Dao {
     public List<DrugStore> getAllDrugStores() {
 
         // Contains the a database command: SELECT.
-        String query = "SELECT * FROM " + tableName;
+        String query = "SELECT * FROM " + TABLE_NAME;
 
         List<DrugStore> listDrugstores = new ArrayList<DrugStore>();
 
@@ -161,17 +171,17 @@ public class DrugStoreDao extends Dao {
 
             DrugStore drugStore = new DrugStore();
 
-            drugStore.setLatitude(cursor.getString(cursor.getColumnIndex(tableColumns[0])));
-            drugStore.setLongitude(cursor.getString(cursor.getColumnIndex(tableColumns[1])));
-            drugStore.setCity(cursor.getString(cursor.getColumnIndex(tableColumns[2])));
-            drugStore.setAddress(cursor.getString(cursor.getColumnIndex(tableColumns[3])));
-            drugStore.setState(cursor.getString(cursor.getColumnIndex(tableColumns[4])));
-            drugStore.setRate(cursor.getFloat(cursor.getColumnIndex(tableColumns[5])));
-            drugStore.setPostalCode(cursor.getString(cursor.getColumnIndex(tableColumns[6])));
-            drugStore.setTelephone(cursor.getString(cursor.getColumnIndex(tableColumns[7])));
-            drugStore.setName(cursor.getString(cursor.getColumnIndex(tableColumns[8])));
-            drugStore.setType(cursor.getString(cursor.getColumnIndex(tableColumns[9])));
-            drugStore.setId(cursor.getString(cursor.getColumnIndex(tableColumns[10])));
+            drugStore.setLatitude(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[0])));
+            drugStore.setLongitude(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[1])));
+            drugStore.setCity(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[2])));
+            drugStore.setAddress(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[3])));
+            drugStore.setState(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[4])));
+            drugStore.setRate(cursor.getFloat(cursor.getColumnIndex(TABLE_COLUMNS[5])));
+            drugStore.setPostalCode(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[6])));
+            drugStore.setTelephone(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[7])));
+            drugStore.setName(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[8])));
+            drugStore.setType(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[9])));
+            drugStore.setId(cursor.getString(cursor.getColumnIndex(TABLE_COLUMNS[10])));
 
             listDrugstores.add(drugStore);
         }
@@ -188,7 +198,7 @@ public class DrugStoreDao extends Dao {
      *
      * @return if the all of the drugstores was indexed, it's return true.
      */
-    public boolean insertAllDrugStores(List<DrugStore> drugStoresList) {
+    public long insertAllDrugStores(List<DrugStore> drugStoresList) {
 
         assert (drugStoresList != null) : "drugStoresList must never be null";
         assert (drugStoresList.size() > 0) : "drugStoresList field must never be empty";
@@ -196,7 +206,7 @@ public class DrugStoreDao extends Dao {
         // Makes the interaction with each object of the list
         Iterator<DrugStore> index = drugStoresList.iterator();
 
-        boolean resultInsertDrugStores = true;
+        long resultInsertDrugStores = 0;
 
         while(index.hasNext()) {
             resultInsertDrugStores = insertDrugstore(index.next());
@@ -211,8 +221,8 @@ public class DrugStoreDao extends Dao {
      */
     public long deleteAllDrugStores() {
 
-        long resultDeleteDrugStores;
-        resultDeleteDrugStores = deleteAndClose(sqliteDatabase, tableName);
+        long resultDeleteDrugStores = 0;
+        resultDeleteDrugStores = deleteAndClose(sqliteDatabase, TABLE_NAME);
         return resultDeleteDrugStores;
     }
 }
