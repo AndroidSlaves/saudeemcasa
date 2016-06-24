@@ -15,6 +15,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import junit.framework.Assert;
+
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 
@@ -50,12 +52,13 @@ public class GoogleMapDrugStore extends FragmentActivity{
      */
     private void setUpMap() {
 
-        if (myGoogleMap == null) {
+        if(myGoogleMap == null) {
             // Try to obtain the map from the SupportMapFragment.
             myGoogleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             myGoogleMap.setTrafficEnabled(true);
             myGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            Assert.assertNotNull(myGoogleMap);
 
         } else {
             oneLocationMap();
@@ -68,12 +71,21 @@ public class GoogleMapDrugStore extends FragmentActivity{
      * marker point there with zoom 10 (10 shows elegance).
      */
     private void oneLocationMap() {
+        Assert.assertNotNull(drugStoreController);
+
         String name = drugStoreController.getDrugstore().getName();
         String latitude = drugStoreController.getDrugstore().getLatitude();
         String longitude = drugStoreController.getDrugstore().getLongitude();
         LatLng drugstoreLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
+        Assert.assertNotNull(name);
+        Assert.assertNotNull(latitude);
+        Assert.assertNotNull(longitude);
+        Assert.assertNotNull(drugstoreLocation);
+
         myGoogleMap.addMarker(new MarkerOptions().position(drugstoreLocation).title(name));
         myGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(drugstoreLocation, 10));
+
+        Assert.assertNotNull(myGoogleMap);
     }
 }
