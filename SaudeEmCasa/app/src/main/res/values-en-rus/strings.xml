@@ -22,4 +22,28 @@
     <string name="drugstore_nota">Evaluation:</string>
     <string name="drugstore_salvar">Save</string>
 
+    <string name="infoScreenDrugstore">The Brazil Popular Pharmacy Program has to be an initiative of
+        the Federal Government authorizing the Oswaldo Cruz Foundation (FIOCRUZ) to provide medicines
+        by compensation, and by Decree No. 5,090, of May 20, 2004, which regulates Law 10,858 and
+        establishes the Popular Pharmacy program Brazil. The units themselves have a list of 112 items,
+        including drugs and male condoms, which are dispensed by its cost, a reduction of up to 90% of
+        market value. The condition for the purchase of medicines available in the units, in this case,
+        is the presentation document with photo, in stating your Social Security number, along with a
+        medical or dental prescription.
+         Importantly, only the Own Network accepts prescriptions written by dentists.</string>
+
+    <string name="infoScreenMelhorEmCasa">Best Home program is related to health program created by
+        the Federal Government in 2013, with the following proposals:
+        Service people in need of motor rehabilitation, elderly, chronic patients without worsening
+        or post-surgical situation. Improve and expand the SUS assistance to patients with health
+        complaints that can receive care at home, and close to family.
+        Contribute to the recovery of disease, since care and family care coupled with adequate
+        health care become important elements for the patient's recovery.</string>
+
+    <string name="infoScreenSaudeEmCasa">The application Home Health, aims to facilitate the user's
+        Best Home program, ways to find Hospitals, Clinics or closest to the patient establishments,
+        taking into account the issue of difficulty of displacement thereof. In addition, the
+        application also provides the locations of drugstores in Brazil, so that users can locate and
+        gain access to potential drug treatments your health.\n";</string>
+
 </resources>
