@@ -81,9 +81,17 @@ public class GoogleMapDrugStore extends FragmentActivity{
         Assert.assertNotNull(drugStoreController);
 
         String name = drugStoreController.getDrugstore().getName();
+        LOG.warning("MUST BE NOT EMPTY");
+        LOG.severe("MUST BE NOT NULL");
         String latitude = drugStoreController.getDrugstore().getLatitude();
+        LOG.warning("MUST BE NOT EMPTY");
+        LOG.severe("MUST BE NOT NULL");
         String longitude = drugStoreController.getDrugstore().getLongitude();
+        LOG.warning("MUST BE NOT EMPTY");
+        LOG.severe("MUST BE NOT NULL");
         LatLng drugstoreLocation = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+        LOG.warning("MUST BE NOT EMPTY");
+        LOG.severe("MUST BE NOT NULL");
 
         Assert.assertNotNull(name);
         Assert.assertNotNull(latitude);
