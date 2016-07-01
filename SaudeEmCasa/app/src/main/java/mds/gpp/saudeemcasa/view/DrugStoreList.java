@@ -64,9 +64,9 @@ public class DrugStoreList extends Activity {
 
         } else {
             Log.e(TAG, "GPS not enabled, showing error message to user...");
-            final String CONNECT_ERROR_TEXT = "Voce nao esta conectado ao gps ou a internet! \n" +
+            final String CONNECT_ERROR_TEXT = "Voce não esta conectado ao gps ou a internet! \n\n" +
                                               "Conecte-se para prosseguir.";
-            Toast.makeText(getApplicationContext(),CONNECT_ERROR_TEXT , Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),CONNECT_ERROR_TEXT, Toast.LENGTH_LONG).show();
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
