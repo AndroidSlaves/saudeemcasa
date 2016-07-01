@@ -8,32 +8,22 @@
 package mds.gpp.saudeemcasa.controller;
 
 import android.content.Context;
-
-import api.Helper.FirebaseHelper;
-import org.json.JSONException;
-
 import android.location.Location;
 
-import java.io.IOException;
-import java.io.InputStream;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import api.Dao.DrugStoreDao;
-import api.Exception.ConnectionErrorException;
-import api.Helper.JSONHelper;
-import api.Request.HttpConnection;
 
 import mds.gpp.saudeemcasa.helper.GPSTracker;
 import mds.gpp.saudeemcasa.model.DrugStore;
 import mds.gpp.saudeemcasa.model.Stablishment;
 
 import static java.util.Collections.sort;
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
 
 public class DrugStoreController {
 
@@ -168,26 +158,6 @@ public class DrugStoreController {
     }
 
     /**
-     * Request the rating for the 15 first drugstores so that it can be shown at the HospitalList.
-     *
-     * @throws ConnectionErrorException
-     *              The request may fail to get the ratings.
-     */
-    public void requestRating() throws ConnectionErrorException {
-        HttpConnection httpConnection = new HttpConnection();
-        String address = "http://159.203.95.153:3000/rate/gid/";
-
-        for(int i = 0; i < 15; i++){
-            try {
-                drugStoreList.get(i).setRate(httpConnection.getRating(drugStoreList.get(i).
-                        getId(), address));
-            } catch(JSONException exceptionJsonRating) {
-                exceptionJsonRating.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * Saves the unique identifier of the android user.
      *
      * @param androidId
@@ -239,42 +209,4 @@ public class DrugStoreController {
         }
 
     }
-
-    /**
-     * Save or update rate from user on server database.
-     *
-     * @param rate
-     *              float value received from user input.
-     * @param androidId
-     *              string value that represents the unique android id.
-     * @param drugstoreId
-     *              int value that represents the stablishment unique id.
-     *
-     * @return
-     *              response from server.
-     *
-     * @throws ConnectionErrorException
-     *              there maybe a failure when connecting to the server.
-     */
-    public String updateRate(int rate,String androidId,String drugstoreId )
-            throws ConnectionErrorException {
-        assert (rate >= 0) : "Receive a negative treatment";
-        assert (androidId != null) : "Receive a null treatment";
-        assert (androidId != "") : "Receive a empty treatment";
-        assert (drugstoreId != null) : "Receive a null treatment";
-        assert (drugstoreId != "") : "Receive a empty treatment";
-
-        HttpConnection connection = new HttpConnection();
-        String response = "";
-
-        final String IP_DRUGSTORE = "http://159.203.95.153:3000/rate/gid/";
-        final String ANDROID_ID_SERVER = "/aid/";
-        final String RATING_SERVER = "/rating/";
-        response = connection.newRequest(IP_DRUGSTORE + drugstoreId + ANDROID_ID_SERVER + androidId
-                + RATING_SERVER + rate);
-        assertNotNull("Response received a null treatment", response);
-
-        return response;
-    }
-
 }

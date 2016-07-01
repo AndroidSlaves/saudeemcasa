@@ -23,8 +23,6 @@ import java.util.List;
 
 import api.Dao.HospitalDao;
 import api.Exception.ConnectionErrorException;
-import api.Helper.JSONHelper;
-import api.Request.HttpConnection;
 
 import mds.gpp.saudeemcasa.helper.GPSTracker;
 import mds.gpp.saudeemcasa.model.Hospital;
@@ -126,42 +124,12 @@ public class HospitalController {
      *              there maybe a failure in the conversion on the treatment of the response
      *              from the server.
      *
-     * @throws JSONHelper
-     *              there maybe a failure in the JSON access.
-     *
      * @throws ConnectionErrorException
      *              there maybe a failure communicating with the server.
      */
     public void initControllerHospital(InputStream inputStream) throws IOException, JSONException,
             ConnectionErrorException {
-        final String IP_ADDRESS = "http://159.203.95.153:3000/habilitados";
 
-        Boolean databaseIsEmpty = hospitalDao.isDbEmpty();
-
-        if(databaseIsEmpty) {
-
-            Log.i(TAG,"Database empty, requesting hospitals from server.");
-
-            HttpConnection httpConnection = new HttpConnection();
-            //String jsonHospital = httpConnection.newRequest(IP_ADDRESS);
-            String jsonHospital = httpConnection.loadJSONFromAsset(inputStream);
-            JSONHelper jsonParser = new JSONHelper(context);
-
-            if(jsonHospital != null){
-                Boolean jsonResult = jsonParser.hospitalListFromJSON(jsonHospital);
-
-                if(jsonResult) {
-                    hospitalList = hospitalDao.getAllHospitals();
-                } else {/* Do nothing */}
-            } else {
-                Log.d(TAG,"JSON hospital is null!");
-                /* Do nothing */}
-        } else {
-            Log.i(TAG,"Database is not empty! Populating hospital list from database.");
-
-            // Just setting hospitals to local list
-            hospitalList = hospitalDao.getAllHospitals();
-        }
     }
 
     /**
@@ -208,33 +176,6 @@ public class HospitalController {
         }
 
         return savedDistance;
-    }
-
-    /**
-     * Request the rating for the 15 first hospitals so that it can be show at the HospitalList.
-     *
-     * @throws ConnectionErrorException
-     *              there maybe a failure communicating with the server.
-     */
-    public void requestRating() throws ConnectionErrorException {
-        HttpConnection httpConnection = new HttpConnection();
-
-        final int NUMBER_OF_ITEMS_ON_THE_LIST = 15;
-        final String IP_ADDRESS= "http://159.203.95.153:3000/rate/gid/";
-
-        for(int i = 0;i < NUMBER_OF_ITEMS_ON_THE_LIST; i++) {
-            String hospitalId = hospitalList.get(i).getId();
-
-            // Get rate from server
-            try {
-                float rate = httpConnection.getRating(hospitalId,IP_ADDRESS);
-                hospitalList.get(i).setRate(rate);
-                Log.i(TAG, "All rating requests where succesfully stored.");
-            } catch (JSONException e) {
-                Log.e(TAG, "Can't load JSON file. Request rating failed!");
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -296,42 +237,4 @@ public class HospitalController {
             return comparatorResult;
         }
     }
-
-    /**
-     * Save or update rate from user on server database.
-     *
-     * @param RATE
-     *           float value received from user input.
-     * @param ANDROID_ID
-     *           string value that represents the unique android id.
-     * @param HOSPITAL_ID
-     *           int value that represents the stablishment unique id.
-     *
-     * @return response from http connection.
-     *
-     * @throws ConnectionErrorException
-     */
-    public String updateRate(final int RATE,final String ANDROID_ID,final String HOSPITAL_ID)
-            throws ConnectionErrorException {
-        assert (RATE >= 0) : "minimum rate value interval.";
-        assert (RATE <= 5) : "maximum rate value interval.";
-        assert (ANDROID_ID != null) : "Null androidId treatment.";
-        assert (ANDROID_ID.length() > 2) : "Minor character androidId treatment.";
-        assert (HOSPITAL_ID != null) : "Nothing stored on hospitalId.";
-        assert (HOSPITAL_ID.length() >= 1) : "Verify hospitalId minor character.";
-
-        // Define ip address string.
-        HttpConnection connection = new HttpConnection();
-        final String SERVER_IP_ADDRESS = "http://159.203.95.153:3000/rate/gid/";
-        final String IP_ADDRESS_WITH_ANDROID_ID = SERVER_IP_ADDRESS + HOSPITAL_ID + "/aid/"
-                + ANDROID_ID;
-        final String IP_ADDRESS_WITH_RATING = IP_ADDRESS_WITH_ANDROID_ID + "/rating/" + RATE;
-
-        // Make request.
-        final String RESPONSE_WITH_RATES = connection.newRequest(IP_ADDRESS_WITH_RATING);
-
-        assert (RESPONSE_WITH_RATES != null) : "Receive a null treatment";
-        return RESPONSE_WITH_RATES;
-    }
-
 }
