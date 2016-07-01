@@ -2,25 +2,52 @@
 
 <resources>
 
-<string name="app_name">SaudeEmCasa</string>
-<string name="title_activity_main">MainActivity</string>
-<string name="km">km</string>
-<string name="meters">m</string>
+    <string name="app_name">SaudeEmCasa</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="km">km</string>
+    <string name="meters">m</string>
 
-<string name="program_drug">Farmácia Popular</string>
-<string name="program_hospital">Mejor en Casa</string>
-<string name="title_activity_hospital_maps">Mapa</string>
+    <string name="program_drug">Farmácia Popular</string>
+    <string name="program_hospital">Mejor en Casa</string>
+    <string name="title_activity_hospital_maps">Mapa</string>
 
-<string name="hospital_address">Dirección:</string>
-<string name="hospital_telephone">Phone:</string>
-<string name="hospital_nota">Evaluación:</string>
-<string name="hospital_salvar">Guardar</string>
+    <string name="hospital_address">Dirección:</string>
+    <string name="hospital_telephone">Phone:</string>
+    <string name="hospital_evaluation">Evaluación:</string>
+    <string name="hospital_save">Guardar</string>
 
-<string name="drugstore_CEP">Código Postal</string>
-<string name="drugstore_name">drugstoreName</string>
-<string name="drugstore_address">Dirección:</string>
-<string name="drugstore_telephone">Teléfono:</string>
-<string name="drugstore_nota">Evaluación:</string>
-<string name="drugstore_salvar">Guardar</string>
+    <string name="drugstore_CEP">Código Postal</string>
+    <string name="drugstore_name">drugstoreName</string>
+    <string name="drugstore_address">Dirección:</string>
+    <string name="drugstore_telephone">Teléfono:</string>
+    <string name="drugstore_evaluation">Evaluación:</string>
+    <string name="drugstore_save">Guardar</string>
+
+    <string name="infoScreenDrugstore">El Programa Farmacia Popular de Brasil tiene que ser una
+        iniciativa del Gobierno Federal que autoriza la Fundación Oswaldo Cruz (Fiocruz) para
+        proporcionar medicamentos por compensación y por el Decreto Nº 5.090, de 20 de mayo de 2004,
+        reglamentario de la Ley 10.858 y establece la programa Farmacia Popular de Brasil. Las
+        unidades mismas tienen una lista de 112 artículos, incluidos los medicamentos y condones
+        masculinos, que son dispensados por su coste, una reducción de hasta el 90% del valor de
+        mercado. La condición para la compra de medicamentos disponibles en las unidades, en este
+        caso, es el documento de presentación con la foto, al indicar su número de la Seguridad Social,
+        junto con una prescripción médica o dental.
+        Es importante destacar que sólo el propietario de la red acepta recetas escritas por los dentistas.</string>
+
+    <string name="infoScreenMelhorEmCasa">Mejor programa principal está relacionada con el programa
+        de salud creado por el Gobierno Federal en 2013, con las siguientes propuestas:
+         Gente de servicio que necesitan rehabilitación motora, los pacientes crónicos, ancianos sin
+        empeoramiento o post-quirúrgica situación \ n \ n Para mejorar y ampliar la asistencia SUS
+        para pacientes con problemas de salud que pueden recibir cuidados en casa, y cerca de la familia.
+         Contribuir a la recuperación de la enfermedad, ya que la atención y el cuidado de la salud
+        cuidado de la familia àadequada aliados se convierten en elementos importantes para la recuperación
+        del paciente....</string>
+
+    <string name="infoScreenSaudeEmCasa">La aplicación principal de la Salud, tiene como objetivo
+        facilitar el mejor programa de Inicio del usuario, maneras de encontrar Hospitales, Clínicas
+        o más cerca de los establecimientos del paciente, teniendo en cuenta la cuestión de la
+        dificultad de desplazamiento de la misma. Además, la aplicación también proporciona la
+        ubicación de las farmacias en Brasil, por lo que los usuarios puedan localizar y acceder a
+        sus posibilidades de drogas tratamientos de salud.</string>
 
 </resources>

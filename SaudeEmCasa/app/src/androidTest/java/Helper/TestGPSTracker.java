@@ -31,13 +31,14 @@ public class TestGPSTracker extends ActivityInstrumentationTestCase2<LoadingScre
     protected void setUp() throws Exception {
         super.setUp();
         this.myActivity = getActivity();
+
         GPSTracker gpsTracker = new GPSTracker(myActivity.getApplicationContext());
         locationManager = (LocationManager) myActivity.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, gpsTracker);
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     }
 
-    public void testShouldPass() {
+    public void testShouldCreateObject() {
         GPSTracker gpsTracker = new GPSTracker(myActivity.getApplicationContext());
         assertNotNull(gpsTracker);
     }
@@ -62,16 +63,6 @@ public class TestGPSTracker extends ActivityInstrumentationTestCase2<LoadingScre
         assertEquals(gpsTracker.getLongitude(), locationTest.getLongitude());
 
     }
-
-    /*public void testGetLatitude() throws Exception {
-        assertEquals(location.getLatitude(), locationTest.getLatitude());
-    }
-
-    public void testGetLongitude() throws Exception {
-        GPSTracker gpsTracker = new GPSTracker(myActivity.getApplicationContext());
-        assertNotNull(gpsTracker);
-        assertEquals(location.getLongitude(), gpsTracker.getLongitude());
-    } */
 
     public void testCanGetLocation() throws Exception {
         GPSTracker gpsTracker = new GPSTracker(myActivity.getApplicationContext());

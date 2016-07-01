@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
 import com.firebase.client.Firebase;
 
@@ -18,7 +19,8 @@ import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
 
 public class LoadingScreen extends Activity {
-
+    //Tag is used in log system.
+    private final String TAG = LoadingScreen.class.getSimpleName();
     /**
      *  @param base
      *                  Define the basic context for this Context Wrapper.
@@ -30,6 +32,7 @@ public class LoadingScreen extends Activity {
         super.attachBaseContext(base);
         // (*) To solve ERROR: _non-zero exit value 2_
         MultiDex.install(this);
+        Log.i(TAG, "Instalação MultiDex.");
     }
 
     /**
@@ -40,6 +43,7 @@ public class LoadingScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Firebase.setAndroidContext(this);
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
@@ -60,5 +64,6 @@ public class LoadingScreen extends Activity {
 
         Intent nextScreen = new Intent(getBaseContext(), ChooseScreen.class);
         startActivity(nextScreen);
+        Log.i(TAG, "ToList Screen - Next initialized screen.");
     }
 }
