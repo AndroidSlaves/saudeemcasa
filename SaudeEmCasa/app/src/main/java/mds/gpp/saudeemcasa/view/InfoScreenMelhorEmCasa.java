@@ -23,6 +23,7 @@ public class InfoScreenMelhorEmCasa extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_screen_melhor_em_casa);
+
         final String TAG = InfoScreenMelhorEmCasa.class.getSimpleName();
 
         TextView nameTextView = (TextView) findViewById(R.id.text_info_melhor_em_casa);

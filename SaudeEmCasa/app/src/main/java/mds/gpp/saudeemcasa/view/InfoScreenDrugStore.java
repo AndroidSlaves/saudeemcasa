@@ -23,6 +23,7 @@ public class InfoScreenDrugStore extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_screen_drugstore);
+
         final String TAG = InfoScreenDrugStore.class.getSimpleName();
 
         TextView nameTextView = (TextView) findViewById(R.id.text_info_drugstore);

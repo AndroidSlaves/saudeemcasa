@@ -8,17 +8,13 @@ package mds.gpp.saudeemcasa.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
-import android.support.multidex.MultiDex;
-import android.widget.ImageView;
 import android.os.Handler;
-
-//import com.firebase.client.Firebase;
+import android.support.multidex.MultiDex;
+import android.util.Log;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -26,34 +22,31 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import org.json.JSONException;
+
 import java.io.IOException;
 
 import api.Dao.DrugStoreDao;
-
 import api.Exception.ConnectionErrorException;
-import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
-import mds.gpp.saudeemcasa.controller.HospitalController;
 import mds.gpp.saudeemcasa.model.DrugStore;
-
 
 public class LoadingScreen extends Activity {
 
-    HospitalController hospitalController;
-    private Handler messageHandler = new Handler();
+    //Tag is used in log system.
+    private final String TAG = LoadingScreen.class.getSimpleName();
 
     /**
      *  @param base
      *                  Define the basic context for this Context Wrapper.
      */
-    // (*) To solve ERROR: _non-zero exit value 2_
     @Override
     protected void attachBaseContext(Context base) {
         assert (base != null) : "Receive a null tratment";
 
         super.attachBaseContext(base);
         MultiDex.install(this);
+        Log.i(TAG, "Instalação MultiDex.");
     }
 
     /**
@@ -64,13 +57,14 @@ public class LoadingScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Firebase.setAndroidContext(this);
+        Log.d(TAG, "Android Context sitting on Firebase.");
 
         final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
 
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
-        final ImageView logoSaudeEmCasa = (ImageView) findViewById(R.id.saude_em_casa_logo);
 
         final Firebase drugstoreFirebase = new Firebase("https://farmpopularconv.firebaseio.com/");
         drugstoreFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -83,62 +77,71 @@ public class LoadingScreen extends Activity {
                 String city = "";
                 String address = "";
                 String state = "";
-                String postalcode = "";
+                String postalCode = "";
                 String id = "";
                 String type = "AQUITEMFARMACIAPOPULAR";
                 int count = 0;
-                System.out.println(dataSnapshot.toString());
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    for (DataSnapshot alldrugstore : snapshot.getChildren()) {
 
-                        id = alldrugstore.getValue().toString();
-                        for (DataSnapshot drugstoreValues : alldrugstore.getChildren()) {
-                            //System.out.println(drugstoreValues.toString());
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for(DataSnapshot allDrugstore : snapshot.getChildren()) {
+
+                        id = allDrugstore.getValue().toString();
+                        for (DataSnapshot drugstoreValues : allDrugstore.getChildren()) {
 
                             if (drugstoreValues.getKey().equalsIgnoreCase("lat")) {
                                 latitude = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("long")) {
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("long")) {
                                 longitude = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("nu_telefone_farmacia")) {
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("nu_telefone_farmacia")) {
                                 telephone = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("no_farmacia")) {
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("no_farmacia")) {
                                 name = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("no_cidade")) {
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("no_cidade")) {
                                 city = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("ds_endereco_farmacia")) {
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("ds_endereco_farmacia")) {
                                 address = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("uf")) {
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("uf")) {
                                 state = drugstoreValues.getValue().toString();
-                            }
-                            if (drugstoreValues.getKey().equalsIgnoreCase("nu_cep_farmacia")) {
-                                postalcode = drugstoreValues.getValue().toString();
+                            } else if (drugstoreValues.getKey().equalsIgnoreCase("nu_cep_farmacia")) {
+                                postalCode = drugstoreValues.getValue().toString();
+                            } else {
+                                /* Nothing to do! */
                             }
                         }
-                        System.out.println("TESTE "+latitude +","+ longitude);
-                        DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type,postalcode);
-                        System.out.println(drugStoreDao.insertDrugstore(newDrugstore));
+
+                        Log.d(TAG, "Latitude check: " + latitude);
+                        Log.d(TAG, "Longitude check: " + longitude);
+
+                        DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,
+                                address,state,id,type,postalCode);
+
+                        if(drugStoreDao.insertDrugstore(newDrugstore) == 1){
+                            Log.i(TAG, "Insert Drugstore is ok!");
+                        } else {
+                            Log.i(TAG, "Insert Drugstore is failure!");
+                        }
 
                         count++;
 
                     }
-                    System.out.println("Percorri "+count+" farmacias.");
+                    Log.d(TAG, "Check amount of drugstores: " + count);
                 }
+
                 DrugStoreController drugStoreController = DrugStoreController.getInstance(getApplicationContext());
+
                 try {
                     drugStoreController.initControllerDrugstore();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ConnectionErrorException e) {
-                    e.printStackTrace();
+                } catch (IOException exceptionIOInitController) {
+                    Log.e(TAG, "Input error and output data to start pharmacy controller.");
+                    exceptionIOInitController.printStackTrace();
+                } catch (JSONException exceptionJSONInitController) {
+                    Log.e(TAG, "JSON error starting pharmacy controller.");
+                    exceptionJSONInitController.printStackTrace();
+                } catch (ConnectionErrorException exceptionConnectionInitController) {
+                    Log.e(TAG, "Error connecting to the database to start pharmacy controller.");
+                    exceptionConnectionInitController.printStackTrace();
                 }
+
                 toListScreen();
             }
 
@@ -150,113 +153,6 @@ public class LoadingScreen extends Activity {
 
     }
 
-    //requestStablishment();
-
-
-    /*
-     * Responsible for requesting communication with the Stabliment. Building alert dialogs,
-     * defined the connection failure.
-	 * Messages dialogue progress and start communication with the hospital or drugstore controller.
-	 */
-    public void requestStablishment() {
-        DrugStoreController drugStoreController = DrugStoreController.getInstance(this);
-
-
-        /*AlertDialog.Builder messageNeutralBuilder = new AlertDialog.Builder( this );
-        final String MESSAGE_CONECTION_FAILURE = "Falha na Conexão";
-        final String MESSAGE_DOWNLOAD_DATA_FAILURE = "Falha ao baixar os dados.";
-        final String MESSAGE_UPLOADING_DATA = "Carregando dados...";
-        final String MESSAGE_UPLOAD_COMPLETED = "Dados carregados";
-        final String MESSAGE_RETRY = "Retry";
-        final String MESSAGE_CANCEL = "Cancel";
-
-        messageNeutralBuilder.setTitle(MESSAGE_CONECTION_FAILURE)
-                             .setMessage(MESSAGE_DOWNLOAD_DATA_FAILURE);
-        messageNeutralBuilder.setPositiveButton(MESSAGE_RETRY, new RetryButtonListener());
-        messageNeutralBuilder.setNegativeButton(MESSAGE_CANCEL, new CancelButtonListener());
-
-        final AlertDialog messageFailedConnection = messageNeutralBuilder.create();
-        assert(messageFailedConnection != null) : "message to not be shown must be null";
-
-        final ProgressDialog progress = new ProgressDialog(this);
-        progress.setMessage(MESSAGE_UPLOADING_DATA);
-        progress.show();
-
-        new Thread() {
-
-            public void run() {
-                Looper.prepare();
-
-                final HospitalController hospitalController = HospitalController.getInstance(
-                                                              getApplicationContext());
-                assert(hospitalController != null) : "controller must not be null";
-
-                final String androidId = "" + android.provider.Settings.Secure.getString(
-                                         getContentResolver(), android.provider.Settings.Secure
-                                         .ANDROID_ID);
-                assert(androidId != null) : "id must not be null";
-                hospitalController.setAndroidId(androidId);
-                InputStream is = null;
-                try {
-                    is = getBaseContext().getAssets().open("json_test_data.json");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    hospitalController.initControllerHospital(is);
-                } catch (IOException e) {
-                    showMessageOnThread(messageFailedConnection, messageHandler);
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    showMessageOnThread(messageFailedConnection, messageHandler);
-                    e.printStackTrace();
-                } catch (ConnectionErrorException cee) {
-                    showMessageOnThread(messageFailedConnection, messageHandler);
-                }
-
-                System.out.println("ESTOU NA LOADING SCREEN");
-                final DrugStoreController drugstoreController = DrugStoreController.getInstance(
-                                                                getApplicationContext());
-                drugstoreController.setAndroidId(androidId);
-                try {
-                    is = getBaseContext().getAssets().open("json_drugstore_test_data.json");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    drugstoreController.initControllerDrugstore(is);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }catch (ConnectionErrorException cee){
-                    showMessageOnThread(messageFailedConnection, messageHandler);
-                }
-                System.out.println("ESTOU NA LOADING SCREEN");
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        progress.setMessage(MESSAGE_UPLOAD_COMPLETED);
-                        System.out.println("TO NA THREAD");
-                        if (drugstoreController.getAllDrugstores().size()>0){// &&
-                        //    hospitalController.getAllHospitals().size()>0) {
-                            System.out.println(drugstoreController.getAllDrugstores().size());
-                            System.out.println("NOME: "+drugstoreController.getAllDrugstores().get(0).getName());
-                            toListScreen();
-                        } else {/* Nothing To Do. }
-
-
-                        Looper.loop();
-                    }
-                });
-            }
-        }.start();*/
-    }
-
-
     /**
      *
      * @param message
@@ -264,11 +160,9 @@ public class LoadingScreen extends Activity {
      * @param messageHandler
      *              Support the error message, show after thread run.
      */
-    private void showMessageOnThread( final AlertDialog message,
-                                      Handler messageHandler ) {
+    private void showMessageOnThread(final AlertDialog message, Handler messageHandler) {
         assert(messageHandler != null) : "messageHandler must never be null";
         assert(message != null) : "message must never be null";
-
 
         messageHandler.post(new Runnable() {
             public void run() {
@@ -286,6 +180,7 @@ public class LoadingScreen extends Activity {
 
         Intent nextScreen = new Intent(getBaseContext(), ChooseScreen.class);
         startActivity(nextScreen);
+        Log.i(TAG, "ToList Screen - Next initialized screen.");
     }
 
     /*
@@ -293,13 +188,15 @@ public class LoadingScreen extends Activity {
      */
     private class RetryButtonListener implements DialogInterface.OnClickListener {
         @Override
-        public void onClick( DialogInterface dialog, int which ) {
-                dialog.dismiss();
+        public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
 
-                Intent myAction = new Intent(LoadingScreen.this, LoadingScreen.class);
+            Intent myAction = new Intent(LoadingScreen.this, LoadingScreen.class);
 
-                LoadingScreen.this.startActivity(myAction);
-                LoadingScreen.this.finish();
+            LoadingScreen.this.startActivity(myAction);
+            Log.i(TAG, "Activity started with my intention Action in return button.");
+            LoadingScreen.this.finish();
+            Log.i(TAG, "Screen Loading Screen finalized by clicking button to return.");
         }
     }
 
@@ -308,10 +205,11 @@ public class LoadingScreen extends Activity {
      */
     private class CancelButtonListener implements DialogInterface.OnClickListener {
         @Override
-        public void onClick( DialogInterface dialog, int which ) {
+        public void onClick(DialogInterface dialog, int which) {
             dialog.dismiss();
 
             LoadingScreen.this.finish();
+            Log.i(TAG, "Screen Loading Screen finalized by clicking the cancel button.");
         }
 
     }
