@@ -12,15 +12,15 @@
 
     <string name="hospital_address">Address:</string>
     <string name="hospital_telephone">Phone:</string>
-    <string name="hospital_nota">Evaluation:</string>
-    <string name="hospital_salvar">Save</string>
+    <string name="hospital_evaluation">Evaluation:</string>
+    <string name="hospital_save">Save</string>
 
     <string name="drugstore_CEP">Postal Code:</string>
     <string name="drugstore_name">drugstoreName</string>
     <string name="drugstore_address">Address:</string>
     <string name="drugstore_telephone">Phone:</string>
-    <string name="drugstore_nota">Evaluation:</string>
-    <string name="drugstore_salvar">Save</string>
+    <string name="drugstore_evaluation">Evaluation:</string>
+    <string name="drugstore_save">Save</string>
 
     <string name="infoScreenDrugstore">The Brazil Popular Pharmacy Program has to be an initiative of
         the Federal Government authorizing the Oswaldo Cruz Foundation (FIOCRUZ) to provide medicines

@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/drugstore_nota"
+        android:text="@string/drugstore_evaluation"
 
 
         android:id="@+id/textViewRatingDrugstore"
@@ -102,7 +102,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/drugstore_salvar"
+        android:text="@string/drugstore_save"
         android:id="@+id/buttonSaveRateDrugstore"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/ratingBarUserDrugstore" />

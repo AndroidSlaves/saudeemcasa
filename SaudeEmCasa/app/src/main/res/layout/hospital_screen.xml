@@ -59,7 +59,7 @@ android:contextClickable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/hospital_nota"
+        android:text="@string/hospital_evaluation"
         android:id="@+id/textViewRatingHospital"
         android:layout_above="@+id/ratingBarFinalHospital"
         android:layout_alignParentStart="true" />
@@ -77,7 +77,7 @@ android:contextClickable="false"
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hospital_salvar"
+        android:text="@string/hospital_save"
         android:id="@+id/buttonSaveRateHostpital"
         android:layout_alignBottom="@+id/ratingBarUserHospital"
         android:layout_toEndOf="@+id/textViewHospName" />

@@ -11,15 +11,15 @@
 
     <string name="hospital_address">Endereço</string>
     <string name="hospital_telephone">Telefone</string>
-    <string name="hospital_nota">Nota</string>
-    <string name="hospital_salvar">Salvar</string>
+    <string name="hospital_evaluation">Nota</string>
+    <string name="hospital_save">Salvar</string>
 
     <string name="drugstore_CEP">CEP</string>
     <string name="drugstore_name">drugstoreName</string>
     <string name="drugstore_address">Endereço</string>
     <string name="drugstore_telephone">Telefone</string>
-    <string name="drugstore_nota">Nota</string>
-    <string name="drugstore_salvar">Salvar</string>
+    <string name="drugstore_evaluation">Nota</string>
+    <string name="drugstore_save">Salvar</string>
 
     <string name="infoScreenDrugstore">O Programa Farmácia Popular do Brasil vem a ser uma iniciativa
         do Governo Federal que autoriza a Fundação Oswaldo Cruz (FIOCRUZ) a disponibilizar medicamentos

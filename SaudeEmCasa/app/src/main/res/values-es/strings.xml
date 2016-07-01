@@ -13,15 +13,15 @@
 
     <string name="hospital_address">Dirección:</string>
     <string name="hospital_telephone">Phone:</string>
-    <string name="hospital_nota">Evaluación:</string>
-    <string name="hospital_salvar">Guardar</string>
+    <string name="hospital_evaluation">Evaluación:</string>
+    <string name="hospital_save">Guardar</string>
 
     <string name="drugstore_CEP">Código Postal</string>
     <string name="drugstore_name">drugstoreName</string>
     <string name="drugstore_address">Dirección:</string>
     <string name="drugstore_telephone">Teléfono:</string>
-    <string name="drugstore_nota">Evaluación:</string>
-    <string name="drugstore_salvar">Guardar</string>
+    <string name="drugstore_evaluation">Evaluación:</string>
+    <string name="drugstore_save">Guardar</string>
 
     <string name="infoScreenDrugstore">El Programa Farmacia Popular de Brasil tiene que ser una
         iniciativa del Gobierno Federal que autoriza la Fundación Oswaldo Cruz (Fiocruz) para
