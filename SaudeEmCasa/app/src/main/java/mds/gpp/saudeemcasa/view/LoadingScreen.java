@@ -17,6 +17,7 @@ import com.firebase.client.Firebase;
 
 import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
+import mds.gpp.saudeemcasa.controller.DrugStoreController;
 
 public class LoadingScreen extends Activity {
     //Tag is used in log system.
@@ -50,6 +51,9 @@ public class LoadingScreen extends Activity {
 
         FirebaseHelper firebaseHelper = new FirebaseHelper();
         firebaseHelper.getDrugstoreInfo(getApplicationContext());
+
+        DrugStoreController drugStoreController = DrugStoreController.getInstance(getApplicationContext());
+        drugStoreController.initControllerDrugstore();
 
         toListScreen();
 
