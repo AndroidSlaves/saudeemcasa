@@ -116,63 +116,12 @@ public class DrugStoreController {
 
     /**
      * Method that is first initiated when the application is opened. It connects to the server and
-     * the database on first use or just get the data from the database for usage.
-     *
-     * @throws IOException
-     *              There maybe a failure in the conversion on the treatment of the response
-     * from the server.
-     * @throws JSONHelper
-     *              There maybe a failure in the JSON access.
-     * @throws ConnectionErrorException
-     *              There maybe a failure communicating with the server.
+     * the database on first use or just get the data from the database for usage.  
      */
-    public void initControllerDrugstore() throws IOException, JSONException,
-            ConnectionErrorException {
+    public void initControllerDrugstore(){
 
-            if (drugStoreDao.isDatabaseEmpty()) {
-                System.out.println("ESTOU NA CONTROLLER");
-
-               // FirebaseHelper firebaseHelper = new FirebaseHelper();
-
-                //firebaseHelper.getAllDrugstore(context);
-
-                drugStoreList = drugStoreDao.getAllDrugStores();
-                /*HttpConnection httpConnection = new HttpConnection();
-
-                /*final String FARMACIA_POPULAR = "http://159.203.95.153:3000/farmacia_popular";
-                String jsonPublic = httpConnection.newRequest(FARMACIA_POPULAR);
-                HttpConnection httpConnectionPrivate = new HttpConnection();
-
-                final String FARMACIA_CONVENIADA = "http://159.203.95.153:3000/farmacia_popular" +
-                        "_conveniada";
-                String jsonPrivate = httpConnectionPrivate.RequestAllDrugstoresByUF(FARMACIA_CONVENIADA);
-
-                /*This check happens because there may be failure during the requisition which would
-                continue the steps with information missing. This maybe replaced by and exception.
-                if(jsonPublic != null && jsonPrivate != null){
-
-                    JSONHelper jsonParser = new JSONHelper(context);
-
-                    if(jsonParser.drugstorePublicListFromJSON(jsonPublic) &&
-                            jsonParser.drugstorePrivateListFromJSON(jsonPrivate)){
-                        drugStoreList = drugStoreDao.getAllDrugStores();
-                    }else{/*Nothing to do}
-
-                }else {/*Nothing to do}
-
-                String jsonPublic = httpConnection.loadJSONFromAsset(inputStream);
-
-                JSONHelper jsonParser = new JSONHelper(context);
-
-                boolean drugstorePublicJson = jsonParser.drugstorePublicListFromJSON(jsonPublic);
-                assertTrue("Return error json parser", drugstorePublicJson);
-
-                drugStoreList = drugStoreDao.getAllDrugStores();
-                assertNotNull("Null treatment drugstoreList", drugStoreList); */
-            } else {
-                drugStoreList = drugStoreDao.getAllDrugStores();
-                assertNotNull("Received null treatment drugstoreList", drugStoreList);
-            }
+        drugStoreList = drugStoreDao.getAllDrugStores();
+        assertNotNull("Received null treatment drugstoreList", drugStoreList);
     }
 
     /**

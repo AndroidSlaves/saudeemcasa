@@ -27,9 +27,6 @@ import mds.gpp.saudeemcasa.helper.GPSTracker;
 public class ChooseScreen extends Activity {
 
     public GPSTracker gps;
-    public final String CONNECTION_ERROR_TEXT = "Houve um erro de conexão.\nVerifique sua " +
-                                                "conexão com a internet.";
-    public final String FETCH_RATE_TEXT = "Requerindo avaliações...";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,32 +106,10 @@ public class ChooseScreen extends Activity {
     /**
      * This thread is used to get the ratings of each hospital from several.
      */
-    public void hospitalListThread() {
-        /*final ProgressDialog PROGRESS_DIALOG = new ProgressDialog(this);
-        showProgress(PROGRESS_DIALOG, FETCH_RATE_TEXT);
-
-        new Thread() {
-            public void run() {
-                Looper.prepare();
-
-                // Request ratings for hospital and go to hospital list.
-                //try {*/
-                    //HospitalController.getInstance(getApplicationContext()).requestRating();
-
+    public void hospitalListThread() {         //HospitalController.getInstance(getApplicationContext()).requestRating();
                     Intent nextScreen = new Intent(getBaseContext(), HospitalList.class);
                     assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
-
-
-                //} catch (ConnectionErrorException e) {
-                //    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
-                //            Toast.LENGTH_LONG).show();
-                //}
-/*
-                PROGRESS_DIALOG.dismiss();
-                Looper.loop();
-            }
-        }.start();*/
 
     }
 
@@ -142,31 +117,11 @@ public class ChooseScreen extends Activity {
      * This thread is used to get the ratings of each drugstore from server.
      * */
     public void drugstoreListThread() {
-        /*final ProgressDialog PROGRESS_DIALOG = new ProgressDialog(this);
-        showProgress(PROGRESS_DIALOG, FETCH_RATE_TEXT);
-
-        new Thread() {
-            public void run() {
-                Looper.prepare();
-*/
-                // Request ratings for drugstore and go to drugstore list.
-                //try {
-                    //DrugStoreController.getInstance(getApplicationContext()).requestRating();
-
                     Intent nextScreen = new Intent(getBaseContext(), DrugStoreList.class);
                     assert (nextScreen != null) : "Receive a null treatment";
                     startActivity(nextScreen);
 
-                //} catch (ConnectionErrorException connectionError) {
-                //    Toast.makeText(getApplicationContext(), CONNECTION_ERROR_TEXT,
-                 //           Toast.LENGTH_LONG).show();
-                //}
-/*
 
-                PROGRESS_DIALOG.dismiss();
-                Looper.loop();
-            }
-        }.start();*/
     }
 
     /**

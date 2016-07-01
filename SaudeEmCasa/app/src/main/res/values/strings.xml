@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">SaudeEmCasa</string>
@@ -5,44 +6,44 @@
     <string name="km">km</string>
     <string name="meters">m</string>
 
-    <string name="program_drug">Farmácia Popular</string>
-    <string name="program_hospital">Melhor em Casa</string>
-    <string name="title_activity_hospital_maps">Mapa</string>
+    <string name="program_drug">Popular Pharmacy</string>
+    <string name="program_hospital">Better in Home</string>
+    <string name="title_activity_hospital_maps">Map</string>
 
-    <string name="hospital_address">Endereço</string>
-    <string name="hospital_telephone">Telefone</string>
-    <string name="hospital_evaluation">Nota</string>
-    <string name="hospital_save">Salvar</string>
+    <string name="hospital_address">Address:</string>
+    <string name="hospital_telephone">Phone:</string>
+    <string name="hospital_evaluation">Evaluation:</string>
+    <string name="hospital_save">Save</string>
 
-    <string name="drugstore_CEP">CEP</string>
+    <string name="drugstore_CEP">Postal Code:</string>
     <string name="drugstore_name">drugstoreName</string>
-    <string name="drugstore_address">Endereço</string>
-    <string name="drugstore_telephone">Telefone</string>
-    <string name="drugstore_evaluation">Nota</string>
-    <string name="drugstore_save">Salvar</string>
+    <string name="drugstore_address">Address:</string>
+    <string name="drugstore_telephone">Phone:</string>
+    <string name="drugstore_evaluation">Evaluation:</string>
+    <string name="drugstore_save">Save</string>
 
-    <string name="infoScreenDrugstore">O Programa Farmácia Popular do Brasil vem a ser uma iniciativa
-        do Governo Federal que autoriza a Fundação Oswaldo Cruz (FIOCRUZ) a disponibilizar medicamentos
-        mediante ressarcimento, e pelo Decreto nº 5.090, de 20 de maio de 2004, que regulamenta a Lei
-        10.858 e institui o Programa Farmácia Popular do Brasil.\n As unidades próprias contam com um
-        elenco de 112 itens, entre medicamentos e o preservativo masculino, os quais são dispensados
-        pelo seu valor de custo, representando uma redução de até 90% do valor de mercado. A condição
-        para a aquisição dos medicamentos disponíveis nas unidades, neste caso, é a apresentação de
-        documento com foto, no qual conste seu CPF, juntamente com uma receita médica ou odontológica.
-        Importante ressaltar que somente a Rede Própria aceita receitas prescritas por dentistas.\n"</string>
+    <string name="infoScreenDrugstore">"The Brazil Popular Pharmacy Program has to be an initiative of
+        the Federal Government authorizing the Oswaldo Cruz Foundation (FIOCRUZ) to provide medicines
+        by compensation, and by Decree No. 5,090, of May 20, 2004, which regulates Law 10,858 and
+        establishes the Popular Pharmacy program Brazil. The units themselves have a list of 112 items,
+        including drugs and male condoms, which are dispensed by its cost, a reduction of up to 90% of
+        market value. The condition for the purchase of medicines available in the units, in this case,
+        is the presentation document with photo, in stating your Social Security number, along with a
+        medical or dental prescription.
+         Importantly, only the Own Network accepts prescriptions written by dentists."</string>
 
-    <string name="infoScreenMelhorEmCasa">"O programa Melhor em Casa, é um programa relacionado a 
-        área de saúde, criado pelo Governo Federal em 2013, com as seguintes propostas:\n \n
-        Atendimento as pessoas com necessidade de reabilitação motora, idosos, pacientes crônicos sem
-        agravamento ou em situação pós-cirúrgica\n \n Melhorar e ampliar a assistência do SUS a
-        pacientes com agravos de saúde que possam receber atendimento em casa, e perto da família,\n
-        \n Contribuir para a recuperação de doenças, visto que, carinho e atenção familiar aliados à
-        adequada assistência em saúde se tornam elementos importantes para a recuperação do paciente.\n";</string>
+    <string name="infoScreenMelhorEmCasa">"Best Home program is related to health program created by
+        the Federal Government in 2013, with the following proposals:
+        Service people in need of motor rehabilitation, elderly, chronic patients without worsening
+        or post-surgical situation. Improve and expand the SUS assistance to patients with health
+        complaints that can receive care at home, and close to family.
+        Contribute to the recovery of disease, since care and family care coupled with adequate
+        health care become important elements for the patient\'s recovery."</string>
 
-    <string name="infoScreenSaudeEmCasa">"O aplicativo Saude em Casa, visa, facilitar ao usuário do
-        Programa Melhor em Casa, formas de encontrar Hospitais, Clínicas ou estabelecimentos mais
-        próximos ao paciente, atendendo à questao de dificuldade de deslocamento dos mesmos. Além disso,
-        o aplicativo disponibiliza também as localizações de farmácias populares do Brasil, para que
-        os usuários possam localizar e ter acesso ao possíveis medicamentos de seus tratamentos de saude.\n";</string>
+    <string name="infoScreenSaudeEmCasa">"The application Home Health, aims to facilitate the user\'s
+        Best Home program, ways to find Hospitals, Clinics or closest to the patient establishments,
+        taking into account the issue of difficulty of displacement thereof. In addition, the
+        application also provides the locations of drugstores in Brazil, so that users can locate and
+        gain access to potential drug treatments your health.\n";</string>
 
 </resources>
