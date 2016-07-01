@@ -112,40 +112,6 @@ public class DrugstoreScreen extends Fragment {
         Button drugStoreButton = (Button)drugStoreScreen.findViewById(R.id.buttonSaveRateDrugstore);
         final RatingBar drugstoreStars = (RatingBar) drugStoreScreen.findViewById(R.id.ratingBarUserDrugstore);
 
-        drugStoreButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread() {
-
-                    public void run() {
-                        Looper.prepare();
-
-                        try {
-                            Log.d(TAG, "Trying to set rate...");
-                            drugStoreController.updateRate((int) drugstoreStars.getRating(),
-                                drugStoreController.getAndroidId(), drugStore.getId());
-
-                            Toast.makeText(getContext(),MESSAGE_SAVE,
-                            Toast.LENGTH_LONG).show();
-                            Log.d(TAG, "Rate Updated! New rate value = " +
-                                    drugstoreStars.getRating());
-
-                        } catch (ConnectionErrorException exceptionConnectionError){
-                            Log.e(TAG, "Connection Error! Warning user that phone don't have" +
-                                    " internet connection");
-                            Log.e(TAG, "Can't update drugstore rating!!!");
-
-                            Toast.makeText(getContext(), MESSAGE_FAIL_CONNECTION,
-                            Toast.LENGTH_LONG).show();
-
-                        }
-                        Looper.loop();
-                    }
-                }.start();
-            }
-
-        });
-
         //Phone call button
         ImageButton phoneCallButton = (ImageButton) drugStoreScreen.findViewById(R.id.
                                           phonecallButtonDrugstore);

@@ -71,28 +71,6 @@ public class HospitalScreen extends Fragment {
         final RatingBar hospitalStars = (RatingBar) hospitalScreen.
                 findViewById(R.id.ratingBarUserHospital);
 
-        hospitalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Thread() {
-
-                    public void run() {
-                        Looper.prepare();
-                        try {
-                            hospitalController.updateRate((int) hospitalStars.getRating(),
-                                    hospitalController.getAndroidId(), hospital.getId());
-                                    Toast.makeText(getContext(),MESSAGE_SAVE ,
-                                    Toast.LENGTH_LONG).show();
-
-                        } catch(ConnectionErrorException exceptionConnectionError) {
-                            Toast.makeText(getContext(), MESSAGE_FAIL_CONNECTION,Toast.LENGTH_LONG).show();
-                        }
-                        Looper.loop();
-                    }
-                }.start();
-            }
-
-        });
 
         ImageButton phoneCallButton = (ImageButton) hospitalScreen.findViewById(R.id.phonecallButtonHospital);
 
