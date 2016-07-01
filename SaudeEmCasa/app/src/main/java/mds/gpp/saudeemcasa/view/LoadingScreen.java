@@ -66,10 +66,11 @@ public class LoadingScreen extends Activity {
         Firebase.setAndroidContext(this);
         MultiDex.install(this);
         setContentView(R.layout.loading_screen);
-        final ImageView logoSaudeEmCasa = (ImageView) findViewById(R.id.saude_em_casa_logo);
-
 
         getDrugstoreInfo();
+
+        toListScreen();
+
     }
     private void getDrugstoreInfo(){
         final DrugStoreDao drugStoreDao = DrugStoreDao.getInstance(this);
@@ -88,8 +89,8 @@ public class LoadingScreen extends Activity {
                 String postalcode = "";
                 String id = "";
                 String type = "AQUITEMFARMACIAPOPULAR";
-                int count = 0;
-                System.out.println(dataSnapshot.toString());
+                int drugstoreCount = 0;
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     for (DataSnapshot alldrugstore : snapshot.getChildren()) {
 
@@ -126,10 +127,10 @@ public class LoadingScreen extends Activity {
                         DrugStore newDrugstore = new DrugStore(latitude,longitude,telephone,name,city,address,state,id,type,postalcode);
                         System.out.println(drugStoreDao.insertDrugstore(newDrugstore));
 
-                        count++;
+                        drugstoreCount++;
 
                     }
-                    System.out.println("Percorri "+count+" farmacias.");
+                    System.out.println("Percorri "+drugstoreCount+" farmacias.");
                 }
                 DrugStoreController drugStoreController = DrugStoreController.getInstance(getApplicationContext());
                 try {
@@ -141,7 +142,6 @@ public class LoadingScreen extends Activity {
                 } catch (ConnectionErrorException e) {
                     e.printStackTrace();
                 }
-                toListScreen();
             }
 
             @Override
