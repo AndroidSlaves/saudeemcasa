@@ -13,8 +13,10 @@ import org.junit.runner.RunWith;
 
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
+import mds.gpp.saudeemcasa.controller.HospitalController;
 import mds.gpp.saudeemcasa.view.LoadingScreen;
 
+import static android.support.test.InstrumentationRegistry.getContext;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -43,8 +45,18 @@ public class TestLoadingScreen extends ActivityInstrumentationTestCase2<LoadingS
 
     @Test
     public void drugStoreNotNull(){
+        DrugStoreController drugStoreController = DrugStoreController.getInstance(getContext());
+        drugStoreController.initControllerDrugstore();
 
         assertNotNull(drugStoreController);
+    }
+
+    @Test
+    public void hospitalNotNull(){
+        HospitalController hospitalController = HospitalController.getInstance(getContext());
+        hospitalController.initControllerHospital();
+
+        assertNotNull(hospitalController);
     }
 
 }
