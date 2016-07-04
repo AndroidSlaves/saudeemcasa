@@ -21,15 +21,15 @@
     <string name="drugstore_evaluation">Nota</string>
     <string name="drugstore_save">Salvar</string>
 
-    <string name="infoScreenDrugstore">"O Programa Farmácia Popular do Brasil vem a ser uma iniciativa
-        do Governo Federal que autoriza a Fundação Oswaldo Cruz (FIOCRUZ) a disponibilizar medicamentos
-        mediante ressarcimento, e pelo Decreto nº 5.090, de 20 de maio de 2004, que regulamenta a Lei
-        10.858 e institui o Programa Farmácia Popular do Brasil.\n As unidades próprias contam com um
-        elenco de 112 itens, entre medicamentos e o preservativo masculino, os quais são dispensados
-        pelo seu valor de custo, representando uma redução de até 90% do valor de mercado. A condição
-        para a aquisição dos medicamentos disponíveis nas unidades, neste caso, é a apresentação de
-        documento com foto, no qual conste seu CPF, juntamente com uma receita médica ou odontológica.
-        Importante ressaltar que somente a Rede Própria aceita receitas prescritas por dentistas.\n"</string>
+    <string name="infoScreenDrugstore">"O Programa Farmácia Popular do Brasil vem a ser uma iniciativa "
+        "do Governo Federal que autoriza a Fundação Oswaldo Cruz (FIOCRUZ) a disponibilizar medicamentos "
+        "mediante ressarcimento, e pelo Decreto nº 5.090, de 20 de maio de 2004, que regulamenta a Lei "
+        "10.858 e institui o Programa Farmácia Popular do Brasil.\n\n As unidades próprias contam com um "
+        "elenco de 112 itens, entre medicamentos e o preservativo masculino, os quais são dispensados "
+        "pelo seu valor de custo, representando uma redução de até 90% do valor de mercado. A condição "
+        "para a aquisição dos medicamentos disponíveis nas unidades, neste caso, é a apresentação de "
+        "documento com foto, no qual conste seu CPF, juntamente com uma receita médica ou odontológica. "
+        "Importante ressaltar que somente a Rede Própria aceita receitas prescritas por dentistas.\n"</string>
 
     <string name="infoScreenMelhorEmCasa">"O programa Melhor em Casa, é um programa relacionado a "
         "área de saúde, criado pelo Governo Federal em 2013, com as seguintes propostas:\n\n"
@@ -46,6 +46,6 @@
 
         "Além disso, o aplicativo disponibiliza também as localizações de farmácias populares do Brasil, "
         "para que os usuários possam localizar e ter acesso ao possíveis medicamentos de seus tratamentos "
-        "de saude.\n";</string>
+        "de saúde.\n"</string>
 
 </resources>
