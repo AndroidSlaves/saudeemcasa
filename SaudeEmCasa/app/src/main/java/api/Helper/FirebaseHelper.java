@@ -21,6 +21,7 @@ import mds.gpp.saudeemcasa.model.DrugStore;
 import mds.gpp.saudeemcasa.model.Hospital;
 
 public class FirebaseHelper {
+    // Used for log
     private final String TAG = "Firebase branch";
     // Access the database class
     DrugStoreDao drugStoreDao;
@@ -53,6 +54,12 @@ public class FirebaseHelper {
         }else{/*Nothing to do*/}
     }
 
+    /**
+     * Get data and treat it to the object
+     *
+     * @param context
+     * @param dataSnapshot
+     */
     private void treatDrugstoresSnapshot(Context context, DataSnapshot dataSnapshot){
 
         String latitude = "";
@@ -113,6 +120,12 @@ public class FirebaseHelper {
         }
     }
 
+    /**
+     * Access data stored in Firebase server.
+     *
+     * @param context
+     *              Screen where this action is happening.
+     */
     public void getHospitalInfo(final Context context){
         hospitalDao = hospitalDao.getInstance(context);
         Log.i(TAG, "Waiting to get in");
@@ -133,6 +146,12 @@ public class FirebaseHelper {
         }else{/*Nothing to do*/}
     }
 
+    /**
+     * Get data and treat it to the object
+     *
+     * @param context
+     * @param dataSnapshot
+     */
     private void treatHospitalSnapshot(Context context, DataSnapshot dataSnapshot){
 
         String latitude = "";

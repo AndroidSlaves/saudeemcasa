@@ -3,6 +3,7 @@ package Helper;
 import android.test.ActivityInstrumentationTestCase2;
 
 import api.Dao.DrugStoreDao;
+import api.Dao.HospitalDao;
 import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.view.LoadingScreen;
 
@@ -25,5 +26,10 @@ public class TestFirebaseHelper extends ActivityInstrumentationTestCase2<Loading
         firebaseHelper.getDrugstoreInfo(myActivity);
 
         assertTrue(DrugStoreDao.getInstance(myActivity).isDatabaseEmpty());
+    }
+    public void testGetHospitalInfo(){
+        firebaseHelper.getHospitalInfo(myActivity);
+
+        assertTrue(HospitalDao.getInstance(myActivity).isDbEmpty());
     }
 }

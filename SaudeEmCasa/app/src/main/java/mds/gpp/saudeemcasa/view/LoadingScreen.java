@@ -15,12 +15,10 @@ import android.util.Log;
 
 import com.firebase.client.Firebase;
 
-import api.Dao.HospitalDao;
 import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
 import mds.gpp.saudeemcasa.controller.HospitalController;
-import mds.gpp.saudeemcasa.model.Hospital;
 
 public class LoadingScreen extends Activity {
     //Tag is used in log system.
