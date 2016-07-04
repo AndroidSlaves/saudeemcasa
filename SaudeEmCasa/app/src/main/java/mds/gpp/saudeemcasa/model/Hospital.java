@@ -8,7 +8,12 @@
 package mds.gpp.saudeemcasa.model;
 
 public class Hospital extends Stablishment {
-    // Empty constructor
+    private String number = "";
+    private String district = "";
+
+    /**
+     * Empty contructor.
+     */
     public Hospital() {
     }
 
@@ -22,23 +27,25 @@ public class Hospital extends Stablishment {
     public Hospital(String name, String telephone) {
         super(name, telephone);
 
-        assert (name != null) : "Null attribute treatment.";
-        assert (name.length() > 1) : "Treatment to minor of character in a name ";
-        assert (name != "") : "Empty name treatment";
-        assert (telephone.length() >= 10) : "Treatment to minor of character in telephone";
-
     }
 
-    /*public Hospital(String latitude, String longitude, String telephone, String name, String city,
-                    String address, String state, String id, float distance, String type,
-                    String number, String district) {
-        super(latitude, longitude, telephone, name, city, address, state, id, distance, type);
-        this.number = number;
+    /**
+     * Contructor
+     * @param latitude
+     * @param longitude
+     * @param telephone
+     * @param name
+     * @param city
+     * @param address
+     * @param state
+     * @param id
+     * @param type
+     */
+    public Hospital(String latitude, String longitude, String telephone, String name, String city,
+                    String address, String state, String id, String type, String district) {
+        super(latitude,longitude,telephone,name,city,address,state,id,type);
         this.district = district;
-    }*/
-
-    private String number = "";
-    private String district = "";
+    }
 
     /**
      * Get the value of attribute number.
