@@ -41,6 +41,13 @@ public class ChooseScreen extends Activity {
 
         GPSTracker gps = new GPSTracker(this);
 
+        setListeners();
+    }
+
+    /**
+     * Initiate listeners of class.
+     */
+    private void setListeners() {
         // Setting event click for hospital list.
         final int HOSPITAL_BUTTON_ID = R.id.melhor_em_casa_button;
         Button hospitalButton = (Button) findViewById(HOSPITAL_BUTTON_ID);
@@ -101,6 +108,7 @@ public class ChooseScreen extends Activity {
                 assert (v != null) : "Receive a null treatment";
             }
         });
+
     }
 
     /**

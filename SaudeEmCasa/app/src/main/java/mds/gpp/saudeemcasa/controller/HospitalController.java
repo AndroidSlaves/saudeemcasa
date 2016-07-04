@@ -27,8 +27,10 @@ import api.Exception.ConnectionErrorException;
 import mds.gpp.saudeemcasa.helper.GPSTracker;
 import mds.gpp.saudeemcasa.model.Hospital;
 import mds.gpp.saudeemcasa.model.Stablishment;
+import mds.gpp.saudeemcasa.view.HospitalList;
 
 import static java.util.Collections.sort;
+import static junit.framework.Assert.assertNotNull;
 
 public class HospitalController {
 
@@ -127,9 +129,9 @@ public class HospitalController {
      * @throws ConnectionErrorException
      *              there maybe a failure communicating with the server.
      */
-    public void initControllerHospital(InputStream inputStream) throws IOException, JSONException,
-            ConnectionErrorException {
-
+    public void initControllerHospital() {
+        hospitalList = hospitalDao.getAllHospitals();
+        assertNotNull("Received null treatment drugstoreList", hospitalList);
     }
 
     /**
