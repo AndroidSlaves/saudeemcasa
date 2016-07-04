@@ -15,9 +15,12 @@ import android.util.Log;
 
 import com.firebase.client.Firebase;
 
+import api.Dao.HospitalDao;
 import api.Helper.FirebaseHelper;
 import mds.gpp.saudeemcasa.R;
 import mds.gpp.saudeemcasa.controller.DrugStoreController;
+import mds.gpp.saudeemcasa.controller.HospitalController;
+import mds.gpp.saudeemcasa.model.Hospital;
 
 public class LoadingScreen extends Activity {
     //Tag is used in log system.
@@ -50,11 +53,15 @@ public class LoadingScreen extends Activity {
         setContentView(R.layout.loading_screen);
 
         FirebaseHelper firebaseHelper = new FirebaseHelper();
+
         firebaseHelper.getDrugstoreInfo(getApplicationContext());
+        firebaseHelper.getHospitalInfo(getApplicationContext());
 
         DrugStoreController drugStoreController = DrugStoreController.getInstance(getApplicationContext());
         drugStoreController.initControllerDrugstore();
 
+        HospitalController hospitalController = HospitalController.getInstance(getApplicationContext());
+        hospitalController.initControllerHospital();
         toListScreen();
 
     }
