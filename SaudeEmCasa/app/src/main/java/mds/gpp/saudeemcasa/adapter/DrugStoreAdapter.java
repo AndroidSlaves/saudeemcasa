@@ -22,8 +22,8 @@ import mds.gpp.saudeemcasa.model.DrugStore;
 import mds.gpp.saudeemcasa.model.Hospital;
 
 public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
-    private Context context;
-    private ArrayList<DrugStore> list;
+    private Context context = null;
+    private ArrayList<DrugStore> list = null;
     public static final int COUNT = 7;
 
     /**
@@ -33,8 +33,8 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
      * @param list
      *              List of DrugStores to populate adapter view.
      */
-    public DrugStoreAdapter(Context context, ArrayList<DrugStore> list){
-        super(context,0,list);
+    public DrugStoreAdapter(Context context, ArrayList<DrugStore> list) {
+        super(context, 0, list);
 
         assert (context != null) : "context must never be null";
         assert (list != null) : "lista must never be null";
@@ -65,10 +65,10 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     public DrugStore getItem(int position) {
         assert (position >= 0) : "position must never be negative";
 
-        DrugStore drugStore = list.get(position);
-        assert (drugStore != null);
+        DrugStore drugStoreItem = list.get(position);
+        assert (drugStoreItem != null);
 
-        return drugStore;
+        return drugStoreItem;
     }
 
     /**
@@ -127,6 +127,7 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
     public View populateAdapter(View convertView, int position){
         assert (convertView != null) : "convertView must never be null";
         assert (position >= 0) : "position must never be null";
+
         // Override method to get view
         DrugStore drugStoreByPosition = this.list.get(position);
         assert (!(drugStoreByPosition == null)) : "text view should not bee null";
@@ -156,13 +157,13 @@ public class DrugStoreAdapter extends ArrayAdapter<DrugStore>   {
         assert (position >= 0) : "position must never be null";
         assert (convertView != null) : "convertView must never be null";
 
-        if (this.list.get(position).getDistance() < 1f) {
+        if(this.list.get(position).getDistance() < 1f) {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
             assert (!(textViewDistance == null)) : "text view should not bee null";
 
             textViewDistance.setText(this.list.get(position).getDistance() + " m");
-        }else {
+        } else {
             // Setting distance of drugstore on list item
             TextView textViewDistance = (TextView) convertView.findViewById(R.id.textView4_item);
             assert (!(textViewDistance == null)) : "text view should not bee null";
