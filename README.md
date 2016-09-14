@@ -8,3 +8,5 @@ The application aims to serve the patients of private or public health area, who
 The objective of this project is to improve the quality of the software produced by refactoring code, good practice programming and application programming techniques.
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6595e82c94b140a1af35b93a215a3a95)](https://www.codacy.com/app/vinisilvacar/saudeemcasa?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndroidSlaves/saudeemcasa&amp;utm_campaign=Badge_Grade)
+
+[![Coverage Status](https://coveralls.io/repos/github/AndroidSlaves/saudeemcasa/badge.svg?branch=master)](https://coveralls.io/github/AndroidSlaves/saudeemcasa?branch=master)
