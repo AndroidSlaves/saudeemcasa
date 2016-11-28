@@ -9,3 +9,4 @@ The objective of this project is to improve the quality of the software produced
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6595e82c94b140a1af35b93a215a3a95)](https://www.codacy.com/app/vinisilvacar/saudeemcasa?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndroidSlaves/saudeemcasa&amp;utm_campaign=Badge_Grade)
 
+[![CircleCI](https://circleci.com/gh/AndroidSlaves/saudeemcasa.svg?style=svg)](https://circleci.com/gh/AndroidSlaves/saudeemcasa)
